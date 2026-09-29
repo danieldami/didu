@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { UserProfile } from '../types';
 import { ADMIN_CREDENTIALS } from '../utils/security';
 import { saveFirestoreAccount, fetchFirestoreAccounts, getFirestoreAccount } from '../services/firebaseService';
@@ -12,7 +12,6 @@ import {
   Phone, 
   Mail, 
   User, 
-  Sparkles,
   KeyRound,
   Compass,
   MapPin,
@@ -30,7 +29,7 @@ interface LoginModalProps {
 }
 
 const SECURITY_QUESTIONS = [
-  'What is your favorite Agra monument?',
+  'What is your favorite Lagos monument?',
   'What was your first car or bike model?',
   'What is your mother maiden name?',
   'What city were you born in?'
@@ -114,11 +113,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         email: foundAdmin.email,
         phone: foundAdmin.phone,
         role: 'admin',
-        avatar: foundAdmin.email.includes('shrey')
+        avatar: foundAdmin.email.includes('amara')
           ? 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'
           : 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
         memberSince: '2023',
-        preferredLocality: 'Fatehabad Road, Agra'
+        preferredLocality: 'Ikoyi, Lagos'
       };
       onLoginSuccess(adminUserProfile);
       onClose();
@@ -128,7 +127,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     // Retrieve saved accounts from localStorage first for fast check
     let savedAccounts: any[] = [];
     try {
-      const stored = localStorage.getItem('royal_agra_accounts_v1');
+      const stored = localStorage.getItem('didu_demo_accounts');
       if (stored) savedAccounts = JSON.parse(stored);
     } catch {
       savedAccounts = [];
@@ -153,14 +152,14 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           matchedAccount = directAccount;
           if (!savedAccounts.some(sa => sa.id === directAccount.id || sa.email === directAccount.email)) {
             savedAccounts.push(directAccount);
-            localStorage.setItem('royal_agra_accounts_v1', JSON.stringify(savedAccounts));
+            localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
           }
         } else {
           const firestoreAccounts = await fetchFirestoreAccounts();
           if (firestoreAccounts && firestoreAccounts.length > 0) {
             // Merge into local list
             savedAccounts = [...savedAccounts, ...firestoreAccounts.filter(fa => !savedAccounts.some(sa => sa.id === fa.id || sa.email === fa.email))];
-            localStorage.setItem('royal_agra_accounts_v1', JSON.stringify(savedAccounts));
+            localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
             matchedAccount = savedAccounts.find(
               (acc: any) => (acc.email && acc.email.toLowerCase() === identifier) || acc.phone === identifier
             );
@@ -181,7 +180,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           role: matchedAccount.role || role,
           avatar: matchedAccount.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
           memberSince: matchedAccount.memberSince || '2024',
-          preferredLocality: matchedAccount.preferredLocality || 'Agra'
+          preferredLocality: matchedAccount.preferredLocality || 'Lagos'
         };
         onLoginSuccess(userToAuth);
         onClose();
@@ -193,16 +192,16 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
 
     // Check demo accounts as fallback
-    if (identifier === 'shrey@royalagraestate.in' || identifier === '+91 91490 79913') {
+    if (identifier === 'amara@diduhomes.com' || identifier === '+234 803 555 0148') {
       const demoUser: UserProfile = {
-        id: 'RAE-OWNER-01',
-        name: 'Shrey Gupta',
-        email: 'shrey@royalagraestate.in',
-        phone: '+91 91490 79913',
+        id: 'DIDU-OWNER-01',
+        name: 'Amara Okafor',
+        email: 'amara@diduhomes.com',
+        phone: '+234 803 555 0148',
         role: role,
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
         memberSince: '2023',
-        preferredLocality: 'Fatehabad Road, Agra'
+        preferredLocality: 'Ikoyi, Lagos'
       };
       onLoginSuccess(demoUser);
       onClose();
@@ -231,7 +230,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     // Retrieve saved accounts from localStorage
     let savedAccounts: any[] = [];
     try {
-      const stored = localStorage.getItem('royal_agra_accounts_v1');
+      const stored = localStorage.getItem('didu_demo_accounts');
       if (stored) savedAccounts = JSON.parse(stored);
     } catch {
       savedAccounts = [];
@@ -245,7 +244,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
 
     const newUserAccount = {
-      id: `RAE-${Math.floor(1000 + Math.random() * 9000)}`,
+      id: `DIDU-${Math.floor(1000 + Math.random() * 9000)}`,
       name: signupName.trim(),
       phone: signupPhone.trim(),
       email: emailFormatted,
@@ -255,7 +254,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
       role: role,
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
       memberSince: new Date().getFullYear().toString(),
-      preferredLocality: 'Taj Ganj, Agra',
+      preferredLocality: 'Ikoyi, Lagos',
       primaryInterest: signupInterest,
       preferredBudget: signupBudgetType.trim(),
       address: signupCurrentAddress.trim(),
@@ -265,7 +264,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
     savedAccounts.push(newUserAccount);
     try {
-      localStorage.setItem('royal_agra_accounts_v1', JSON.stringify(savedAccounts));
+      localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
     } catch {
       // ignore
     }
@@ -299,7 +298,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
     let savedAccounts: any[] = [];
     try {
-      const stored = localStorage.getItem('royal_agra_accounts_v1');
+      const stored = localStorage.getItem('didu_demo_accounts');
       if (stored) savedAccounts = JSON.parse(stored);
     } catch {
       savedAccounts = [];
@@ -315,7 +314,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         account = firestoreAccounts.find((acc: any) => acc.email && acc.email.toLowerCase() === emailF);
         if (account) {
           savedAccounts.push(account);
-          localStorage.setItem('royal_agra_accounts_v1', JSON.stringify(savedAccounts));
+          localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
         }
       } catch {}
     }
@@ -341,7 +340,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
       }
       account.password = forgotNewPassword.trim();
       try {
-        localStorage.setItem('royal_agra_accounts_v1', JSON.stringify(savedAccounts));
+        localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
       } catch {}
       await saveFirestoreAccount(account);
       setSuccessMsg('Password reset successfully! You can now log in.');
@@ -371,7 +370,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
             <Landmark className="w-6 h-6" />
           </div>
           <h3 className="font-brand-title font-bold text-xl text-white">
-            Royal Agra Estate
+            DIDU Homes
           </h3>
           <p className="text-xs text-[#E4D5B7] mt-0.5">
             Client & Property Owner Portal
@@ -381,13 +380,16 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         {/* Prompt Notice if redirected from Post Property or restricted action */}
         {promptMessage && authMode !== 'forgot' && (
           <div className="bg-[#FAF8F5] border-b border-[#E4D5B7]/50 px-6 py-2.5 flex items-center gap-2 text-xs text-[#0F382C] font-medium">
-            <Sparkles className="w-4 h-4 text-[#C5A869] shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-[#C5A869] shrink-0" />
             <span>{promptMessage}</span>
           </div>
         )}
 
         {/* Modal Body */}
         <div className="p-6 sm:p-8">
+          <div className="mb-5 rounded-lg border border-[#D4B77A]/50 bg-[#F7F3EA] px-3 py-2 text-xs text-[#33483D]">
+            Demo sign-in: <strong>amara@diduhomes.com</strong> / <strong>demo123</strong>
+          </div>
           
           {/* Tab Switcher: Log In vs Create Account */}
           {authMode !== 'forgot' && (
@@ -545,7 +547,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Shrey Gupta"
+                    placeholder="e.g. Amara Okafor"
                     value={signupName}
                     onChange={(e) => setSignupName(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
@@ -562,7 +564,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   <input
                     type="tel"
                     required
-                    placeholder="+91 9149079913"
+                    placeholder="+234 803 555 0148"
                     value={signupPhone}
                     onChange={(e) => setSignupPhone(e.target.value)}
                     className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
@@ -597,7 +599,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Taj Mahal"
+                  placeholder="e.g. Lagos waterfront"
                   value={signupSecurityAnswer}
                   onChange={(e) => setSignupSecurityAnswer(e.target.value)}
                   className="w-full px-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
@@ -622,7 +624,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   <label className="block text-[11px] font-bold text-gray-600 uppercase mb-1">Target Budget</label>
                   <input
                     type="text"
-                    placeholder="e.g. ₹2.5 Cr+"
+                    placeholder="e.g. NGN 2.5bn+"
                     value={signupBudgetType}
                     onChange={(e) => setSignupBudgetType(e.target.value)}
                     className="w-full px-2.5 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded-lg text-gray-900"
@@ -640,7 +642,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                     <input
                       type="email"
                       required
-                      placeholder="shrey@royalagraestate.in"
+                      placeholder="hello@diduhomes.com"
                       value={signupEmail}
                       onChange={(e) => setSignupEmail(e.target.value)}
                       className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
@@ -723,7 +725,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                     <input
                       type="email"
                       required
-                      placeholder="e.g. shrey123@gmail.com"
+                      placeholder="e.g. amara@diduhomes.com"
                       value={forgotEmail}
                       onChange={(e) => setForgotEmail(e.target.value)}
                       className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-lg text-gray-900"

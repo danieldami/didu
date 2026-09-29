@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { Property, PropertyType, UserProfile } from '../types';
-import { AGRA_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
+import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
 import { isAdmin } from '../utils/security';
+import { formatNaira } from '../utils/format';
 import { 
   Building, 
   MapPin, 
-  IndianRupee, 
+  Banknote, 
   Upload, 
   CheckCircle, 
-  Sparkles, 
   ArrowRight, 
   ArrowLeft, 
   ShieldCheck,
@@ -45,10 +45,10 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
   const isUserAdmin = isAdmin(user);
   const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [listingIntent, setListingIntent] = useState<'Sale' | 'Rent'>('Sale');
-  const [propertyType, setPropertyType] = useState<string>('Luxury Villa');
+  const [propertyType, setPropertyType] = useState<string>('Detached House');
   const [customPropertyType, setCustomPropertyType] = useState<string>('');
   const [isOtherPropertyType, setIsOtherPropertyType] = useState<boolean>(false);
-  const [locality, setLocality] = useState<string>('Fatehabad Road');
+  const [locality, setLocality] = useState<string>('Ikoyi');
   const [customLocality, setCustomLocality] = useState<string>('');
   const [isOtherLocality, setIsOtherLocality] = useState<boolean>(false);
   const [projectTitle, setProjectTitle] = useState('');
@@ -57,7 +57,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
   const [areaUnit, setAreaUnit] = useState<'Sq.Ft' | 'Sq.Yard'>('Sq.Ft');
   const [bedrooms, setBedrooms] = useState<string>('4');
   const [bathrooms, setBathrooms] = useState<string>('4');
-  const [askingPrice, setAskingPrice] = useState<string>('28500000');
+  const [askingPrice, setAskingPrice] = useState<string>('950000000');
   const [furnishing, setFurnishing] = useState('Fully Furnished');
   const [possession, setPossession] = useState('Ready to Move');
   const [ownerName, setOwnerName] = useState(user?.name || '');
@@ -98,8 +98,8 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
   const cameraInputRef = useRef<HTMLInputElement>(null);
   
   // Verification states
-  const [isVerified, setIsVerified] = useState<'yes' | 'no' | 'in_process'>('yes');
-  const [verifiedByAuthority, setVerifiedByAuthority] = useState<string>('Agra Development Authority (ADA)');
+  const [isVerified, setIsVerified] = useState<'yes' | 'no' | 'in_process'>('no');
+  const [verifiedByAuthority, setVerifiedByAuthority] = useState<string>('');
   const [customAuthority, setCustomAuthority] = useState<string>('');
   const [verificationDocNumber, setVerificationDocNumber] = useState<string>('');
   const [titleType, setTitleType] = useState<string>('Freehold Clear Title');
@@ -113,10 +113,10 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
   const resetForm = () => {
     setStep(1);
     setListingIntent('Sale');
-    setPropertyType('Luxury Villa');
+    setPropertyType('Detached House');
     setCustomPropertyType('');
     setIsOtherPropertyType(false);
-    setLocality('Fatehabad Road');
+    setLocality('Ikoyi');
     setCustomLocality('');
     setIsOtherLocality(false);
     setProjectTitle('');
@@ -125,14 +125,14 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
     setAreaUnit('Sq.Ft');
     setBedrooms('4');
     setBathrooms('4');
-    setAskingPrice('28500000');
+    setAskingPrice('950000000');
     setFurnishing('Fully Furnished');
     setPossession('Ready to Move');
     setSelectedAmenities(['Swimming Pool', '24/7 Security', 'Private Garden']);
     setUploadedMediaList([]);
     setSelectedCoverIndex(0);
-    setIsVerified('yes');
-    setVerifiedByAuthority('Agra Development Authority (ADA)');
+    setIsVerified('no');
+    setVerifiedByAuthority('');
     setCustomAuthority('');
     setVerificationDocNumber('');
     setTitleType('Freehold Clear Title');
@@ -151,33 +151,14 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
     'EV Charging Point'
   ];
 
-  const formatINRCommas = (numStr: string): string => {
+  const formatNGNCommas = (numStr: string): string => {
     const clean = numStr.replace(/[^0-9]/g, '');
     const num = parseFloat(clean);
     if (isNaN(num)) return '';
-    return num.toLocaleString('en-IN');
+    return num.toLocaleString('en-NG');
   };
 
-  const convertNumberToIndianWords = (num: number): string => {
-    if (num <= 0 || isNaN(num)) return '';
-    let result = '';
-    const crore = Math.floor(num / 10000000);
-    let remainder = num % 10000000;
-    const lakh = Math.floor(remainder / 100000);
-    remainder = remainder % 100000;
-    const thousand = Math.floor(remainder / 1000);
-    remainder = remainder % 1000;
-    const hundred = Math.floor(remainder / 100);
-    remainder = remainder % 100;
-
-    if (crore > 0) result += `${crore} Crore `;
-    if (lakh > 0) result += `${lakh} Lakh `;
-    if (thousand > 0) result += `${thousand} Thousand `;
-    if (hundred > 0) result += `${hundred} Hundred `;
-    if (remainder > 0) result += `${remainder} `;
-    
-    return result.trim() + ' Rupees';
-  };
+  const amountInWords = (num: number): string => num > 0 && Number.isFinite(num) ? formatNaira(num) : '';
 
   const toggleAmenity = (item: string) => {
     if (selectedAmenities.includes(item)) {
@@ -202,7 +183,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
             fbCtx.fillStyle = '#C5A880';
             fbCtx.font = 'bold 28px sans-serif';
             fbCtx.textAlign = 'center';
-            fbCtx.fillText('Royal Agra Estate — Verified Photo', 400, 270);
+            fbCtx.fillText('DIDU Homes   Verified Photo', 400, 270);
             return fbCanvas.toDataURL('image/jpeg', 0.60);
           }
         } catch {}
@@ -338,7 +319,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
           url: compressedUrl,
           type: 'image',
           name: file.name,
-          size: `${rawSizeStr} raw • ${approxSizeInKB} KB HD`
+          size: `${rawSizeStr} raw   ${approxSizeInKB} KB HD`
         });
       }
 
@@ -358,7 +339,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
       errors.customPropertyType = 'Please enter a custom property typology';
     }
     if (isOtherLocality && !customLocality.trim()) {
-      errors.customLocality = 'Please enter your custom Agra locality';
+      errors.customLocality = 'Please enter your custom Lagos locality';
     }
     setStepErrors(errors);
     return Object.keys(errors).length === 0;
@@ -402,11 +383,9 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
 
   const formatPriceDisplay = (amt: number, type: 'Sale' | 'Rent') => {
     if (type === 'Rent') {
-      if (amt >= 100000) return `₹${(amt / 100000).toFixed(2)} Lac/mo`;
-      return `₹${amt.toLocaleString('en-IN')}/mo`;
+      return `${formatNaira(amt)}/month`;
     }
-    if (amt >= 10000000) return `₹${(amt / 10000000).toFixed(2)} Cr`;
-    return `₹${(amt / 100000).toFixed(2)} Lacs`;
+    return formatNaira(amt);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -433,23 +412,13 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
     const numSuperArea = areaUnit === 'Sq.Yard' ? Math.round(rawArea * 9) : rawArea;
 
     const generatedId = `prop-user-${Date.now()}`;
-    const refCode = `RAE-${Math.floor(100000 + Math.random() * 900000)}`;
+    const refCode = `DIDU-${Math.floor(100000 + Math.random() * 900000)}`;
     setCreatedPropertyRef(refCode);
 
-    const isLegallyVerified = isVerified === 'yes';
-    const resolvedVerificationStatus: 'Verified' | 'Not Verified' | 'In Process' = 
-      isVerified === 'yes' ? 'Verified' : isVerified === 'in_process' ? 'In Process' : 'Not Verified';
+    const isLegallyVerified = false;
+    const resolvedVerificationStatus: 'Verified' | 'Not Verified' | 'In Process' = 'Not Verified';
     
-    let resolvedAuthorityName = 'Not Verified / Independent Registry';
-    if (isVerified === 'yes') {
-      resolvedAuthorityName = verifiedByAuthority === 'Other Authority (Specify)' 
-        ? (customAuthority.trim() || 'Independent Authority') 
-        : verifiedByAuthority;
-    } else if (isVerified === 'in_process') {
-      resolvedAuthorityName = verifiedByAuthority === 'Other Authority (Specify)'
-        ? (customAuthority.trim() ? `${customAuthority.trim()} (Applied)` : 'Verification In Process')
-        : `${verifiedByAuthority} (Under Review)`;
-    }
+    const resolvedAuthorityName = 'Seller-provided details; not independently verified';
 
     const isPosterAdmin = isUserAdmin;
     const initialStatus = isPosterAdmin ? 'published' : 'pending_verification';
@@ -480,28 +449,28 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
     const newProperty: Property = {
       id: generatedId,
       title: projectTitle.trim() || `Luxury ${propertyType} in ${finalLocality}`,
-      tagline: `Exclusive ${furnishing} ${propertyType} with prime connectivity on ${finalLocality}, Agra.`,
+      tagline: `Exclusive ${furnishing} ${propertyType} with prime connectivity on ${finalLocality}, Lagos.`,
       propertyType,
       listingType: listingIntent,
       price: numPrice,
       priceDisplay: formatPriceDisplay(numPrice, listingIntent),
       pricePerSqFt: Math.round(numPrice / numSuperArea),
-      location: `${finalLocality}, Agra`,
+      location: `${finalLocality}, Lagos`,
       locality: finalLocality,
-      address: address.trim() || `${finalLocality}, Agra`,
+      address: address.trim() || `${finalLocality}, Lagos`,
       bedrooms: Number(bedrooms) || 4,
       bathrooms: Number(bathrooms) || 4,
       balconies: 2,
       superAreaSqFt: numSuperArea,
       carpetAreaSqFt: Math.round(numSuperArea * 0.78),
       furnishing: furnishing as any,
-      facing: 'North-East (Vastu)',
-      reraId: verificationDocNumber.trim() || (isLegallyVerified ? `UPRERA-AGR-${Math.floor(1000 + Math.random() * 9000)}` : 'N/A'),
+      facing: 'East',
+      reraId: verificationDocNumber.trim() || 'Demo reference',
       possession: possession as any,
       featured: true,
       isExclusive: true,
       verified: isLegallyVerified,
-      verificationStatus: isUserAdmin ? 'Verified' : resolvedVerificationStatus,
+      verificationStatus: resolvedVerificationStatus,
       verifiedBy: resolvedAuthorityName,
       verificationNumber: verificationDocNumber.trim() || "",
       status: initialStatus,
@@ -520,24 +489,20 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
       },
       images: finalImages,
       coverImage: finalCover,
-      description: `Spectacular ${propertyType} situated in the prestigious enclave of ${finalLocality}, Agra. Designed for distinguished living with spacious layouts, high ceilings, premium fittings, and comprehensive security infrastructure.`,
+      description: `Spectacular ${propertyType} situated in the prestigious enclave of ${finalLocality}, Lagos. Designed for distinguished living with spacious layouts, high ceilings, premium fittings, and comprehensive security infrastructure.`,
       highlights: [
         `${furnishing} with bespoke craftsmanship`,
-        '100% Vastu Compliant Orientation',
-        'High-Speed Connectivity to Expressway & Taj Corridor',
-        'Multi-car covered garage & 24/7 power backup'
+        'Thoughtfully planned interiors',
+        `Located in ${finalLocality}, Lagos`,
+        'Viewing by appointment'
       ],
       amenities: selectedAmenities,
-      landmarks: [
-        { name: `${finalLocality} Metro Station`, distance: '1.2 km', travelTime: '3 mins' },
-        { name: 'Taj Mahal East Gate', distance: '4.5 km', travelTime: '10 mins' },
-        { name: 'Agra-Lucknow Expressway', distance: '5.8 km', travelTime: '12 mins' }
-      ],
+      landmarks: [],
       agent: {
-        name: 'Shrey Gupta',
+        name: 'Amara Okafor',
         role: 'Managing Partner & Co-Founder',
-        phone: '+91 91490 79913',
-        email: 'shrey@royalagraestate.in',
+        phone: '+234 803 555 0148',
+        email: 'hello@diduhomes.com',
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
         experience: 'Luxury Residential & HNI Advisory'
       },
@@ -545,7 +510,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
       parkingSpots: 3,
       gatedSecurity: true,
       powerBackup: true,
-      coordinates: { lat: 27.1767, lng: 78.0081 }
+      coordinates: { lat: 6.4541, lng: 3.4331 }
     };
 
     try {
@@ -591,7 +556,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
             </h1>
 
             <p className="text-sm text-gray-600 max-w-md mx-auto mb-8 leading-relaxed">
-              To ensure 100% verified listings, owner privacy, and direct buyer connections, property posting is reserved exclusively for registered accounts on Royal Agra Estate.
+              Property submissions in this demo are saved in this browser and are not independently reviewed.
             </p>
 
             {/* CTAs */}
@@ -599,7 +564,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               <button
                 type="button"
                 id="barrier-login-btn"
-                onClick={() => onOpenLogin?.('Please sign in or create an account to list your property on Royal Agra Estate.')}
+                onClick={() => onOpenLogin?.('Please sign in or create an account to list your property on DIDU Homes.')}
                 className="w-full sm:w-auto flex-1 bg-[#0F382C] hover:bg-[#164E3D] text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Sign In / Create Account</span>
@@ -622,7 +587,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                 <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-xs font-bold text-gray-800">Direct HNI Buyers</h4>
-                  <p className="text-[11px] text-gray-500">Connect with genuine luxury buyers across UP & Delhi NCR.</p>
+                  <p className="text-[11px] text-gray-500">Showcase a property to prospective buyers across Lagos.</p>
                 </div>
               </div>
 
@@ -669,10 +634,10 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
             <span>Owner & Developer Portal</span>
           </div>
           <h1 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-[#0F382C]">
-            List Your Luxury Property in Agra
+            List Your Luxury Property in Lagos
           </h1>
           <p className="text-sm text-gray-600 mt-2">
-            Showcase your exclusive property directly to verified HNI buyers and elite investors across Uttar Pradesh and Delhi NCR.
+            Present your property to prospective buyers and investors across Lagos.
           </p>
         </div>
 
@@ -725,7 +690,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                 {isUserAdmin ? 'Property Published Live!' : 'Property Submitted for Verification!'}
               </h2>
               <p className="text-sm text-gray-600 max-w-lg mx-auto">
-                Thank you, <strong>{ownerName || user?.name || 'Property Owner'}</strong>. Your luxury listing in <strong>{locality}</strong> has been {isUserAdmin ? 'published directly to the live website' : 'submitted for admin verification'} with reference ID <strong>#{createdPropertyRef || 'RAE-892140'}</strong>.
+                Thank you, <strong>{ownerName || user?.name || 'Property Owner'}</strong>. Your luxury listing in <strong>{locality}</strong> has been {isUserAdmin ? 'published directly to the live website' : 'submitted for admin verification'} with reference ID <strong>#{createdPropertyRef || 'DIDU-892140'}</strong>.
               </p>
               
               <div className="bg-emerald-50 rounded-xl p-4 max-w-md mx-auto border border-emerald-200 text-xs text-emerald-900 space-y-1">
@@ -779,7 +744,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               {step === 1 && (
                 <div className="space-y-6">
                   <h3 className="text-lg font-serif-luxury font-bold text-[#0F382C]">
-                    Step 1: Property Type & Agra Location
+                    Step 1: Property Type & Lagos Location
                   </h3>
 
                   {/* Intent Switcher: Sale vs Rent */}
@@ -865,9 +830,9 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                     )}
                   </div>
 
-                  {/* Locality in Agra */}
+                  {/* Locality in Lagos */}
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold text-gray-700 uppercase">Primary Agra Locality</label>
+                    <label className="block text-xs font-bold text-gray-700 uppercase">Primary Lagos Locality</label>
                     <select
                       value={isOtherLocality ? 'Other' : locality}
                       onChange={(e) => {
@@ -882,7 +847,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       }}
                       className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-800 focus:bg-white focus:border-[#0F382C]"
                     >
-                      {AGRA_LOCALITIES.filter(l => l !== 'All Localities').map((l) => (
+                      {LAGOS_LOCALITIES.filter(l => l !== 'All Localities').map((l) => (
                         <option key={l} value={l}>{l}</option>
                       ))}
                       <option value="Other">Other (Specify Custom Locality)</option>
@@ -892,7 +857,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       <div className="mt-2">
                         <input
                           type="text"
-                          placeholder="Enter custom Agra locality name (e.g. Dayalbagh, Bodla)"
+                          placeholder="Enter custom Lagos locality name (e.g. Victoria Island, Bodla)"
                           value={customLocality}
                           onChange={(e) => {
                             setCustomLocality(e.target.value);
@@ -909,7 +874,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                     <label className="block text-xs font-bold text-gray-700 uppercase">Building / House / Project Name *</label>
                     <input
                       type="text"
-                      placeholder="e.g. The Taj Sovereign Villa or Royal Palms"
+                      placeholder="e.g. Ikoyi Signature Residence"
                       value={projectTitle}
                       onChange={(e) => {
                         setProjectTitle(e.target.value);
@@ -929,10 +894,10 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
 
                   {/* Detailed Address */}
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold text-gray-700 uppercase">Full Address & Landmarks in Agra *</label>
+                    <label className="block text-xs font-bold text-gray-700 uppercase">Full Address & Landmarks in Lagos *</label>
                     <textarea
                       rows={2}
-                      placeholder="e.g. Plot 14, Royal Enclave, Near ITC Mughal, Fatehabad Road, Agra"
+                      placeholder="e.g. Plot 14, Ikoyi, Near Lagos Island, Ikoyi, Lagos"
                       value={address}
                       onChange={(e) => {
                         setAddress(e.target.value);
@@ -949,7 +914,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       </p>
                     )}
                     <p className="text-[11px] text-gray-500">
-                      🔒 <span className="font-semibold">Privacy Protected:</span> Only the property's locality ({locality || 'Agra'}) is shown publicly on the website. Full house/plot addresses are never revealed to buyers.
+                      <span className="font-semibold">Privacy Protected:</span> Only the property's locality ({locality || 'Lagos'}) is shown publicly on the website. Full house/plot addresses are never revealed to buyers.
                     </p>
                   </div>
 
@@ -1029,19 +994,19 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       )}
                     </div>
 
-                    {/* Bedrooms (BHK) */}
+                    {/* Bedrooms (bedroom) */}
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold text-gray-700 uppercase">Bedrooms (BHK)</label>
+                      <label className="block text-xs font-bold text-gray-700 uppercase">Bedrooms (bedroom)</label>
                       <select
                         value={bedrooms}
                         onChange={(e) => setBedrooms(e.target.value)}
                         className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-800 focus:bg-white"
                       >
-                        <option value="1">1 BHK</option>
-                        <option value="2">2 BHK</option>
-                        <option value="3">3 BHK</option>
-                        <option value="4">4 BHK</option>
-                        <option value="5">5+ BHK Mansion</option>
+                        <option value="1">1 bedroom</option>
+                        <option value="2">2 bedroom</option>
+                        <option value="3">3 bedroom</option>
+                        <option value="4">4 bedroom</option>
+                        <option value="5">5+ bedroom Mansion</option>
                         <option value="0">Commercial Plot / Floor</option>
                       </select>
                     </div>
@@ -1094,7 +1059,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                     {/* Asking Price with Comma Format & Word Breakdown */}
                     <div className="space-y-2 sm:col-span-2">
                       <label className="block text-xs font-bold text-gray-700 uppercase">
-                        {listingIntent === 'Sale' ? 'Expected Sale Price (₹ INR) *' : 'Expected Monthly Rent (₹ INR) *'}
+                        {listingIntent === 'Sale' ? 'Expected Sale Price (NGN  NGN) *' : 'Expected Monthly Rent (NGN  NGN) *'}
                       </label>
                       <input
                         type="text"
@@ -1119,11 +1084,11 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       {askingPrice && Number(askingPrice) > 0 && (
                         <div className="p-3 bg-emerald-50/80 border border-emerald-200 rounded-xl text-xs space-y-1">
                           <div className="flex items-center justify-between text-emerald-950 font-mono font-bold">
-                            <span>Formatted Amount (INR):</span>
-                            <span className="text-sm">₹ {formatINRCommas(askingPrice)}</span>
+                            <span>Formatted Amount (NGN):</span>
+                            <span className="text-sm">NGN  {formatNGNCommas(askingPrice)}</span>
                           </div>
                           <div className="text-emerald-900 font-medium text-[11px] capitalize">
-                            <strong>Amount in Words:</strong> {convertNumberToIndianWords(Number(askingPrice))}
+                            <strong>Price:</strong> {amountInWords(Number(askingPrice))}
                           </div>
                         </div>
                       )}
@@ -1196,7 +1161,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         Property Photos & Gallery ({uploadedMediaList.length}/{MAX_PHOTOS} Uploaded)
                       </label>
                       <span className="text-[11px] text-emerald-800 font-semibold bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                        HD Quality • Max 10 Photos • Up to 25 MB each
+                        HD Quality   Max 10 Photos   Up to 25 MB each
                       </span>
                     </div>
 
@@ -1245,7 +1210,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       <div className="space-y-4">
                         <div className="p-3 bg-amber-50/80 border border-amber-200 rounded-xl text-xs text-amber-950 flex items-center justify-between">
                           <span className="font-semibold">
-                            👉 Select which image to use as your <strong>Main Property Display Photo</strong>:
+                            <strong>Main Property Display Photo</strong>:
                           </span>
                           <span className="text-[11px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">
                             Photo #{selectedCoverIndex + 1} Selected as Cover
@@ -1284,7 +1249,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                                   {isChosenCover ? (
                                     <span className="bg-emerald-700 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow flex items-center gap-1 border border-emerald-400">
                                       <Check className="w-3 h-3 text-white" />
-                                      ★ Main Display Cover
+                                        Main Display Cover
                                     </span>
                                   ) : (
                                     <button
@@ -1443,14 +1408,14 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       Step 4: Legal Verification & Owner Contact
                     </h3>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      Specify whether your property is approved by ADA or another regulatory authority, or listed as an independent private registry.
+                      Add any seller-provided approval details. This demo does not independently verify documents.
                     </p>
                   </div>
 
                   {/* 1. Verification Status Toggle */}
                   <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-4">
                     <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                      Is this property verified / approved by any authority?
+                      What approval status does the seller report?
                     </label>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -1465,11 +1430,11 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         }`}
                       >
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold">✓ Verified & Approved</span>
+                          <span className="text-xs font-bold">Seller reports approved</span>
                           {isVerified === 'yes' && <Check className="w-4 h-4 text-emerald-600" />}
                         </div>
                         <p className="text-[11px] text-gray-500 leading-tight">
-                          Approved by ADA, UP RERA, Nagar Nigam, or Bank Title
+                          Seller-provided status only; documents are not checked in this demo.
                         </p>
                       </button>
 
@@ -1484,7 +1449,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         }`}
                       >
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold">⏳ In Process / Applied</span>
+                          <span className="text-xs font-bold">Application in progress</span>
                           {isVerified === 'in_process' && <Check className="w-4 h-4 text-amber-600" />}
                         </div>
                         <p className="text-[11px] text-gray-500 leading-tight">
@@ -1503,7 +1468,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         }`}
                       >
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-xs font-bold">✕ Not ADA / Independent</span>
+                          <span className="text-xs font-bold">Not provided / not verified</span>
                           {isVerified === 'no' && <Check className="w-4 h-4 text-gray-700" />}
                         </div>
                         <p className="text-[11px] text-gray-500 leading-tight">
@@ -1526,18 +1491,18 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                               setCustomAuthority(e.target.value);
                               setVerifiedByAuthority(e.target.value);
                             }}
-                            placeholder="e.g., ADA Approved, RERA Verified, Agra Cantonment Board"
+                            placeholder="Enter the authority named on the seller's documents"
                             className="w-full p-2.5 text-xs bg-white border border-gray-300 rounded-lg text-gray-800 font-medium focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
                           />
                         </div>
 
                         <div>
                           <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
-                            Sanction / RERA / Approval File Reference Number (Optional)
+                            Seller-provided approval reference (Optional)
                           </label>
                           <input
                             type="text"
-                            placeholder="e.g. ADA/2024/9912 or UPRERAAGT2024"
+                            placeholder="Enter the reference shown on the document"
                             value={verificationDocNumber}
                             onChange={(e) => setVerificationDocNumber(e.target.value)}
                             className="w-full p-2.5 text-xs bg-white border border-gray-300 rounded-lg text-gray-800 font-mono"
@@ -1638,12 +1603,12 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       {isSubmitting ? (
                         <>
                           <Loader2 className="w-4 h-4 text-[#E4D5B7] animate-spin" />
-                          <span>Publishing to Royal Agra...</span>
+                          <span>Publishing to DIDU Homes...</span>
                         </>
                       ) : (
                         <>
                           <span>Publish Property Listing</span>
-                          <Sparkles className="w-4 h-4 text-[#E4D5B7]" />
+                          <ShieldCheck className="w-4 h-4 text-[#E4D5B7]" />
                         </>
                       )}
                     </button>

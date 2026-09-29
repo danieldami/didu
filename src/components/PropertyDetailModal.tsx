@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Property, UserProfile } from '../types';
 import { isAdmin, isPropertyOwnerOrAdmin } from '../utils/security';
 import { saveFirestoreLead } from '../services/firebaseService';
+import { formatNaira } from '../utils/format';
 import { motion, AnimatePresence } from 'motion/react';
 import { MapComponent } from './MapComponent';
 import {
@@ -12,12 +13,11 @@ import {
   Bath, 
   Maximize, 
   ShieldCheck, 
-  Sparkles, 
   Phone, 
   Mail, 
   MessageSquare, 
   Calendar, 
-  IndianRupee, 
+  Banknote, 
   Compass, 
   Car, 
   Zap, 
@@ -71,8 +71,8 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
   const displayAddress = isUserAdmin && property.address 
     ? property.address 
     : (property.locality 
-        ? (property.locality.toLowerCase().includes('agra') ? property.locality : `${property.locality}, Agra`)
-        : (property.location || 'Agra'));
+        ? (property.locality.toLowerCase().includes('lagos') ? property.locality : `${property.locality}, Lagos`)
+        : (property.location || 'Lagos'));
 
   const handleCopyLink = () => {
     const shareUrl = `${window.location.origin}?property=${property.id}`;
@@ -92,7 +92,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
         propertyTitle: property.title,
         buyerName: inquiryName.trim(),
         phone: inquiryPhone.trim(),
-        email: user?.email || 'direct-visitor@royalagraestate.in',
+        email: user?.email || 'visitor@diduhomes.com',
         preferredTime: `${inquiryDate} ${chauffeurReq ? '(Chauffeur Included)' : ''}`,
         timestamp: new Date().toLocaleString()
       };
@@ -126,12 +126,10 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
         <div className="px-6 py-4 bg-[#0F382C] text-white flex items-center justify-between border-b border-[#164E3D] shrink-0">
           <div className="flex items-center gap-3">
             <span className="text-xs uppercase tracking-widest text-[#E4D5B7] font-semibold">
-              {property.propertyType} • {property.listingType === 'Rent' ? 'Rental Lease' : 'Freehold Sale'}
+              {property.propertyType}   {property.listingType === 'Rent' ? 'Rental Lease' : 'Freehold Sale'}
             </span>
             <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#C5A869]" />
-            <span className="hidden sm:inline-block text-xs text-gray-300 font-medium">
-              Verified Clean Title
-            </span>
+            <span className="hidden sm:inline-block text-xs text-gray-300 font-medium">Lagos property showcase</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -185,7 +183,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                 </span>
                 <span className="px-3 py-1 rounded-md bg-white/90 text-[#0F382C] text-xs font-bold tracking-wider shadow-md flex items-center gap-1">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  Verified Clear Title
+                  Showcase listing
                 </span>
               </div>
               <div className="absolute bottom-4 right-4 bg-black/60 text-white text-xs px-3 py-1 rounded backdrop-blur-xs font-mono">
@@ -228,15 +226,15 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                 {property.verified ? (
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>Verified by {property.verifiedBy || 'ADA / Regulatory Authority'}</span>
+                    <span>Seller-provided details; not independently verified</span>
                   </span>
                 ) : property.verificationStatus === 'In Process' ? (
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 text-xs font-semibold">
-                    <span>⏳ Verification In Process ({property.verifiedBy || 'Applied'})</span>
+                    <span>Seller reports application in progress; not independently verified</span>
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-700 border border-gray-200 text-xs font-medium">
-                    <span>Independent Private Registry (Self-Declared)</span>
+                    <span>Not independently verified</span>
                   </span>
                 )}
               </div>
@@ -255,7 +253,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                 {property.priceDisplay}
               </span>
               <span className="text-xs text-gray-500 font-mono block mt-0.5">
-                ₹{(property.pricePerSqFt ?? Math.round((property.price || 0) / (property.superAreaSqFt || 1)) ?? 0).toLocaleString('en-IN')} per sq.ft
+                {formatNaira(property.pricePerSqFt ?? Math.round((property.price || 0) / (property.superAreaSqFt || 1)))} per sq.ft
               </span>
               <button
                 type="button"
@@ -273,13 +271,13 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
             <div>
               <span className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold block">Configuration</span>
               <span className="text-sm font-bold text-[#0F382C] mt-0.5 block">
-                {(property.bedrooms || 0) > 0 ? `${property.bedrooms} BHK (${property.bathrooms || 0} Baths)` : 'Commercial Suite'}
+                {(property.bedrooms || 0) > 0 ? `${property.bedrooms} bedroom (${property.bathrooms || 0} Baths)` : 'Commercial Suite'}
               </span>
             </div>
             <div>
               <span className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold block">Super Built-up Area</span>
               <span className="text-sm font-bold text-[#0F382C] mt-0.5 block">
-                {(property.superAreaSqFt || 0).toLocaleString('en-IN')} sq.ft
+                {(property.superAreaSqFt || 0).toLocaleString('en-NG')} sq.ft
               </span>
             </div>
             <div>
@@ -319,7 +317,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {property.highlights.map((h, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-gray-700 bg-gray-50 p-2.5 rounded-lg border border-gray-100">
-                      <Sparkles className="w-4 h-4 text-[#C5A869] shrink-0 mt-0.5" />
+                      <ShieldCheck className="w-4 h-4 text-[#C5A869] shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </div>
                   ))}
@@ -347,7 +345,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
               {/* Nearby Landmarks & Connectivity */}
               <div>
                 <h4 className="text-sm font-bold text-[#0F382C] uppercase tracking-wider mb-3">
-                  Connectivity & Agra Landmarks
+                  Connectivity & Lagos Landmarks
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {property.landmarks.map((l, i) => (
@@ -371,7 +369,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-amber-800" />
-                      <span className="font-bold uppercase tracking-wider text-[#0F382C]">Admin Metadata • Linked User Account</span>
+                      <span className="font-bold uppercase tracking-wider text-[#0F382C]">Admin Metadata   Linked User Account</span>
                     </div>
                     <span className="px-2 py-0.5 rounded bg-amber-200 font-mono text-[10px] font-bold">
                       Account ID: #{property.ownerId || property.userId || 'N/A'}
@@ -400,20 +398,20 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   {isUserAdmin ? (
                     <span className="text-[10px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-300 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1 w-fit">
                       <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                      <span>Admin Full Access • Exact GPS Map & Street View</span>
+                      <span>Admin Full Access   Exact GPS Map & Street View</span>
                     </span>
                   ) : (
                     <span className="text-[10px] font-bold text-gray-600 bg-gray-100 border border-gray-300 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1 w-fit">
-                      <span>🔒 Protected For Seller Privacy</span>
+                      <span></span>
                     </span>
                   )}
                 </div>
 
                 {isUserAdmin ? (
                   <div>
-                    <MapComponent lat={property.coordinates?.lat ?? 27.1767} lng={property.coordinates?.lng ?? 78.0081} />
+                    <MapComponent lat={property.coordinates?.lat ?? 6.4541} lng={property.coordinates?.lng ?? 3.4331} />
                     <p className="text-[11px] text-gray-500 mt-2 flex items-center gap-1">
-                      <span className="font-semibold text-emerald-800">Exact GPS Coordinates:</span> {(property.coordinates?.lat ?? 27.1767).toFixed(4)}°N, {(property.coordinates?.lng ?? 78.0081).toFixed(4)}°E (Visible exclusively to Admin account)
+                      <span className="font-semibold text-emerald-800">Exact GPS Coordinates:</span> {(property.coordinates?.lat ?? 27.1767).toFixed(4)}ÂN, {(property.coordinates?.lng ?? 78.0081).toFixed(4)}ÂE (Visible exclusively to Admin account)
                     </p>
                   </div>
                 ) : (
@@ -457,7 +455,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   Schedule Private Site Tour
                 </h4>
                 <p className="text-[11px] text-gray-500 mb-4">
-                  Complimentary luxury chauffeur transfer available for Agra site visits.
+                  Complimentary luxury chauffeur transfer available for Lagos site visits.
                 </p>
 
                 {inquirySubmitted ? (
@@ -485,7 +483,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                       <input
                         type="tel"
                         required
-                        placeholder="+91 98765 43210"
+                        placeholder="+234 803 555 0148"
                         value={inquiryPhone}
                         onChange={(e) => setInquiryPhone(e.target.value)}
                         className="w-full p-2 text-xs bg-white border border-gray-300 rounded-md focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
@@ -512,7 +510,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                         className="rounded text-[#0F382C] focus:ring-[#0F382C]"
                       />
                       <label htmlFor="chauffeur-opt" className="text-[11px] text-gray-700">
-                        Include luxury chauffeur pick-up in Agra
+                        Include luxury chauffeur pick-up in Lagos
                       </label>
                     </div>
 

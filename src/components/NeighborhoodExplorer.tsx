@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { NEIGHBORHOODS_DATA } from '../data/mockData';
 import { MapPin, TrendingUp, ArrowRight } from 'lucide-react';
 
@@ -17,13 +17,13 @@ export const NeighborhoodExplorer: React.FC<NeighborhoodExplorerProps> = ({
         <div className="text-center max-w-3xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0F382C]/10 text-[#0F382C] text-xs font-bold uppercase tracking-wider mb-3">
             <MapPin className="w-3.5 h-3.5 text-[#0F382C]" />
-            <span>Agra Micro-Market Intelligence</span>
+            <span>Lagos Micro-Market Intelligence</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-[#0F382C]">
-            Explore Agra’s Prime Neighborhoods
+            Explore Lagos s Prime Neighborhoods
           </h2>
           <p className="text-sm sm:text-base text-gray-600 mt-3 leading-relaxed">
-            From the 5-star hospitality corridor of Fatehabad Road to the peaceful riverfront of Dayalbagh, discover the unique character, capital appreciation, and luxury residences in each sector.
+            From the 5-star hospitality corridor of Ikoyi to the peaceful riverfront of Victoria Island, discover the unique character, capital appreciation, and luxury residences in each sector.
           </p>
         </div>
 

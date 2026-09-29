@@ -1,6 +1,7 @@
-import React from 'react';
+﻿import React from 'react';
 import { Property } from '../types';
-import { Bed, Bath, Maximize, MapPin, ShieldCheck, Heart, Sparkles, Eye, Calendar, ArrowRight, MessageSquare, Trash2 } from 'lucide-react';
+import { formatNaira } from '../utils/format';
+import { Bed, Bath, Maximize, MapPin, ShieldCheck, Heart, Eye, Calendar, ArrowRight, MessageSquare, Trash2 } from 'lucide-react';
 
 interface PropertyCardProps {
   property: Property;
@@ -71,7 +72,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           {/* Secondary Badge if exclusive */}
           {property.isExclusive && (
             <span className="px-2 py-0.5 rounded bg-[#C5A869] text-[#0F382C] text-[10px] font-bold tracking-wider uppercase shadow-xs flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-[#0F382C]" />
+              <ShieldCheck className="w-3 h-3 text-[#0F382C]" />
               Exclusive
             </span>
           )}
@@ -101,10 +102,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             {property.verified ? (
               <span 
                 className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-emerald-950/85 backdrop-blur-xs text-emerald-300 border border-emerald-500/30 flex items-center gap-1" 
-                title={property.verifiedBy ? `Verified by ${property.verifiedBy}` : 'Verified Title'}
+                title="Seller-provided details; not independently verified"
               >
                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                {property.verifiedBy ? (property.verifiedBy.includes('ADA') ? 'ADA Verified' : property.verifiedBy.includes('RERA') ? 'RERA' : 'Verified') : 'Verified'}
+                Seller reported
               </span>
             ) : property.verificationStatus === 'In Process' ? (
               <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-amber-950/85 backdrop-blur-xs text-amber-300 border border-amber-500/30 flex items-center gap-1">
@@ -114,7 +115,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           </div>
 
           <span className="text-[11px] bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded text-gray-200 border border-white/10 font-mono">
-            ₹{(property.pricePerSqFt ?? Math.round((property.price || 0) / (property.superAreaSqFt || 1)) ?? 0).toLocaleString('en-IN')}/sq.ft
+            {formatNaira(property.pricePerSqFt ?? Math.round((property.price || 0) / (property.superAreaSqFt || 1)))}/sq.ft
           </span>
         </div>
       </a>
@@ -129,7 +130,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             <span className="truncate" title={isAdminUser && property.address ? property.address : undefined}>
               {isAdminUser && property.address
                 ? property.address
-                : (property.locality ? (property.locality.toLowerCase().includes('agra') ? property.locality : `${property.locality}, Agra`) : (property.location || 'Agra'))}
+                : (property.locality ? (property.locality.toLowerCase().includes('lagos') ? property.locality : `${property.locality}, Lagos`) : (property.location || 'Lagos'))}
             </span>
             {isAdminUser && property.address && (
               <span className="ml-auto text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200 shrink-0">
@@ -184,7 +185,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
             <div className="flex items-center gap-1.5 text-xs font-medium">
               <Maximize className="w-4 h-4 text-gray-400 shrink-0" />
-              <span>{(property.superAreaSqFt || 0).toLocaleString('en-IN')} sq.ft</span>
+              <span>{(property.superAreaSqFt || 0).toLocaleString('en-NG')} sq.ft</span>
             </div>
           </div>
 
@@ -209,8 +210,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           
           {/* Unified Clean "Inquire / Contact" Button */}
           <a
-            href={`https://wa.me/919149079913?text=${encodeURIComponent(
-              `Hi Royal Agra Estate, I am interested in Property ID #${property.id}.`
+            href={`https://wa.me/2348035550148?text=${encodeURIComponent(
+              `Hi DIDU Homes, I am interested in Property ID #${property.id}.`
             )}`}
             target="_blank"
             rel="noreferrer"
@@ -237,7 +238,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
                     : 'text-gray-600 hover:text-[#0F382C] hover:bg-gray-100'
                 }`}
               >
-                {isComparing ? '✓ Comparing' : '+ Compare'}
+                {isComparing ? '  Comparing' : '+ Compare'}
               </button>
             )}
 

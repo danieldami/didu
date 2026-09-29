@@ -1,20 +1,16 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# DIDU Homes
 
-# Run and deploy your AI Studio app
+A polished, self-contained property showcase for a Lagos real estate firm. Listings, projects, demo accounts, saved homes and inquiries are stored in the visitor's browser only. No backend credentials or account setup are required.
 
-This contains everything you need to run your app locally.
+## Run locally
 
-View your app in AI Studio: https://ai.studio/apps/c08b1aab-573d-4cbd-89b2-b37c10541b20
+1. Install dependencies with `npm install`.
+2. Start the site with `npm run dev`.
+3. Create a production build with `npm run build`.
 
-## Run Locally
+## Demo notes
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- Use the site navigation to explore listings, compare homes, save favourites, open the dashboard and submit sample inquiries.
+- Form submissions are demo interactions and do not contact a real agent or persist to a company system.
+- Sample listing and development information is illustrative. Replace it with approved company information before public marketing.
+- Deploy the static Vite output to Vercel. The included rewrite supports the app's query-string navigation.

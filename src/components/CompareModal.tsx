@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Property } from '../types';
 import { 
-  X, Check, Minus, Bed, Bath, Maximize, MapPin, IndianRupee, 
-  Trash2, ShieldCheck, Sparkles, Navigation, Layers, Compass, 
+  X, Check, Minus, Bed, Bath, Maximize, MapPin, Banknote, 
+  Trash2, ShieldCheck, Navigation, Layers, Compass, 
   Car, Clock, Calendar, CheckCircle2, ArrowRight, Eye
 } from 'lucide-react';
 
@@ -20,23 +20,23 @@ const COMPARISON_AMENITIES = [
   '24/7 Security & CCTV',
   '100% Power Backup',
   'Clubhouse & Gymnasium',
-  'Vastu Compliant',
+  'Backup power',
   'Private Lift / Elevator',
   'Landscaped Garden / Terrace',
-  'Italian Marble Flooring',
+  'Private outdoor space',
   'Smart Home Automation',
   'Chauffeur & Servant Quarters',
-  'Taj Mahal / Heritage View',
+  'Lagoon outlook',
   'EV Charging Station'
 ];
 
-// Key Agra Landmarks to compare proximity
+// Key Lagos Landmarks to compare proximity
 const KEY_LANDMARKS = [
-  'Taj Mahal (East Gate)',
-  'Fatehabad Road Luxury Hub',
-  'Agra Airport (Civil Enclave)',
-  'Agra Cantt Railway Station',
-  'Agra Metro Station'
+  'Lagos Island',
+  'Victoria Island',
+  'Ikoyi',
+  'Lekki Phase 1',
+  'Victoria Garden City'
 ];
 
 export const CompareModal: React.FC<CompareModalProps> = ({
@@ -50,24 +50,12 @@ export const CompareModal: React.FC<CompareModalProps> = ({
 
   if (!isOpen) return null;
 
-  // Calculate Stamp Duty in UP (~7%)
-  const calculateStampDuty = (price: number) => {
-    const duty = Math.round(price * 0.07);
-    if (duty >= 10000000) {
-      return `₹${(duty / 10000000).toFixed(2)} Cr`;
-    }
-    return `₹${(duty / 100000).toFixed(2)} Lakh`;
-  };
-
   // Helper to check if property has amenity (case-insensitive fuzzy match)
   const hasAmenity = (property: Property, amenityName: string) => {
     const list = [...property.amenities, ...property.highlights, property.description];
     const needle = amenityName.toLowerCase();
     
     // Custom check for specific amenities
-    if (needle.includes('taj')) {
-      return property.facing.includes('Taj') || property.description.toLowerCase().includes('taj');
-    }
     if (needle.includes('pool')) {
       return list.some(a => a.toLowerCase().includes('pool'));
     }
@@ -76,9 +64,6 @@ export const CompareModal: React.FC<CompareModalProps> = ({
     }
     if (needle.includes('power')) {
       return property.powerBackup || list.some(a => a.toLowerCase().includes('power') || a.toLowerCase().includes('backup'));
-    }
-    if (needle.includes('vastu')) {
-      return property.facing.includes('Vastu') || list.some(a => a.toLowerCase().includes('vastu'));
     }
     if (needle.includes('lift') || needle.includes('elevator')) {
       return list.some(a => a.toLowerCase().includes('lift') || a.toLowerCase().includes('elevator'));
@@ -113,23 +98,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
     if (found) {
       return `${found.distance} (${found.travelTime})`;
     }
-    // Fallback based on locality
-    if (landmarkName.includes('Taj')) {
-      return property.locality.includes('Taj') ? '1.2 km (4 mins)' : '6.5 km (15 mins)';
-    }
-    if (landmarkName.includes('Fatehabad')) {
-      return property.locality.includes('Fatehabad') ? '0.5 km (2 mins)' : '5.0 km (12 mins)';
-    }
-    if (landmarkName.includes('Airport')) {
-      return '11.5 km (25 mins)';
-    }
-    if (landmarkName.includes('Cantt')) {
-      return '7.0 km (18 mins)';
-    }
-    if (landmarkName.includes('Metro')) {
-      return '1.8 km (5 mins)';
-    }
-    return '10-15 mins';
+    return 'Ask DIDU Homes';
   };
 
   return (
@@ -257,7 +226,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                     Properties
                   </span>
                   <p className="text-xs text-gray-500 mt-1">
-                    Comparing specifications across Agra's finest real estate.
+                    Comparing specifications across Lagos's finest real estate.
                   </p>
                 </div>
 
@@ -315,7 +284,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 {(activeSection === 'all' || activeSection === 'specs') && (
                   <>
                     <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-[#0F382C] uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
-                      <IndianRupee className="w-3.5 h-3.5 text-[#C5A869]" />
+                      <Banknote className="w-3.5 h-3.5 text-[#C5A869]" />
                       <span>Financials & Registration</span>
                     </div>
 
@@ -337,7 +306,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                     }`}>
                       <span className="font-bold text-gray-600 px-2">Rate per Sq.Ft</span>
                       {compareList.map(p => (
-                        <span key={p.id} className="font-mono text-gray-900 font-semibold px-2">₹{(p.pricePerSqFt ?? Math.round((p.price || 0) / (p.superAreaSqFt || 1)) ?? 0).toLocaleString('en-IN')}/sq.ft</span>
+                        <span key={p.id} className="font-mono text-gray-900 font-semibold px-2">NGN {(p.pricePerSqFt ?? Math.round((p.price || 0) / (p.superAreaSqFt || 1)) ?? 0).toLocaleString('en-NG')}/sq.ft</span>
                       ))}
                     </div>
 
@@ -346,9 +315,9 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                       compareList.length === 2 ? 'grid-cols-3' :
                       compareList.length === 3 ? 'grid-cols-4' : 'grid-cols-5'
                     }`}>
-                      <span className="font-bold text-gray-600 px-2">Est. UP Stamp Duty (7%)</span>
+                      <span className="font-bold text-gray-600 px-2">Location details</span>
                       {compareList.map(p => (
-                        <span key={p.id} className="text-gray-700 px-2">{calculateStampDuty(p.price || 0)}</span>
+                        <span key={p.id} className="text-gray-700 px-2">{p.locality}, Lagos</span>
                       ))}
                     </div>
 
@@ -362,11 +331,11 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                         <div key={p.id} className="px-2">
                           {p.verified ? (
                             <span className="font-medium text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded inline-block">
-                              ✓ {p.verifiedBy || 'ADA / Authority'}
+                                {p.verifiedBy || 'Seller-provided; not independently verified'}
                             </span>
                           ) : p.verificationStatus === 'In Process' ? (
                             <span className="font-medium text-[11px] text-amber-800 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded inline-block">
-                              ⏳ In Process
+                                In Process
                             </span>
                           ) : (
                             <span className="font-medium text-[11px] text-gray-700 bg-gray-100 border border-gray-200 px-2 py-0.5 rounded inline-block">
@@ -395,7 +364,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                       <span className="font-bold text-gray-600 px-2">Super Built-up Area</span>
                       {compareList.map(p => (
                         <span key={p.id} className="font-mono font-bold text-gray-900 px-2">
-                          {(p.superAreaSqFt || 0).toLocaleString('en-IN')} sq.ft
+                          {(p.superAreaSqFt || 0).toLocaleString('en-NG')} sq.ft
                         </span>
                       ))}
                     </div>
@@ -408,7 +377,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                       <span className="font-bold text-gray-600 px-2">Carpet Area</span>
                       {compareList.map(p => (
                         <span key={p.id} className="font-mono text-gray-800 px-2">
-                          {(p.carpetAreaSqFt || 0).toLocaleString('en-IN')} sq.ft
+                          {(p.carpetAreaSqFt || 0).toLocaleString('en-NG')} sq.ft
                         </span>
                       ))}
                     </div>
@@ -421,7 +390,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                       <span className="font-bold text-gray-600 px-2">Configuration</span>
                       {compareList.map(p => (
                         <span key={p.id} className="text-gray-900 font-semibold px-2">
-                          {p.bedrooms} BHK ({p.bathrooms} Baths, {p.balconies} Balconies)
+                          {p.bedrooms} bedroom ({p.bathrooms} Baths, {p.balconies} Balconies)
                         </span>
                       ))}
                     </div>
@@ -476,7 +445,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 {(activeSection === 'all' || activeSection === 'amenities') && (
                   <>
                     <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-[#0F382C] uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
-                      <Sparkles className="w-3.5 h-3.5 text-[#C5A869]" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#C5A869]" />
                       <span>Luxury Amenities Checklist</span>
                     </div>
 
@@ -499,7 +468,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                               ) : (
                                 <span className="inline-flex items-center gap-1 text-gray-400 text-xs px-2 py-0.5">
                                   <Minus className="w-3.5 h-3.5 text-gray-300" />
-                                  <span>—</span>
+                                  <span> </span>
                                 </span>
                               )}
                             </div>
@@ -510,12 +479,12 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                   </>
                 )}
 
-                {/* 4. PROXIMITY TO AGRA LANDMARKS */}
+                {/* 4. PROXIMITY TO LAGOS LANDMARKS */}
                 {(activeSection === 'all' || activeSection === 'landmarks') && (
                   <>
                     <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-[#0F382C] uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
                       <Navigation className="w-3.5 h-3.5 text-[#C5A869]" />
-                      <span>Proximity to Agra Landmarks & Transit</span>
+                      <span>Proximity to Lagos Landmarks & Transit</span>
                     </div>
 
                     {KEY_LANDMARKS.map((landmark) => (

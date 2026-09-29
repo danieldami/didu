@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { Property, PropertyType } from '../types';
-import { AGRA_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
-import { X, Building2, Image as ImageIcon, IndianRupee, Save, Trash2, Plus, Upload, Star, Loader2, Check } from 'lucide-react';
+import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
+import { formatNaira } from '../utils/format';
+import { X, Building2, Image as ImageIcon, Banknote, Save, Trash2, Plus, Upload, Star, Loader2, Check } from 'lucide-react';
 
 interface EditPropertyModalProps {
   property: Property | null;
@@ -20,7 +21,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
   const [tagline, setTagline] = useState(property?.tagline || '');
   const [price, setPrice] = useState<number>(property?.price || 0);
   const [propertyType, setPropertyType] = useState<PropertyType>(property?.propertyType || 'Luxury Villa');
-  const [locality, setLocality] = useState(property?.locality || 'Fatehabad Road');
+  const [locality, setLocality] = useState(property?.locality || 'Ikoyi');
   const [address, setAddress] = useState(property?.address || '');
   const [superAreaSqFt, setSuperAreaSqFt] = useState(property?.superAreaSqFt || 0);
   const [bedrooms, setBedrooms] = useState(property?.bedrooms || 0);
@@ -38,7 +39,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [status, setStatus] = useState<Property['status']>(property?.status || 'Active');
   const [verified, setVerified] = useState<boolean>(property?.verified ?? true);
-  const [verifiedBy, setVerifiedBy] = useState<string>(property?.verifiedBy || 'Agra Development Authority (ADA)');
+  const [verifiedBy, setVerifiedBy] = useState<string>(property?.verifiedBy || 'Seller-provided details');
   const [verificationNumber, setVerificationNumber] = useState<string>(property?.verificationNumber || '');
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
       setCoverImage(property.coverImage || initialImages[0] || '');
       setStatus(property.status || 'Active');
       setVerified(property.verified ?? true);
-      setVerifiedBy(property.verifiedBy || 'Agra Development Authority (ADA)');
+      setVerifiedBy(property.verifiedBy || 'Seller-provided details');
       setVerificationNumber(property.verificationNumber || '');
       setImageError('');
     }
@@ -70,12 +71,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
   if (!isOpen || !property) return null;
 
   const formatPriceDisplay = (amt: number, type: 'Sale' | 'Rent') => {
-    if (type === 'Rent') {
-      if (amt >= 100000) return `₹${(amt / 100000).toFixed(2)} Lac/mo`;
-      return `₹${amt.toLocaleString('en-IN')}/mo`;
-    }
-    if (amt >= 10000000) return `₹${(amt / 10000000).toFixed(2)} Cr`;
-    return `₹${(amt / 100000).toFixed(2)} Lacs`;
+    return type === 'Rent' ? `${formatNaira(amt)}/month` : formatNaira(amt);
   };
 
   const MAX_PHOTOS = 10;
@@ -95,7 +91,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
             fbCtx.fillStyle = '#C5A880';
             fbCtx.font = 'bold 28px sans-serif';
             fbCtx.textAlign = 'center';
-            fbCtx.fillText('Royal Agra Estate — Verified Photo', 400, 270);
+            fbCtx.fillText('DIDU Homes   Verified Photo', 400, 270);
             return fbCanvas.toDataURL('image/jpeg', 0.60);
           }
         } catch {}
@@ -261,8 +257,8 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
       pricePerSqFt: superAreaSqFt > 0 ? Math.round(price / superAreaSqFt) : property.pricePerSqFt,
       propertyType,
       locality,
-      location: `${locality}, Agra`,
-      address: address.trim() || property.address || `${locality}, Agra`,
+      location: `${locality}, Lagos`,
+      address: address.trim() || property.address || `${locality}, Lagos`,
       superAreaSqFt,
       bedrooms,
       bathrooms,
@@ -332,7 +328,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                       : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-100'
                   }`}
                 >
-                  {st === 'Active' ? '● Active Listing' : st === 'Sold' ? '✓ Mark as Sold' : '✓ Mark as Rented'}
+                  {st === 'Active' ? '  Active Listing' : st === 'Sold' ? '  Mark as Sold' : '  Mark as Rented'}
                 </button>
               ))}
             </div>
@@ -370,7 +366,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                Asking Price (₹ INR)
+                Asking Price (NGN  NGN)
               </label>
               <input
                 type="number"
@@ -417,14 +413,14 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
 
             <div>
               <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                Agra Locality
+                Lagos Locality
               </label>
               <select
                 value={locality}
                 onChange={(e) => setLocality(e.target.value)}
                 className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white"
               >
-                {AGRA_LOCALITIES.filter(l => l !== 'All Localities').map(l => (
+                {LAGOS_LOCALITIES.filter(l => l !== 'All Localities').map(l => (
                   <option key={l} value={l}>{l}</option>
                 ))}
               </select>
@@ -436,7 +432,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
             <label className="block text-xs font-bold text-gray-700 uppercase mb-1 flex items-center justify-between">
               <span>Complete Exact Address / House No. & Plot *</span>
               <span className="text-[10px] text-amber-700 font-semibold">
-                🔒 Confidential: Visible only to Admins
+                
               </span>
             </label>
             <textarea
@@ -444,7 +440,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
               required
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              placeholder="e.g. Plot 18, Royal Enclave, Near Hotel ITC Mughal, Fatehabad Road, Agra"
+              placeholder="e.g. Plot 18, Ikoyi, Near Hotel Lagos Island, Ikoyi, Lagos"
               className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
             />
           </div>
@@ -504,7 +500,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                       : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-100'
                   }`}
                 >
-                  ✓ Verified
+                    Verified
                 </button>
                 <button
                   type="button"
@@ -515,7 +511,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                       : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-100'
                   }`}
                 >
-                  ✕ Independent / Not ADA
+                    Seller-provided / unverified
                 </button>
               </div>
             </div>
@@ -531,22 +527,22 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                     onChange={(e) => setVerifiedBy(e.target.value)}
                     className="w-full p-2.5 text-xs bg-white border border-gray-300 rounded-lg text-gray-900 font-medium"
                   >
-                    <option value="Agra Development Authority (ADA)">Agra Development Authority (ADA)</option>
-                    <option value="UP RERA (Real Estate Regulatory Authority)">UP RERA (Real Estate Regulatory Authority)</option>
-                    <option value="Tehsil Registry / Sub-Registrar Agra">Tehsil Registry / Sub-Registrar Agra</option>
-                    <option value="Nagar Nigam Agra (Municipal Corporation)">Nagar Nigam Agra (Municipal Corporation)</option>
-                    <option value="Royal Agra Legal Advisory Cell">Royal Agra Legal Advisory Cell</option>
-                    <option value="Agra Cantonment Board">Agra Cantonment Board</option>
+                    <option value="Lagos State Lands Bureau">Lagos State Lands Bureau</option>
+                    <option value="Seller-provided details">Seller-provided details</option>
+                    <option value="Tehsil Registry / Sub-Registrar Lagos">Tehsil Registry / Sub-Registrar Lagos</option>
+                    <option value="Lagos local authority (Municipal Corporation)">Lagos local authority (Municipal Corporation)</option>
+                    <option value="DIDU Homes Legal Advisory Cell">DIDU Homes Legal Advisory Cell</option>
+                    <option value="Lagos Cantonment Board">Lagos Cantonment Board</option>
                     <option value="Nationalized / Private Bank (Home Loan Approved)">Nationalized / Private Bank (Home Loan Approved)</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
-                    Approval / Sanction / RERA Reference No.
+                    Approval reference supplied by seller
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. ADA/2024/782 or UPRERA"
+                    placeholder="Reference shown on the supplied document"
                     value={verificationNumber}
                     onChange={(e) => setVerificationNumber(e.target.value)}
                     className="w-full p-2.5 text-xs bg-white border border-gray-300 rounded-lg text-gray-900 font-mono"
@@ -565,7 +561,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                   <span>Property Photo Gallery ({images.length}/{MAX_PHOTOS})</span>
                 </label>
                 <p className="text-[11px] text-gray-500 mt-0.5">
-                  HD Quality • Max 10 Photos, up to 25 MB each. Click any thumbnail to set it as cover.
+                  HD Quality   Max 10 Photos, up to 25 MB each. Click any thumbnail to set it as cover.
                 </p>
               </div>
               {images.length < MAX_PHOTOS && (
@@ -633,7 +629,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                         {isCover ? (
                           <span className="inline-flex items-center gap-1 bg-emerald-600 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
                             <Star className="w-3 h-3 fill-current" />
-                            <span>★ Active Cover</span>
+                            <span>  Active Cover</span>
                           </span>
                         ) : (
                           <span className="bg-black/60 group-hover:bg-emerald-700 text-white text-[9px] font-semibold px-1.5 py-0.5 rounded backdrop-blur-xs transition-colors opacity-0 group-hover:opacity-100">
@@ -689,7 +685,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                     <span>Active Photo Preview (Primary Cover)</span>
                   </span>
                   <span className="text-[10px] text-emerald-700 font-semibold">
-                    ✓ Selected Cover Photo
+                      Selected Cover Photo
                   </span>
                 </div>
                 <div className="relative h-44 sm:h-56 w-full rounded-xl overflow-hidden border-2 border-emerald-600/50 shadow-md bg-gray-900 group">

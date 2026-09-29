@@ -1,22 +1,22 @@
-import React from 'react';
+﻿import React from 'react';
 import { Landmark, ShieldCheck, Users, Compass, CheckCircle2, FileCheck, Scale, Phone } from 'lucide-react';
 
 export const AboutScreen: React.FC = () => {
   const trustPillars = [
     {
       icon: FileCheck,
-      title: '100% Clear Title Focus',
-      description: 'Thorough verification of property documentation, ownership chains, and legal status across ADA, RERA, and registrar records before presentation.'
+      title: 'A considered search',
+      description: 'We take time to understand your priorities, preferred neighbourhoods and the way you want to live.'
     },
     {
       icon: Users,
-      title: 'Direct Founder Access',
-      description: 'Personalized advisory directly with Shrey and Abhishek. Work with dedicated decision-makers without dealing with commission-driven third-party middlemen.'
+      title: 'Personal guidance',
+      description: 'A dedicated property advisor helps you explore suitable homes and coordinate private viewings.'
     },
     {
       icon: Scale,
-      title: 'Transparent Valuation',
-      description: 'Fair market pricing backed by real corridor analytics and honest consultation, safeguarding interests for both discerning buyers and property owners.'
+      title: 'Lagos perspective',
+      description: 'Local neighbourhood context helps you compare locations, property styles and the details that matter to you.'
     }
   ];
 
@@ -28,13 +28,13 @@ export const AboutScreen: React.FC = () => {
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-[#0F382C]/10 text-[#0F382C] text-xs font-bold uppercase tracking-wider mb-3">
             <Landmark className="w-3.5 h-3.5 text-[#0F382C]" />
-            <span>LUXURY REAL ESTATE ADVISORY • AGRA</span>
+            <span>LUXURY REAL ESTATE ADVISORY   LAGOS</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-serif-luxury font-bold text-[#0F382C] tracking-tight">
             Modern Real Estate Built on Discretion & Absolute Trust
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-4 leading-relaxed font-medium">
-            Founded by Shrey Gupta and Abhishek Singh Jadon, Royal Agra Estate was built to bring institutional-grade transparency, clear-title verification, and seamless property acquisitions to Agra.
+            DIDU Homes is a Lagos property advisory concept focused on a more personal, considered way to find a home.
           </p>
         </div>
 
@@ -43,26 +43,26 @@ export const AboutScreen: React.FC = () => {
           <div className="space-y-4">
             <span className="text-xs uppercase tracking-widest text-[#C5A869] font-bold">Our Philosophy</span>
             <h2 className="text-2xl font-serif-luxury font-bold text-[#0F382C]">
-              A Modern, Advisory-First Approach to Agra Real Estate
+              A Modern, Advisory-First Approach to Lagos Real Estate
             </h2>
             <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-              Traditional real estate in Agra is often burdened by fragmented titles, hidden intermediaries, and opaque pricing. Royal Agra Estate was founded with a singular purpose: to replace uncertainty with modern, tech-enabled advisory and institutional rigor.
+              Finding the right home is a personal decision. DIDU Homes brings a curated property experience together with thoughtful, one-to-one guidance.
             </p>
             <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
-              Whether you are acquiring a signature villa along Fatehabad Road, a prime estate in Dayalbagh, or high-growth commercial land near the Agra Metro and Expressway corridors, we provide verified insights and end-to-end legal diligence with absolute client confidentiality.
+              Explore residences in Ikoyi, Banana Island, Victoria Island, Lekki Phase 1 and other sought-after Lagos neighbourhoods.
             </p>
           </div>
 
           <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-md">
             <img
               src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80"
-              alt="Agra Heritage and Prime Corridors"
+              alt="Lagos Heritage and Prime Corridors"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0B2B22]/80 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 text-white">
-              <span className="text-xs font-semibold text-[#E4D5B7] block">Agra Prime Residential & Commercial Corridors</span>
-              <p className="text-[11px] text-gray-300">Curating verified estates with bespoke client discretion</p>
+              <span className="text-xs font-semibold text-[#E4D5B7] block">Lagos Prime Residential & Commercial Corridors</span>
+              <p className="text-[11px] text-gray-300">Curated Lagos properties with thoughtful, personal guidance</p>
             </div>
           </div>
         </div>
@@ -72,7 +72,7 @@ export const AboutScreen: React.FC = () => {
           <div className="text-center mb-8">
             <span className="text-xs uppercase tracking-widest text-[#C5A869] font-bold">Core Foundations</span>
             <h3 className="text-2xl font-serif-luxury font-bold text-[#0F382C] mt-1">
-              The Royal Agra Estate Trust Standard
+              The DIDU Homes Experience
             </h3>
           </div>
 
@@ -109,7 +109,7 @@ export const AboutScreen: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Card 1: Shrey Gupta */}
+            {/* Card 1: Amara Okafor */}
             <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm text-center flex flex-col items-center hover:border-[#C5A869]/60 transition-all">
               <div className="relative mb-5 group">
                 <div className="w-28 h-28 rounded-full bg-[#0F382C]/5 border-2 border-[#C5A869] flex flex-col items-center justify-center text-[#0F382C] overflow-hidden shadow-inner">
@@ -117,20 +117,20 @@ export const AboutScreen: React.FC = () => {
                   <span className="text-[10px] uppercase font-bold tracking-wider text-[#C5A869]">Photo</span>
                 </div>
               </div>
-              <h4 className="text-xl font-serif-luxury font-bold text-[#0F382C]">Shrey Gupta</h4>
+              <h4 className="text-xl font-serif-luxury font-bold text-[#0F382C]">Amara Okafor</h4>
               <span className="text-xs font-bold text-[#C5A869] uppercase tracking-wider block mt-1 mb-3">Managing Partner & Co-Founder</span>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-sm mb-4">
-                Leading strategic client relations, luxury residential acquisitions, and high-value property portfolios across Agra's prime corridors.
+                Leading strategic client relations, luxury residential acquisitions, and high-value property portfolios across Lagos's prime corridors.
               </p>
               <div className="mt-auto pt-4 border-t border-gray-100 w-full flex items-center justify-center gap-2 text-xs font-semibold text-[#0F382C]">
                 <span>Direct:</span>
-                <a href="tel:+919149079913" className="text-[#0F382C] hover:text-[#C5A869] underline">
-                  +91 91490 79913
+                <a href="tel:+2348035550148" className="text-[#0F382C] hover:text-[#C5A869] underline">
+                  +234 803 555 0148
                 </a>
               </div>
             </div>
 
-            {/* Card 2: Abhishek Singh Jadon */}
+            {/* Card 2: Tunde Adebayo */}
             <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-sm text-center flex flex-col items-center hover:border-[#C5A869]/60 transition-all">
               <div className="relative mb-5 group">
                 <div className="w-28 h-28 rounded-full bg-[#0F382C]/5 border-2 border-[#C5A869] flex flex-col items-center justify-center text-[#0F382C] overflow-hidden shadow-inner">
@@ -138,15 +138,15 @@ export const AboutScreen: React.FC = () => {
                   <span className="text-[10px] uppercase font-bold tracking-wider text-[#C5A869]">Photo</span>
                 </div>
               </div>
-              <h4 className="text-xl font-serif-luxury font-bold text-[#0F382C]">Abhishek Singh Jadon</h4>
+              <h4 className="text-xl font-serif-luxury font-bold text-[#0F382C]">Tunde Adebayo</h4>
               <span className="text-xs font-bold text-[#C5A869] uppercase tracking-wider block mt-1 mb-3">Managing Partner & Co-Founder</span>
               <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-sm mb-4">
-                Overseeing commercial real estate developments, clear-title legal verifications, and strategic property investments in Agra.
+                Overseeing commercial real estate developments, clear-title legal verifications, and strategic property investments in Lagos.
               </p>
               <div className="mt-auto pt-4 border-t border-gray-100 w-full flex items-center justify-center gap-2 text-xs font-semibold text-[#0F382C]">
                 <span>Direct:</span>
-                <a href="tel:+919557138449" className="text-[#0F382C] hover:text-[#C5A869] underline">
-                  +91 95571 38449
+                <a href="tel:+2348095550182" className="text-[#0F382C] hover:text-[#C5A869] underline">
+                  +234 809 555 0182
                 </a>
               </div>
             </div>

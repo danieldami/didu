@@ -1,4 +1,4 @@
-export type PropertyType = string;
+﻿export type PropertyType = string;
 
 export type ListingType = 'Buy' | 'Rent' | 'Commercial' | 'Projects' | 'Plots';
 
@@ -8,8 +8,8 @@ export interface Property {
   tagline: string;
   propertyType: PropertyType;
   listingType: 'Sale' | 'Rent';
-  price: number; // in INR (e.g., 28500000 = 2.85 Cr)
-  priceDisplay: string; // "₹2.85 Cr"
+  price: number; // in Nigerian naira
+  priceDisplay: string; // formatted for the Lagos market
   pricePerSqFt: number; // e.g., 8500
   location: string;
   locality: string;
@@ -20,7 +20,7 @@ export interface Property {
   superAreaSqFt: number;
   carpetAreaSqFt: number;
   furnishing: 'Fully Furnished' | 'Semi-Furnished' | 'Unfurnished' | 'Designer Fitted';
-  facing: 'North-East (Vastu)' | 'East' | 'North' | 'Taj View (South-East)' | 'Park Facing';
+  facing: 'East' | 'North' | 'South' | 'West' | 'Park Facing' | 'Lagoon View';
   reraId: string;
   possession: 'Ready to Move' | 'Immediate' | 'Dec 2025' | 'Under Construction';
   featured: boolean;

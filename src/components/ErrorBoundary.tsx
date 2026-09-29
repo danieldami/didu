@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Uncaught Error in Royal Agra Estate App:', error, errorInfo);
+    console.error('Uncaught Error in DIDU Homes App:', error, errorInfo);
     
     // Auto-reload on chunk load failures (e.g. after a new deployment)
     const isChunkError = error.message?.includes('Loading chunk') || 
@@ -43,8 +43,8 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   private handleResetCacheAndReload = () => {
     try {
-      localStorage.removeItem('royal_agra_properties_cache_v2');
-      localStorage.removeItem('royal_agra_deleted_property_ids_v2');
+      localStorage.removeItem('royal_lagos_properties_cache_v2');
+      localStorage.removeItem('royal_lagos_deleted_property_ids_v2');
       sessionStorage.clear();
     } catch (e) {
       // ignore
@@ -91,7 +91,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
               margin: '0 auto 20px',
               fontSize: '28px'
             }}>
-              🏛️
+              
             </div>
             
             <h1 style={{
@@ -101,7 +101,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
               marginBottom: '10px',
               letterSpacing: '-0.02em'
             }}>
-              Royal Agra Estate
+              DIDU Homes
             </h1>
             
             <p style={{
@@ -110,7 +110,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
               lineHeight: '1.6',
               marginBottom: '28px'
             }}>
-              We encountered a temporary loading issue. Please refresh or reset the cache to load the latest luxury listings in Agra.
+              We encountered a temporary loading issue. Please refresh or reset the cache to load the latest luxury listings in Lagos.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>

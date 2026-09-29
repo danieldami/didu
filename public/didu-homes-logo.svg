@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <rect x="2" y="2" width="76" height="76" rx="20" fill="#142A23"/>
+  <path d="M20 59V21h16c13 0 21 7 21 19S49 59 36 59H20Zm12-10h4c6 0 9-3 9-9s-3-9-9-9h-4v18Z" fill="#D4B77A"/>
+  <path d="M62 21v38" stroke="#F7F3EA" stroke-width="3"/>
+  <text x="94" y="43" fill="#FFFFFF" font-family="Georgia,serif" font-size="29" letter-spacing="1.8">DIDU</text>
+  <text x="96" y="64" fill="#D4B77A" font-family="Arial,sans-serif" font-size="12" letter-spacing="4.8">HOMES</text>
+</svg>

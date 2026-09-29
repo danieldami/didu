@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { UserProfile, Property, UserDashboardTab } from '../types';
 import { isAdmin, LeadSubmission, ADMIN_CREDENTIALS } from '../utils/security';
 import { 
@@ -14,7 +14,6 @@ import {
   Mail, 
   MapPin, 
   ShieldCheck, 
-  Sparkles, 
   Calendar, 
   Bed, 
   Bath, 
@@ -74,11 +73,11 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
   
   // Profile form state
   const [name, setName] = useState(user?.name || 'Valued Client');
-  const [phone, setPhone] = useState(user?.phone || '+91 91490 79913');
-  const [email, setEmail] = useState(user?.email || 'client@royalagraestate.in');
+  const [phone, setPhone] = useState(user?.phone || '+234 803 555 0148');
+  const [email, setEmail] = useState(user?.email || 'client@diduhomes.com');
   const [role, setRole] = useState<'buyer' | 'owner' | 'admin'>(user?.role || 'owner');
   const [avatar, setAvatar] = useState(user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80');
-  const [preferredLocality, setPreferredLocality] = useState(user?.preferredLocality || 'Fatehabad Road, Agra');
+  const [preferredLocality, setPreferredLocality] = useState(user?.preferredLocality || 'Ikoyi, Lagos');
   const [primaryInterest, setPrimaryInterest] = useState(user?.primaryInterest || 'Buying');
   const [preferredBudget, setPreferredBudget] = useState(user?.preferredBudget || '');
   const [address, setAddress] = useState(user?.address || '');
@@ -101,7 +100,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
       setEmail(user.email);
       setRole(user.role);
       setAvatar(user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80');
-      setPreferredLocality(user.preferredLocality || 'Fatehabad Road, Agra');
+      setPreferredLocality(user.preferredLocality || 'Ikoyi, Lagos');
       setPrimaryInterest(user.primaryInterest || 'Buying');
       setPreferredBudget(user.preferredBudget || '');
       setAddress(user.address || '');
@@ -126,7 +125,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
       }
       let savedAccounts: any[] = [];
       try {
-        const stored = localStorage.getItem('royal_agra_accounts_v1');
+        const stored = localStorage.getItem('didu_demo_accounts');
         if (stored) savedAccounts = JSON.parse(stored);
       } catch {}
 
@@ -138,7 +137,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
         }
         account.password = newPassword.trim();
         try {
-          localStorage.setItem('royal_agra_accounts_v1', JSON.stringify(savedAccounts));
+          localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
         } catch {}
       } else {
         const adminAcc = ADMIN_CREDENTIALS.find(a => a.email.toLowerCase() === user.email.toLowerCase());
@@ -224,12 +223,12 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 </div>
                 {isAdmin(user) && (
                   <p className="text-xs text-[#E4D5B7] font-semibold mt-1">
-                    Royal Agra Estate - Managed by Shrey Gupta & Abhishek Singh Jadon
+                    DIDU Homes - Managed by Amara Okafor & Tunde Adebayo
                   </p>
                 )}
                 <p className="text-xs text-gray-300 mt-1 flex items-center gap-3">
-                  <span>ID: #{user?.id || 'RAE-Client'}</span>
-                  <span>•</span>
+                  <span>ID: #{user?.id || 'DIDU-Client'}</span>
+                  <span> </span>
                   <span>Member since {user?.memberSince || '2024'}</span>
                 </p>
                 <div className="flex items-center gap-4 text-xs text-gray-300 mt-2">
@@ -469,7 +468,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                   My Listed Properties ({userProperties.length})
                 </h2>
                 <p className="text-xs text-gray-600 mt-0.5">
-                  Manage live status, edit pricing/photos, or remove listings from the Royal Agra network.
+                  Manage live status, edit pricing/photos, or remove listings from the DIDU Homes network.
                 </p>
               </div>
 
@@ -489,7 +488,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
               <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0 mt-0.5">
-                    <Sparkles className="w-5 h-5" />
+                    <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-amber-900 flex items-center gap-2">
@@ -514,7 +513,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                       }}
                       className="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5"
                     >
-                      <Sparkles className="w-3.5 h-3.5 text-amber-800" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-amber-800" />
                       <span>Restore Samples</span>
                     </button>
                   )}
@@ -546,7 +545,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                   You Haven't Listed Any Properties Yet
                 </h3>
                 <p className="text-xs text-gray-500 max-w-md mx-auto">
-                  List your luxury villa, penthouse, apartment, or commercial plot to connect directly with verified buyers in Agra.
+                  List your luxury villa, penthouse, apartment, or commercial plot to connect directly with verified buyers in Lagos.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
                   <button
@@ -560,13 +559,13 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     <button
                       type="button"
                       onClick={() => {
-                        if (window.confirm('Restore the default 8 curated sample luxury properties for Agra?')) {
+                        if (window.confirm('Restore the default 8 curated sample luxury properties for Lagos?')) {
                           onRestoreDefaultProperties();
                         }
                       }}
                       className="bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2"
                     >
-                      <Sparkles className="w-4 h-4 text-amber-800" />
+                      <ShieldCheck className="w-4 h-4 text-amber-800" />
                       <span>Restore 8 Sample Properties</span>
                     </button>
                   )}
@@ -613,7 +612,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                             </span>
                           ) : prop.status === 'pending_verification' || prop.status === 'Pending Approval' || prop.isApproved === false ? (
                             <span className="px-3 py-1 rounded-md bg-amber-600 text-white text-xs font-bold uppercase tracking-wider shadow-md flex items-center gap-1">
-                              <span>⏳ UNDER REVIEW / PENDING APPROVAL</span>
+                              <span>  UNDER REVIEW / PENDING APPROVAL</span>
                             </span>
                           ) : (
                             <span className="px-3 py-1 rounded-md bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider shadow-md flex items-center gap-1">
@@ -664,15 +663,15 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                             {prop.verified ? (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-semibold">
                                 <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                                <span>Verified: {prop.verifiedBy || 'ADA / Authority Approved'}</span>
+                                <span>Seller-provided details (not independently checked)</span>
                               </span>
                             ) : prop.verificationStatus === 'In Process' ? (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-50 text-amber-800 border border-amber-200 text-[11px] font-semibold">
-                                <span>⏳ Approval In Process</span>
+                                <span>Seller reports application in progress</span>
                               </span>
                             ) : (
                               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200 text-[11px] font-medium">
-                                <span>Independent Registry (Not ADA)</span>
+                                <span>Not independently verified</span>
                               </span>
                             )}
                           </div>
@@ -691,10 +690,10 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                               </div>
                               <div className="text-[10px] text-gray-500 flex flex-wrap items-center gap-2">
                                 {prop.postedBy?.email || prop.ownerEmail ? (
-                                  <span>✉️ {prop.postedBy?.email || prop.ownerEmail}</span>
+                                  <span>  {prop.postedBy?.email || prop.ownerEmail}</span>
                                 ) : null}
                                 {prop.ownerContact ? (
-                                  <span>📞 {prop.ownerContact}</span>
+                                  <span></span>
                                 ) : null}
                                 {prop.ownerId || prop.userId ? (
                                   <span className="font-mono">ID: #{prop.ownerId || prop.userId}</span>
@@ -707,7 +706,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                           <div className="grid grid-cols-3 gap-2 py-2.5 my-3 border-y border-gray-100 text-xs text-gray-700 font-medium">
                             <div className="flex items-center gap-1">
                               <Bed className="w-3.5 h-3.5 text-gray-400" />
-                              <span>{(prop.bedrooms || 0) > 0 ? `${prop.bedrooms} BHK` : 'Comm.'}</span>
+                              <span>{(prop.bedrooms || 0) > 0 ? `${prop.bedrooms} bedroom` : 'Comm.'}</span>
                             </div>
                             <div className="flex items-center gap-1">
                               <Bath className="w-3.5 h-3.5 text-gray-400" />
@@ -715,7 +714,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                             </div>
                             <div className="flex items-center gap-1">
                               <Maximize className="w-3.5 h-3.5 text-gray-400" />
-                              <span>{(prop.superAreaSqFt || 0).toLocaleString('en-IN')} sq.ft</span>
+                              <span>{(prop.superAreaSqFt || 0).toLocaleString('en-NG')} sq.ft</span>
                             </div>
                           </div>
                         </div>
@@ -815,7 +814,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 Personal Profile & Contact Settings
               </h2>
               <p className="text-xs text-gray-500 mt-1">
-                Keep your confidential contact details and Agra investment preferences updated.
+                Keep your confidential contact details and Lagos investment preferences updated.
               </p>
             </div>
 
@@ -938,7 +937,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     }`}
                   >
                     <span className="block font-bold">Property Owner / Seller</span>
-                    <span className="text-[11px] opacity-80 font-normal">Listing & managing Agra properties</span>
+                    <span className="text-[11px] opacity-80 font-normal">Listing & managing Lagos properties</span>
                   </button>
                 </div>
               </div>
@@ -946,13 +945,13 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
               {/* Preferred Locality */}
               <div>
                 <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Primary Agra Locality / Focus Area
+                  Primary Lagos Locality / Focus Area
                 </label>
                 <input
                   type="text"
                   value={preferredLocality}
                   onChange={(e) => setPreferredLocality(e.target.value)}
-                  placeholder="e.g. Fatehabad Road, Dayalbagh, Civil Lines"
+                  placeholder="e.g. Ikoyi, Victoria Island, Civil Lines"
                   className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
                 />
               </div>
@@ -983,7 +982,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     type="text"
                     value={preferredBudget}
                     onChange={(e) => setPreferredBudget(e.target.value)}
-                    placeholder="e.g. ₹2.5 Cr+ Luxury Villa"
+                    placeholder="e.g. NGN 2.5bn+ luxury home"
                     className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
                   />
                 </div>
@@ -1012,7 +1011,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     type="text"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    placeholder="e.g. Taj Ganj, Agra"
+                    placeholder="e.g. Lekki Phase 1, Lagos"
                     className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
                   />
                 </div>
@@ -1144,16 +1143,16 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                       <h4 className="text-sm font-serif-luxury font-bold text-[#0F382C] line-clamp-1">{prop.title}</h4>
                       <p className="text-xs text-gray-500 flex items-center gap-1">
                         <MapPin className="w-3 h-3 text-[#0F382C]" />
-                        <span>{prop.locality ? (prop.locality.toLowerCase().includes('agra') ? prop.locality : `${prop.locality}, Agra`) : (prop.location || 'Agra')}</span>
+                        <span>{prop.locality ? (prop.locality.toLowerCase().includes('lagos') ? prop.locality : `${prop.locality}, Lagos`) : (prop.location || 'Lagos')}</span>
                       </p>
                       <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
-                        <span className="text-xs text-gray-600 font-mono">{(prop.superAreaSqFt || 0).toLocaleString('en-IN')} sq.ft</span>
+                        <span className="text-xs text-gray-600 font-mono">{(prop.superAreaSqFt || 0).toLocaleString('en-NG')} sq.ft</span>
                         <button
                           type="button"
                           onClick={() => onViewProperty(prop)}
                           className="text-xs font-bold text-[#0F382C] hover:underline"
                         >
-                          View Details →
+                          View Details  
                         </button>
                       </div>
                     </div>
@@ -1217,7 +1216,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                           <td className="p-4 text-right">
                             <div className="flex items-center justify-end gap-2">
                               <a
-                                href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${lead.buyerName}, regarding your inquiry for Royal Agra Estate...`)}`}
+                                href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${lead.buyerName}, regarding your inquiry for DIDU Homes...`)}`}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold text-[10px]"

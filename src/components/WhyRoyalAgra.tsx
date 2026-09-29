@@ -1,21 +1,21 @@
-import React from 'react';
-import { Compass, Award, Sparkles } from 'lucide-react';
+﻿import React from 'react';
+import { Compass, Award,  } from 'lucide-react';
 
-interface WhyRoyalAgraProps {
+interface WhyRoyalLagosProps {
   onContactAdvisory: () => void;
 }
 
-export const WhyRoyalAgra: React.FC<WhyRoyalAgraProps> = ({ onContactAdvisory }) => {
+export const WhyRoyalLagos: React.FC<WhyRoyalLagosProps> = ({ onContactAdvisory }) => {
   const pillars = [
     {
       icon: Compass,
-      title: 'Private Chauffeur Architectural Tours',
-      description: 'Experience confidential private site visits in luxury comfort accompanied by our senior architectural advisors and valuation specialists.'
+      title: 'Private viewings',
+      description: 'Arrange a considered visit to the homes that match your search.'
     },
     {
       icon: Award,
-      title: '5–6 Years of Market Discretion & Advisory',
-      description: 'Trusted by distinguished business families, doctors, and prime investors for brokering Agra’s most iconic estates with absolute confidentiality.'
+      title: 'Local guidance',
+      description: 'Explore Lagos neighbourhoods with a property advisor who understands the details of each search.'
     }
   ];
 
@@ -31,14 +31,14 @@ export const WhyRoyalAgra: React.FC<WhyRoyalAgraProps> = ({ onContactAdvisory })
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E4D5B7]/15 border border-[#C5A869]/30 text-[#E4D5B7] text-xs font-bold uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-[#C5A869]" />
-            <span>The Royal Standard</span>
+            <Award className="w-3.5 h-3.5 text-[#C5A869]" />
+            <span>The DIDU standard</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-white">
-            Why Agra’s Elite Trust Royal Agra Estate
+            A considered way to find your place in Lagos
           </h2>
           <p className="text-sm sm:text-base text-gray-300 mt-3 leading-relaxed">
-            Uncompromising integrity, architectural expertise, and personalized bespoke advisory for high-value real estate transactions in Agra.
+            Discover exceptional homes across Ikoyi, Victoria Island, Banana Island and beyond with personal, one-to-one guidance.
           </p>
         </div>
 
@@ -75,7 +75,7 @@ export const WhyRoyalAgra: React.FC<WhyRoyalAgraProps> = ({ onContactAdvisory })
             className="inline-flex items-center gap-2 bg-[#C5A869] hover:bg-[#b09355] text-[#0F382C] px-8 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg hover:shadow-xl transition-all cursor-pointer"
           >
             <span>Schedule Private Advisory Consultation</span>
-            <span>→</span>
+            <span> </span>
           </button>
         </div>
 

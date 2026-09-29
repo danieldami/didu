@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { ActiveScreen, UserProfile } from '../types';
-import { Landmark, Menu, X, Building2, User, LogOut, LayoutDashboard, ChevronDown } from 'lucide-react';
+import { Menu, X, Building2, User, LogOut, LayoutDashboard, ChevronDown } from 'lucide-react';
 
 interface NavbarProps {
   activeScreen: ActiveScreen;
@@ -49,7 +49,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* LEFT: Logo Icon + ONLY "Royal Agra Estate" */}
+          {/* DIDU Homes brand */}
           <a
             href="?screen=home"
             id="brand-logo-btn"
@@ -61,14 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             }}
             className="flex items-center gap-3 text-left group focus:outline-none"
           >
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#E4D5B7] via-[#C5A869] to-[#8C6D32] p-[1.5px] shadow-sm flex items-center justify-center">
-              <div className="w-full h-full bg-[#0F382C] rounded-[6.5px] flex items-center justify-center">
-                <Landmark className="w-5 h-5 text-[#E4D5B7] group-hover:scale-105 transition-transform" />
-              </div>
-            </div>
-            <span className="text-xl sm:text-2xl tracking-wide font-brand-title font-semibold text-white group-hover:text-[#E4D5B7] transition-colors leading-none">
-              Royal Agra Estate
-            </span>
+            <img src="/didu-homes-logo.svg" alt="DIDU Homes" className="h-12 w-auto" />
           </a>
 
           {/* MIDDLE: Standard navigation links */}

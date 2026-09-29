@@ -1,9 +1,9 @@
-import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Property, FilterState, PropertyType, ListingType } from '../types';
 import { PropertyCard } from './PropertyCard';
 import { PropertySkeletonGrid } from './PropertyCardSkeleton';
-import { AGRA_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
+import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
 import { 
   Search, 
   SlidersHorizontal, 
@@ -11,9 +11,8 @@ import {
   List, 
   Map, 
   X, 
-  IndianRupee, 
+  Banknote, 
   RotateCcw,
-  Sparkles,
   MapPin,
   Building,
   Check
@@ -124,7 +123,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
         if (pPrice < min || pPrice > max) return false;
       }
 
-      // 6. BHK
+      // 6. bedroom
       if (filterState.bhk) {
         const bhkNum = parseInt(filterState.bhk, 10);
         if (!isNaN(bhkNum)) {
@@ -162,10 +161,10 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-[#0F382C]">
-                Exclusive Agra Property Portfolio
+                Exclusive Lagos Property Portfolio
               </h1>
               <p className="text-sm text-gray-600 mt-1">
-                Showing <strong className="text-[#0F382C]">{filteredProperties.length}</strong> luxury properties in Agra with verified clear titles.
+                Showing <strong className="text-[#0F382C]">{filteredProperties.length}</strong> selected homes across Lagos.
               </p>
             </div>
 
@@ -235,7 +234,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
               <input
                 type="text"
                 id="properties-search-input"
-                placeholder="Search by title, location, landmark (e.g. Fatehabad, Pool, Taj)..."
+                placeholder="Search by title or location (e.g. Ikoyi, Banana Island)..."
                 value={filterState.searchQuery}
                 onChange={(e) => onUpdateFilters({ searchQuery: e.target.value })}
                 className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
@@ -304,17 +303,17 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                 </button>
               </div>
 
-              {/* 1. Locality in Agra */}
+              {/* 1. Locality in Lagos */}
               <div className="space-y-2">
                 <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Agra Locality
+                  Lagos Locality
                 </label>
                 <select
                   value={filterState.locality}
                   onChange={(e) => onUpdateFilters({ locality: e.target.value })}
                   className="w-full p-2.5 text-xs bg-gray-50 border border-gray-200 rounded-lg font-medium text-gray-800 focus:bg-white focus:border-[#0F382C]"
                 >
-                  {AGRA_LOCALITIES.map((loc) => (
+                  {LAGOS_LOCALITIES.map((loc) => (
                     <option key={loc} value={loc === 'All Localities' ? '' : loc}>
                       {loc}
                     </option>
@@ -347,10 +346,10 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                 </div>
               </div>
 
-              {/* 3. BHK Bedrooms */}
+              {/* 3. bedroom Bedrooms */}
               <div className="space-y-2">
                 <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Bedrooms / BHK
+                  Bedrooms / bedroom
                 </label>
                 <div className="grid grid-cols-4 gap-1.5">
                   {['', '2', '3', '4', '5'].map((b) => (
@@ -364,7 +363,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                           : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                       }`}
                     >
-                      {b === '' ? 'Any' : b === '5' ? '5+' : `${b}BHK`}
+                      {b === '' ? 'Any' : b === '5' ? '5+' : `${b}bedroom`}
                     </button>
                   ))}
                 </div>
@@ -416,25 +415,25 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
               <div className="bg-white rounded-xl border border-gray-200 overflow-hidden p-4 mb-6 shadow-sm">
                 <div className="relative aspect-[16/9] bg-emerald-950 rounded-lg overflow-hidden flex items-center justify-center border border-[#164E3D]">
                   
-                  {/* Decorative Map Vector Representation with plotted Agra Pins */}
+                  {/* Decorative Map Vector Representation with plotted Lagos Pins */}
                   <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#C5A869_1.5px,transparent_1.5px)] [background-size:24px_24px]" />
                   
-                  {/* Agra Landmarks on Map */}
+                  {/* Lagos Landmarks on Map */}
                   <div className="absolute top-1/4 left-1/3 text-center pointer-events-none">
                     <div className="px-2 py-1 bg-amber-500/20 border border-amber-400 rounded text-[10px] text-amber-300 font-bold">
-                      🏛️ Taj Mahal Heritage Corridor
+                      
                     </div>
                   </div>
 
                   <div className="absolute bottom-1/3 right-1/4 text-center pointer-events-none">
                     <div className="px-2 py-1 bg-emerald-500/20 border border-emerald-400 rounded text-[10px] text-emerald-300 font-bold">
-                      🛣️ Fatehabad Road Prime Strip
+                      
                     </div>
                   </div>
 
                   <div className="absolute top-1/3 right-1/3 text-center pointer-events-none">
                     <div className="px-2 py-1 bg-blue-500/20 border border-blue-400 rounded text-[10px] text-blue-300 font-bold">
-                      🌊 Yamuna Riverfront (Dayalbagh)
+                      
                     </div>
                   </div>
 
@@ -454,7 +453,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                   </div>
 
                   <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-xs text-white text-[11px] px-3 py-1.5 rounded-md">
-                    📍 Agra Metro Corridor & Prime Real Estate Map
+                    
                   </div>
                 </div>
               </div>

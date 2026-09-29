@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Project } from '../types';
-import { Building2, MapPin, CheckCircle, Download, Calendar, ShieldCheck, Sparkles, ArrowRight, PlusCircle, Edit3, Trash2, X } from 'lucide-react';
+import { Building2, MapPin, CheckCircle, Download, Calendar, ShieldCheck, ArrowRight, PlusCircle, Edit3, Trash2, X } from 'lucide-react';
 
 interface ProjectsScreenProps {
   projects: Project[];
@@ -40,7 +40,7 @@ export const ProjectsScreen: React.FC<ProjectsScreenProps> = ({
     const proj = projects.find(p => p.name === projectName);
     if (proj) {
       const brochureContent = `=====================================================
-ROYAL AGRA ESTATE • EXCLUSIVE PROJECT E-BROCHURE
+DIDU ESTATE   EXCLUSIVE PROJECT E-BROCHURE
 =====================================================
 
 Project Name:       ${proj.name}
@@ -50,7 +50,7 @@ Starting Price:     ${proj.priceStarting}
 Total Units:        ${proj.units}
 Construction Status:${proj.status}
 Possession Date:    ${proj.possessionDate}
-Authority Approval: Agra Development Authority (ADA) / UP RERA
+Status: Illustrative showcase concept; confirm availability and approvals with the developer.
 
 -----------------------------------------------------
 PROJECT OVERVIEW & ARCHITECTURAL HIGHLIGHTS
@@ -58,20 +58,19 @@ PROJECT OVERVIEW & ARCHITECTURAL HIGHLIGHTS
 ${proj.description}
 
 AMENITIES & SPECIFICATIONS:
-• Gated Multi-Tier Security & Concierge Front Desk
-• Luxury Clubhouse, Fitness Gym & Swimming Pool
-• 100% DG Power Redundancy & High-Speed Elevators
-• Reserved Underground Covered Parking with EV Stations
-• Manicured Landscaping, Green Walkways & Kids Arena
+  Gated Multi-Tier Security & Concierge Front Desk
+  Luxury Clubhouse, Fitness Gym & Swimming Pool
+  100% DG Power Redundancy & High-Speed Elevators
+  Reserved Underground Covered Parking with EV Stations
+  Manicured Landscaping, Green Walkways & Kids Arena
 
 -----------------------------------------------------
 FOR CONFIDENTIAL INQUIRIES & PRIVATE SITE INSPECTIONS
 -----------------------------------------------------
-Royal Agra Estate Advisory Desk
-Shrey Gupta:           +91 91490 79913 | shrey@royalagraestate.in
-Abhishek Singh Jadon:  +91 95571 38449 | abhishek@royalagraestate.in
-Corporate Office:      Fatehabad Road Corridor, Agra, Uttar Pradesh
-Official Website:      https://real-estate-website-pi-azure.vercel.app/
+DIDU Homes Advisory Desk
+Email:                  hello@diduhomes.com
+Office:                 4 Uwajeh Lane, Ikoyi, Lagos
+Website:                DIDU Homes showcase
 =====================================================`;
 
       const blob = new Blob([brochureContent], { type: 'text/plain;charset=utf-8' });
@@ -89,9 +88,9 @@ Official Website:      https://real-estate-website-pi-azure.vercel.app/
 
   const handleOpenCreate = () => {
     setFormName('');
-    setFormDeveloper('Royal Agra Developers');
-    setFormLocality('Fatehabad Road, Agra');
-    setFormPriceStarting('₹2.10 Cr onwards');
+    setFormDeveloper('DIDU Homes Developers');
+    setFormLocality('Ikoyi, Lagos');
+    setFormPriceStarting('NGN 2.10bn onwards');
     setFormUnits('32 Luxury Units');
     setFormStatus('Under Construction');
     setFormPossession('December 2026');
@@ -120,19 +119,19 @@ Official Website:      https://real-estate-website-pi-azure.vercel.app/
     const projObj: Project = {
       id: editingProject ? editingProject.id : `proj-${Date.now()}`,
       name: formName.trim() || 'New Luxury Project',
-      developer: formDeveloper.trim() || 'Royal Agra Developers',
-      locality: formLocality.trim() || 'Fatehabad Road, Agra',
-      priceStarting: formPriceStarting.trim() || '₹2.00 Cr onwards',
+      developer: formDeveloper.trim() || 'DIDU Homes Developers',
+      locality: formLocality.trim() || 'Ikoyi, Lagos',
+      priceStarting: formPriceStarting.trim() || 'NGN 2.00bn onwards',
       units: formUnits.trim() || '50 Units',
       status: formStatus,
       possessionDate: formPossession.trim() || 'December 2026',
-      reraNumber: 'UPRERAAGT2024/9999',
+      reraNumber: 'Illustrative demo',
       coverImage: formCoverImage,
       images: [formCoverImage],
-      description: formDescription.trim() || 'Luxury residential development in Agra.',
+      description: formDescription.trim() || 'Luxury residential development in Lagos.',
       highlights: ['Rooftop Sky Deck', '24/7 Gated Security', 'Clubhouse & Pool'],
       totalArea: formTotalArea.trim() || '4.0 Acres',
-      unitConfigurations: ['3 BHK (2,100 sq.ft)', '4 BHK (2,900 sq.ft)']
+      unitConfigurations: ['3 bedroom (2,100 sq.ft)', '4 bedroom (2,900 sq.ft)']
     };
 
     if (editingProject) {
@@ -155,10 +154,10 @@ Official Website:      https://real-estate-website-pi-azure.vercel.app/
             <span>Mega Gated Townships & Developments</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-serif-luxury font-bold text-[#0F382C]">
-            New Luxury Projects in Agra
+            New Luxury Projects in Lagos
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-3 leading-relaxed">
-            Direct developer collaborations with verified clear-title deeds, zero brokerage fees on new bookings, and flexible installment plans with premier banks.
+            Explore illustrative project concepts created to demonstrate the DIDU Homes property experience.
           </p>
 
           {/* Add New Project Button for Admin */}
@@ -204,7 +203,7 @@ Official Website:      https://real-estate-website-pi-azure.vercel.app/
                   </span>
                   <span className="px-3 py-1 rounded-md bg-white/90 text-[#0F382C] text-xs font-bold flex items-center gap-1 shadow-md">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                    Verified Project
+                    Showcase sample
                   </span>
                 </div>
 
@@ -275,7 +274,7 @@ Official Website:      https://real-estate-website-pi-azure.vercel.app/
                       <MapPin className="w-3.5 h-3.5 text-[#0F382C]" />
                       <span>{project.locality}</span>
                     </div>
-                    <span>•</span>
+                    <span> </span>
                     <span className="text-emerald-700 font-medium">Freehold Clear Title</span>
                   </div>
 
@@ -322,7 +321,7 @@ Official Website:      https://real-estate-website-pi-azure.vercel.app/
                     className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-[#0F382C] border border-[#0F382C]/30 hover:bg-[#0F382C]/5 rounded-lg flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <Download className="w-3.5 h-3.5" />
-                    <span>{downloadSuccess === project.name ? '✓ PDF Brochure Downloaded' : 'Download E-Brochure (PDF)'}</span>
+                    <span>{downloadSuccess === project.name ? '  PDF Brochure Downloaded' : 'Download E-Brochure (PDF)'}</span>
                   </button>
 
                   <button

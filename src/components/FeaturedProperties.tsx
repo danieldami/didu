@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Property, PropertyType } from '../types';
 import { PropertyCard } from './PropertyCard';
 import { PropertySkeletonGrid } from './PropertyCardSkeleton';
-import { Sparkles, Award } from 'lucide-react';
+import { , Award } from 'lucide-react';
 
 interface FeaturedPropertiesProps {
   properties: Property[];
@@ -65,10 +65,10 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
               <span>Handpicked Portfolio</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-[#0F382C]">
-              Featured Luxury Estates in Agra
+              Featured Luxury Estates in Lagos
             </h2>
             <p className="text-sm sm:text-base text-gray-600 mt-2 max-w-2xl">
-              Strictly verified clear-title residences offering distinguished architecture, private amenities, and prime connectivity in Agra.
+              Explore a considered collection of residences across Lagos, selected for their setting, design and lifestyle.
             </p>
           </div>
         </div>
@@ -131,9 +131,9 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
           </motion.div>
         ) : (
           <div className="text-center py-16 bg-white rounded-2xl border border-gray-200">
-            <Sparkles className="w-10 h-10 text-gray-400 mx-auto mb-3" />
+            <Award className="w-10 h-10 text-gray-400 mx-auto mb-3" />
             <h3 className="text-lg font-serif-luxury font-bold text-gray-800">No properties in this category right now</h3>
-            <p className="text-sm text-gray-500 mt-1 mb-4">View our full collection across all Agra localities.</p>
+            <p className="text-sm text-gray-500 mt-1 mb-4">View our full collection across all Lagos localities.</p>
             <button
               type="button"
               onClick={() => handleTabChange('All')}
@@ -151,10 +151,10 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
               Personalized Private Property Matchmaking
             </span>
             <h3 className="text-xl sm:text-2xl font-serif-luxury font-bold text-white">
-              Looking for a confidential off-market estate in Agra?
+              Looking for a confidential off-market estate in Lagos?
             </h3>
             <p className="text-sm text-gray-300 max-w-xl">
-              Many of Agra's most prestigious heritage estates and premium villas are handled discreetly without public listings.
+              Many of Lagos's most prestigious heritage estates and premium villas are handled discreetly without public listings.
             </p>
           </div>
 

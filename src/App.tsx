@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { ActiveScreen, Property, Project, FilterState, PropertyType, ListingType, UserProfile } from './types';
 import { isAdmin, getMaskedProperty, LeadSubmission } from './utils/security';
 import { 
@@ -25,7 +25,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { FeaturedProperties } from './components/FeaturedProperties';
 import { NeighborhoodExplorer } from './components/NeighborhoodExplorer';
-import { WhyRoyalAgra } from './components/WhyRoyalAgra';
+import { WhyRoyalLagos } from './components/WhyRoyalAgra';
 import { PropertiesScreen } from './components/PropertiesScreen';
 import { PropertyDetailModal } from './components/PropertyDetailModal';
 import { ProjectsScreen } from './components/ProjectsScreen';
@@ -49,7 +49,7 @@ export default function App() {
   // User Authentication State
   const [user, setUser] = useState<UserProfile | null>(() => {
     try {
-      const stored = localStorage.getItem('royal_agra_user_profile_v2');
+      const stored = localStorage.getItem('didu_user_profile_v1');
       if (stored) return JSON.parse(stored);
     } catch {
       // ignore
@@ -70,9 +70,9 @@ export default function App() {
   useEffect(() => {
     try {
       if (user) {
-        localStorage.setItem('royal_agra_user_profile_v2', JSON.stringify(user));
+        localStorage.setItem('didu_user_profile_v1', JSON.stringify(user));
       } else {
-        localStorage.removeItem('royal_agra_user_profile_v2');
+        localStorage.removeItem('didu_user_profile_v1');
       }
     } catch {
       // ignore
@@ -83,7 +83,7 @@ export default function App() {
   useEffect(() => {
     const migrateLocalAccountsToCloud = async () => {
       try {
-        const stored = localStorage.getItem('royal_agra_accounts_v1');
+        const stored = localStorage.getItem('didu_demo_accounts');
         if (stored) {
           const accounts = JSON.parse(stored);
           if (Array.isArray(accounts)) {
@@ -130,7 +130,7 @@ export default function App() {
     listingType: 'Buy',
     locality: '',
     propertyType: 'All',
-    priceRange: [0, 200000000],
+    priceRange: [0, 5000000000],
     bhk: '',
     possession: 'all',
     furnishing: 'all',
@@ -143,7 +143,7 @@ export default function App() {
   // Saved / Favorite properties state
   const [savedPropertyIds, setSavedPropertyIds] = useState<string[]>(() => {
     try {
-      const stored = localStorage.getItem('royal_agra_saved_v2');
+      const stored = localStorage.getItem('didu_saved_homes');
       return stored ? JSON.parse(stored) : [];
     } catch {
       return [];
@@ -152,7 +152,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('royal_agra_saved_v2', JSON.stringify(savedPropertyIds));
+      localStorage.setItem('didu_saved_homes', JSON.stringify(savedPropertyIds));
     } catch {
       // ignore
     }
@@ -164,7 +164,7 @@ export default function App() {
   // Leads State
   const [leads, setLeads] = useState<LeadSubmission[]>(() => {
     try {
-      const stored = localStorage.getItem('royal_agra_leads_v1');
+      const stored = localStorage.getItem('didu_leads');
       return stored ? JSON.parse(stored) : [];
     } catch {
       return [];
@@ -173,7 +173,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('royal_agra_leads_v1', JSON.stringify(leads));
+      localStorage.setItem('didu_leads', JSON.stringify(leads));
     } catch {
       // ignore
     }
@@ -234,7 +234,7 @@ export default function App() {
     }
 
     if (screen === 'sell-rent' && !user) {
-      setLoginPromptMessage('Please sign in or create an account to list your property on Royal Agra Estate.');
+      setLoginPromptMessage('Please sign in or create an account to list your property on DIDU Homes.');
       setPendingPostRedirect(true);
       setLoginModalOpen(true);
       return;
@@ -332,7 +332,7 @@ export default function App() {
   // Protected Post Property trigger - directly navigates to Sell/Rent or prompts login
   const handleInitiatePostProperty = () => {
     if (!user) {
-      setLoginPromptMessage('Please sign in or create an account to list your property on Royal Agra Estate.');
+      setLoginPromptMessage('Please sign in or create an account to list your property on DIDU Homes.');
       setPendingPostRedirect(true);
       setLoginModalOpen(true);
       return;
@@ -447,8 +447,8 @@ export default function App() {
       isApproved: true,
       isDeleted: false,
       isUserListing: idx === 0 || idx === 2,
-      ownerId: (idx === 0 || idx === 2) ? 'RAE-OWNER-01' : 'RAE-PARTNER-02',
-      ownerName: (idx === 0 || idx === 2) ? 'Shrey Gupta' : p.agent?.name || 'Managing Partner'
+      ownerId: (idx === 0 || idx === 2) ? 'DIDU-OWNER-01' : 'DIDU-PARTNER-02',
+      ownerName: (idx === 0 || idx === 2) ? 'Amara Okafor' : p.agent?.name || 'Managing Partner'
     }));
     setProperties(seeded);
     setPropertiesCache(seeded);
@@ -500,8 +500,8 @@ export default function App() {
       propertyId: property.id,
       propertyTitle: property.title,
       buyerName: user?.name || 'Prospective Buyer',
-      phone: user?.phone || '+91 9149079913',
-      email: user?.email || 'buyer@royalagraestate.in',
+      phone: user?.phone || '+234 803 555 0148',
+      email: user?.email || 'client@diduhomes.com',
       preferredTime: 'Direct WhatsApp Inquire / Contact',
       timestamp: new Date().toLocaleString()
     };
@@ -538,7 +538,7 @@ export default function App() {
       ...prop, 
       status: 'published',
       isApproved: true,
-      verificationStatus: 'Verified'
+      verificationStatus: prop.verificationStatus || 'Not Verified'
     };
     // 1. Immediately update React state and persistent cache
     setProperties(prev => {
@@ -670,7 +670,7 @@ export default function App() {
               onSelectLocality={handleSelectLocality}
             />
 
-            <WhyRoyalAgra
+            <WhyRoyalLagos
               onContactAdvisory={() => navigateTo('contact')}
             />
           </div>
@@ -731,7 +731,7 @@ export default function App() {
             onPropertyCreated={handlePropertyCreated}
             onNavigateDashboard={() => navigateTo('dashboard')}
             onOpenLogin={(msg) => {
-              setLoginPromptMessage(msg || 'Please sign in or create an account to list your property on Royal Agra Estate.');
+              setLoginPromptMessage(msg || 'Please sign in or create an account to list your property on DIDU Homes.');
               setPendingPostRedirect(true);
               setLoginModalOpen(true);
             }}
@@ -851,7 +851,7 @@ export default function App() {
             className="text-gray-300 hover:text-white text-xs p-1"
             title="Clear compare selection"
           >
-            ✕
+             
           </button>
         </div>
       )}

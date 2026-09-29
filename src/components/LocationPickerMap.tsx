@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { 
   MapPin, 
   Navigation, 
@@ -16,21 +16,19 @@ import {
   Info
 } from 'lucide-react';
 
-// Preset neighborhood centers for Agra
-export const AGRA_LOCALITY_COORDINATES: Record<string, { lat: number; lng: number }> = {
-  'Fatehabad Road': { lat: 27.1585, lng: 78.0494 },
-  'Dayalbagh': { lat: 27.2284, lng: 78.0125 },
-  'Tajganj': { lat: 27.1658, lng: 78.0421 },
-  'Civil Lines': { lat: 27.1994, lng: 78.0039 },
-  'Sanjay Place': { lat: 27.2023, lng: 77.9972 },
-  'Shastripuram': { lat: 27.2081, lng: 77.9429 },
-  'Kamla Nagar': { lat: 27.2215, lng: 78.0267 },
-  'Khandari': { lat: 27.2142, lng: 77.9892 },
-  'Sikandra': { lat: 27.2206, lng: 77.9504 },
-  'Shamshabad Road': { lat: 27.1350, lng: 78.0315 },
-  'Agra Cantonment': { lat: 27.1589, lng: 78.0089 },
-  'Delhi-Agra NH-19': { lat: 27.2341, lng: 77.9189 },
-  'Other / Custom Agra Locality': { lat: 27.1767, lng: 78.0081 }
+// Preset neighborhood centers for Lagos
+export const LAGOS_LOCALITY_COORDINATES: Record<string, { lat: number; lng: number }> = {
+  'Ikoyi': { lat: 6.4541, lng: 3.4331 },
+  'Old Ikoyi': { lat: 6.4532, lng: 3.4351 },
+  'Victoria Island': { lat: 6.4281, lng: 3.4219 },
+  'Lekki Phase 1': { lat: 6.4474, lng: 3.4723 },
+  'Eko Atlantic': { lat: 6.4132, lng: 3.4058 },
+  'Banana Island': { lat: 6.4382, lng: 3.4281 },
+  'Oniru': { lat: 6.4317, lng: 3.4471 },
+  'Parkview Estate': { lat: 6.4554, lng: 3.4381 },
+  'Victoria Garden City': { lat: 6.4698, lng: 3.5882 },
+  'Chevron Drive': { lat: 6.4414, lng: 3.5485 },
+  'Other / Custom Lagos Locality': { lat: 6.4541, lng: 3.4331 }
 };
 
 interface LocationPickerMapProps {
@@ -54,12 +52,12 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
   // Auto-pan to selected neighborhood when locality changes
   useEffect(() => {
     if (selectedLocality) {
-      const matchedKey = Object.keys(AGRA_LOCALITY_COORDINATES).find(
+      const matchedKey = Object.keys(LAGOS_LOCALITY_COORDINATES).find(
         k => k.toLowerCase() === selectedLocality.toLowerCase() || 
              selectedLocality.toLowerCase().includes(k.toLowerCase())
       );
-      if (matchedKey && AGRA_LOCALITY_COORDINATES[matchedKey]) {
-        onChangeCoordinates(AGRA_LOCALITY_COORDINATES[matchedKey]);
+      if (matchedKey && LAGOS_LOCALITY_COORDINATES[matchedKey]) {
+        onChangeCoordinates(LAGOS_LOCALITY_COORDINATES[matchedKey]);
       }
     }
   }, [selectedLocality]);
@@ -98,14 +96,14 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
 
   // Reset to default locality center
   const handleResetToLocality = () => {
-    const matchedKey = Object.keys(AGRA_LOCALITY_COORDINATES).find(
+    const matchedKey = Object.keys(LAGOS_LOCALITY_COORDINATES).find(
       k => k.toLowerCase() === selectedLocality.toLowerCase() || 
            selectedLocality.toLowerCase().includes(k.toLowerCase())
     );
-    if (matchedKey && AGRA_LOCALITY_COORDINATES[matchedKey]) {
-      onChangeCoordinates(AGRA_LOCALITY_COORDINATES[matchedKey]);
+    if (matchedKey && LAGOS_LOCALITY_COORDINATES[matchedKey]) {
+      onChangeCoordinates(LAGOS_LOCALITY_COORDINATES[matchedKey]);
     } else {
-      onChangeCoordinates({ lat: 27.1767, lng: 78.0081 });
+      onChangeCoordinates({ lat: 6.4541, lng: 3.4331 });
     }
   };
 
@@ -156,7 +154,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
             <span>Select Exact Location On Google Map</span>
           </label>
           <p className="text-[11px] text-gray-500 mt-0.5">
-            Position the pin on your exact plot, villa, or building in {selectedLocality || 'Agra'}.
+            Position the pin on your exact plot, villa, or building in {selectedLocality || 'Lagos'}.
           </p>
         </div>
 
@@ -207,7 +205,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
         {/* Top-Left Live Coordinate Tag */}
         <div className="absolute top-2 left-2 bg-black/80 backdrop-blur-xs text-white text-[11px] font-mono px-2.5 py-1 rounded-md shadow-md flex items-center gap-1.5 z-10 border border-white/20 pointer-events-none">
           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-          <span>GPS Pin: {coordinates.lat.toFixed(5)}°N, {coordinates.lng.toFixed(5)}°E</span>
+          <span>GPS Pin: {coordinates.lat.toFixed(5)}ÂN, {coordinates.lng.toFixed(5)}ÂE</span>
         </div>
 
         {/* Top-Right Quick Zoom Controls */}
@@ -283,7 +281,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
           rel="noopener noreferrer"
           className="absolute bottom-2 right-2 bg-white/95 hover:bg-white text-[#0F382C] text-[11px] font-bold px-2.5 py-1 rounded-md shadow-md border border-gray-200 backdrop-blur-xs transition-colors flex items-center gap-1 z-10"
         >
-          <span>Open Full Map ↗</span>
+          <span>Open Full Map  </span>
         </a>
       </div>
 
@@ -323,13 +321,13 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
           onClick={() => setShowCoordinateInputs(!showCoordinateInputs)}
           className="text-[11px] text-[#0F382C] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
         >
-          <span>{showCoordinateInputs ? '▲ Hide Exact Coordinate Inputs' : '▼ Advanced: Enter Exact Latitude / Longitude Manually'}</span>
+          <span>{showCoordinateInputs ? '  Hide Exact Coordinate Inputs' : '  Advanced: Enter Exact Latitude / Longitude Manually'}</span>
         </button>
 
         {showCoordinateInputs && (
           <div className="grid grid-cols-2 gap-3 pt-2">
             <div>
-              <label className="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Latitude (°N)</label>
+              <label className="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Latitude (ÂN)</label>
               <input
                 type="number"
                 step="0.000001"
@@ -339,7 +337,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
               />
             </div>
             <div>
-              <label className="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Longitude (°E)</label>
+              <label className="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Longitude (ÂE)</label>
               <input
                 type="number"
                 step="0.000001"

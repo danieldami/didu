@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Property } from '../types';
 import { X, Calendar, CheckCircle2, ShieldCheck, User, Phone, Mail, Clock } from 'lucide-react';
 import { LeadSubmission } from '../utils/security';
@@ -67,14 +67,14 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
 
           <div className="flex items-center gap-2 text-[#E4D5B7] text-xs uppercase tracking-wider font-semibold mb-1">
             <Calendar className="w-4 h-4" />
-            <span>Royal Agra Estate Concierge</span>
+            <span>DIDU Homes Concierge</span>
           </div>
           <h3 className="font-brand-title font-bold text-lg text-white">
             {property ? `Inquire / Book Tour: ${property.title}` : 'Private Inquiry & Tour Booking'}
           </h3>
           {property && (
             <p className="text-xs text-gray-300 mt-0.5 line-clamp-1">
-              {property.priceDisplay} • {property.location}
+              {property.priceDisplay}   {property.location}
             </p>
           )}
         </div>
@@ -120,7 +120,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
                   <input
                     type="tel"
                     required
-                    placeholder="+91 98765 43210"
+                    placeholder="+234 803 555 0148"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"

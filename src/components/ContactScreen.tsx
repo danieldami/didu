@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { MapPin, Phone, Mail, MessageSquare, Clock, Send, CheckCircle2, Landmark, Compass } from 'lucide-react';
 import { saveFirestoreLead } from '../services/firebaseService';
 import { LeadSubmission } from '../utils/security';
@@ -48,10 +48,10 @@ export const ContactScreen: React.FC = () => {
             <span>Private Concierge Desk</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-serif-luxury font-bold text-[#0F382C]">
-            Connect With Our Agra Advisory
+            Connect With Our Lagos Advisory
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-3 leading-relaxed">
-            Schedule a confidential consultation, request a private architectural chauffeur tour, or discuss bespoke estate acquisitions in Agra.
+            Schedule a confidential consultation, request a private architectural chauffeur tour, or discuss bespoke estate acquisitions in Lagos.
           </p>
         </div>
 
@@ -67,9 +67,14 @@ export const ContactScreen: React.FC = () => {
                   <Landmark className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-brand-title font-bold text-lg text-white">Royal Agra Estate</h3>
-                  <span className="text-xs text-[#E4D5B7]">Managed by Shrey Gupta & Abhishek Singh Jadon</span>
+                  <h3 className="font-brand-title font-bold text-lg text-white">DIDU Homes</h3>
+                  <span className="text-xs text-[#E4D5B7]">Private residential property advisory</span>
                 </div>
+              </div>
+
+              <div className="flex items-start gap-3 text-xs sm:text-sm text-gray-300">
+                <MapPin className="w-5 h-5 text-[#C5A869] shrink-0" />
+                <span>4 Uwajeh Lane, Ikoyi, Lagos</span>
               </div>
 
               <div className="space-y-4 text-xs sm:text-sm">
@@ -78,11 +83,11 @@ export const ContactScreen: React.FC = () => {
                   <div>
                     <strong className="block text-white">Co-Owner Direct Lines:</strong>
                     <div className="flex flex-col gap-1 mt-1">
-                      <a href="tel:+919149079913" className="text-gray-300 hover:text-white underline">
-                        Shrey Gupta (+91 9149079913)
+                      <a href="tel:+2348035550148" className="text-gray-300 hover:text-white underline">
+                        Amara Okafor (+234 803 555 0148)
                       </a>
-                      <a href="tel:+919557138449" className="text-gray-300 hover:text-white underline">
-                        Abhishek Singh Jadon (+91 9557138449)
+                      <a href="tel:+2348095550182" className="text-gray-300 hover:text-white underline">
+                        Tunde Adebayo (+234 809 555 0182)
                       </a>
                     </div>
                   </div>
@@ -92,8 +97,8 @@ export const ContactScreen: React.FC = () => {
                   <Mail className="w-5 h-5 text-[#C5A869] shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-white">Confidential Desk:</strong>
-                    <a href="mailto:concierge@royalagraestate.in" className="text-gray-300 hover:text-white underline">
-                      concierge@royalagraestate.in
+                    <a href="mailto:hello@diduhomes.com" className="text-gray-300 hover:text-white underline">
+                      hello@diduhomes.com
                     </a>
                   </div>
                 </div>
@@ -103,8 +108,8 @@ export const ContactScreen: React.FC = () => {
                   <div>
                     <strong className="block text-white">Advisory Hours:</strong>
                     <span className="text-gray-300">
-                      Mon – Sat: 9:30 AM – 7:30 PM (IST)<br />
-                      Sunday Site Visits by Prior Appointment
+                      By appointment, Monday to Saturday (WAT)<br />
+                      Private viewings arranged on request
                     </span>
                   </div>
                 </div>
@@ -112,21 +117,19 @@ export const ContactScreen: React.FC = () => {
 
               <div className="pt-4 border-t border-[#164E3D]">
                 <a
-                  href="https://wa.me/919149079913?text=Hello%20Royal%20Agra%20Estate,%20I%20would%20like%20to%20inquire%20about%20luxury%20properties."
-                  target="_blank"
-                  rel="noreferrer"
+                  href="mailto:hello@diduhomes.com?subject=Private%20property%20consultation"
                   className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all"
                 >
                   <MessageSquare className="w-4 h-4" />
-                  <span>Direct WhatsApp Concierge</span>
+                  <span>Email our property desk</span>
                 </a>
               </div>
             </div>
 
             {/* Clear Title Advisory Guarantee */}
             <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-2xs text-xs text-gray-600 space-y-1">
-              <span className="font-bold text-[#0F382C] block">Clear-Title Assurance</span>
-              <p>All portfolio transactions undergo strict 30-year chain title searches, municipal mutation verification, and clean deed execution.</p>
+              <span className="font-bold text-[#0F382C] block">A considered property search</span>
+              <p>Our team can help you arrange a viewing and connect with the relevant property representative.</p>
             </div>
 
           </div>
@@ -138,15 +141,15 @@ export const ContactScreen: React.FC = () => {
                 Book a Private Consultation
               </h2>
               <p className="text-xs sm:text-sm text-gray-600 mb-6">
-                Please complete the form below. A Senior Portfolio Partner will contact you within 2 hours.
+                Tell us what you are looking for and we will help you plan the next step.
               </p>
 
               {sent ? (
                 <div className="p-8 bg-emerald-50 text-emerald-900 rounded-xl text-center border border-emerald-200 space-y-2">
                   <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto" />
-                  <h3 className="text-lg font-serif-luxury font-bold">Consultation Booked Successfully</h3>
+                  <h3 className="text-lg font-serif-luxury font-bold">Thank you for your interest</h3>
                   <p className="text-xs text-emerald-800">
-                    Our Senior Advisory desk has received your request and will reach out to you promptly.
+                    This demo keeps your request in this browser. Email hello@diduhomes.com to reach the property team.
                   </p>
                 </div>
               ) : (
@@ -169,7 +172,7 @@ export const ContactScreen: React.FC = () => {
                       <input
                         type="tel"
                         required
-                        placeholder="+91 98765 43210"
+                        placeholder="+234 803 555 0148"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         className="w-full p-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-[#0F382C]"
@@ -210,7 +213,7 @@ export const ContactScreen: React.FC = () => {
                     <label className="block text-xs font-bold text-gray-700 uppercase mb-1">Specific Requirements / Message</label>
                     <textarea
                       rows={3}
-                      placeholder="Please mention preferred Agra localities (e.g. Fatehabad Rd, Dayalbagh), budget, or questions..."
+                      placeholder="Please mention preferred Lagos localities (e.g. Ikoyi Rd, Victoria Island), budget, or questions..."
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       className="w-full p-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg focus:bg-white focus:border-[#0F382C]"

@@ -1,4 +1,4 @@
-import { Property, UserProfile } from '../types';
+﻿import { Property, UserProfile } from '../types';
 
 export interface LeadSubmission {
   id: string;
@@ -13,19 +13,19 @@ export interface LeadSubmission {
 
 export const ADMIN_CREDENTIALS = [
   {
-    email: 'shrey123@gmail.com',
-    password: 'shrey123@gmail.com',
-    name: 'Shrey Gupta',
-    phone: '+91 9149079913',
-    id: 'RAE-ADMIN-01',
+    email: 'amara@diduhomes.com',
+    password: 'demo123',
+    name: 'Amara Okafor',
+    phone: '+234 803 555 0148',
+    id: 'DIDU-ADMIN-01',
     role: 'admin' as const
   },
   {
-    email: 'abhi9557138449@gmail.com',
-    password: 'abhi9557138449@gmail.com',
-    name: 'Abhishek Singh Jadon',
-    phone: '+91 9557138449',
-    id: 'RAE-ADMIN-02',
+    email: 'tunde@diduhomes.com',
+    password: 'demo123',
+    name: 'Tunde Adebayo',
+    phone: '+234 809 555 0182',
+    id: 'DIDU-ADMIN-02',
     role: 'admin' as const
   }
 ];
@@ -36,12 +36,10 @@ export const isAdmin = (user: UserProfile | null): boolean => {
   const phoneClean = user.phone ? user.phone.replace(/[^0-9]/g, '') : '';
   return (
     user.role === 'admin' ||
-    emailLower === 'shrey123@gmail.com' ||
-    emailLower === 'abhi9557138449@gmail.com' ||
-    emailLower === 'shrey@royalagraestate.in' ||
-    emailLower === 'abhishek@royalagraestate.in' ||
-    phoneClean.endsWith('9149079913') ||
-    phoneClean.endsWith('9557138449')
+    emailLower === 'amara@diduhomes.com' ||
+    emailLower === 'tunde@diduhomes.com' ||
+    phoneClean.endsWith('8035550148') ||
+    phoneClean.endsWith('8095550182')
   );
 };
 
@@ -91,8 +89,8 @@ export const getMaskedProperty = (property: Property, user: UserProfile | null):
   // For non-admin accounts (buyers, guests, and owners on public/catalog views), mask sensitive details:
   // Show ONLY the primary area locality, hide exact street address & coordinates
   const primaryLocality = property.locality 
-    ? (property.locality.toLowerCase().includes('agra') ? property.locality : `${property.locality}, Agra`)
-    : (property.location || 'Agra');
+    ? (property.locality.toLowerCase().includes('lagos') ? property.locality : `${property.locality}, Lagos`)
+    : (property.location || 'Lagos');
 
   return {
     ...property,
@@ -100,10 +98,10 @@ export const getMaskedProperty = (property: Property, user: UserProfile | null):
     coordinates: { lat: 27.1767, lng: 78.0081 },
     ownerContact: undefined,
     agent: {
-      name: 'Royal Agra Estate Concierge',
+      name: 'DIDU Homes Concierge',
       role: 'Senior Advisory Desk',
-      phone: '+91 91490 79913',
-      email: 'contact@royalagraestate.in',
+      phone: '+234 803 555 0148',
+      email: 'hello@diduhomes.com',
       avatar: property.agent?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
       experience: 'Verified Luxury Advisory'
     }
