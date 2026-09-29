@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { Compass, Award,  } from 'lucide-react';
+import { Compass, Award } from 'lucide-react';
 
 interface WhyRoyalLagosProps {
   onContactAdvisory: () => void;

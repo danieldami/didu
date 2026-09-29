@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Property, PropertyType } from '../types';
 import { PropertyCard } from './PropertyCard';
 import { PropertySkeletonGrid } from './PropertyCardSkeleton';
-import { , Award } from 'lucide-react';
+import { Award } from 'lucide-react';
 
 interface FeaturedPropertiesProps {
   properties: Property[];
