@@ -177,12 +177,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         <div className="flex items-center gap-2 pt-3 mt-2 border-t border-gray-100">
           <a href={`?property=${property.id}`} onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) { e.preventDefault(); onSelect(property); } }} className="text-xs font-semibold bg-[#0F382C] hover:bg-[#164E3D] text-white px-3.5 py-2 rounded shadow-xs flex items-center gap-1"><span>View</span><ArrowRight className="w-3.5 h-3.5" /></a>
           <a href={`https://wa.me/2349125882627?text=${encodeURIComponent(`Hi, I'm interested in ${property.title} (${property.priceDisplay})`)}`} target="_blank" rel="noopener" className="flex-1 py-2 bg-[#25D366] hover:bg-[#1ebd54] text-white rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs"><MessageSquare className="w-3.5 h-3.5" /><span>Chat on WhatsApp</span></a>
-        </div>      </div>
-          </div>
         </div>
-
       </div>
-
     </div>
   );
 };

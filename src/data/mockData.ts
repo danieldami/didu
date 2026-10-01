@@ -24,7 +24,7 @@ const baseProperties: Property[] = [
   home('lag-parkview-06', 'Parkview Signature Home', 'Parkview Estate', 'Terrace House', 960000000, 4, 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85', 'Understated architecture in one of Ikoyi’s sought-after enclaves.')
 ];
 
-const listingDetails: { area: number; baths: number; rate: number; furnishing: Property[''furnishing'']; gated: boolean; badge: string; tags: string[] }[] = [
+const listingDetails: { area: number; baths: number; rate: number; furnishing: Property['furnishing']; gated: boolean; badge: string; tags: string[] }[] = [
   { area: 4200, baths: 5, rate: 440476, furnishing: 'Fully Furnished', gated: true, badge: 'Exclusive', tags: ['Ready to Move', 'Fully Furnished', 'Serviced'] },
   { area: 4450, baths: 6, rate: 280899, furnishing: 'Unfurnished', gated: true, badge: 'New Listing', tags: ['Ready to Move', 'Unfurnished', '24/7 Gated'] },
   { area: 4200, baths: 4, rate: 583333, furnishing: 'Fully Furnished', gated: true, badge: 'Exclusive', tags: ['Ready to Move', 'Fully Furnished', 'Lagoon Views'] },
