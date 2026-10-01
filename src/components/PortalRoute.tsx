@@ -15,7 +15,8 @@ export function PortalRoute() {
   const isLogin = window.location.pathname === '/login';
   const [page, setPage] = useState('Dashboard');
   const [rows, setRows] = useState<Property[]>(PROPERTIES_DATA);
-  const [modal, setModal] = useState(false);\n  const [editingId, setEditingId] = useState<string | null>(null);
+  const [modal, setModal] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState({ title: '', propertyType: '', locality: '', priceDisplay: '', bedrooms: '', bathrooms: '', superAreaSqFt: '', description: '' });
   React.useEffect(() => {
     document.title = isLogin ? 'Client Portal | DIDU Homes' : 'Dashboard | DIDU Homes';
