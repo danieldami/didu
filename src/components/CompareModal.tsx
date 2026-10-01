@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Property } from '../types';
 import { 
   X, Check, Minus, Bed, Bath, Maximize, MapPin, Banknote, 
@@ -306,7 +306,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                     }`}>
                       <span className="font-bold text-gray-600 px-2">Rate per Sq.Ft</span>
                       {compareList.map(p => (
-                        <span key={p.id} className="font-mono text-gray-900 font-semibold px-2">NGN {(p.pricePerSqFt ?? Math.round((p.price || 0) / (p.superAreaSqFt || 1)) ?? 0).toLocaleString('en-NG')}/sq.ft</span>
+                        <span key={p.id} className="font-mono text-gray-900 font-semibold px-2">₦ {(p.pricePerSqFt ?? Math.round((p.price || 0) / (p.superAreaSqFt || 1)) ?? 0).toLocaleString('en-NG')}/sq.ft</span>
                       ))}
                     </div>
 

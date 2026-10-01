@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ActiveScreen, UserProfile } from '../types';
 import { Menu, X, Building2, User, LogOut, LayoutDashboard, ChevronDown } from 'lucide-react';
 
@@ -117,132 +117,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* RIGHT: Header Auth & Actions */}
-          <div className="hidden md:flex items-center space-x-4">
-            
-            {/* LOGGED OUT STATE */}
-            {!user ? (
-              <button
-                id="nav-login-btn"
-                onClick={onOpenLogin}
-                className="text-sm font-semibold text-white/90 hover:text-white transition-colors hover:underline underline-offset-4 focus:outline-none px-3 py-1.5 rounded-lg hover:bg-[#164E3D]/50"
-              >
-                Login / Sign Up
-              </button>
-            ) : (
-              /* LOGGED IN STATE: My Dashboard Profile Menu Dropdown */
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  type="button"
-                  id="user-profile-menu-btn"
-                  onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="flex items-center gap-2.5 bg-[#0B2B22] hover:bg-[#164E3D] text-white px-3 py-2 rounded-full border border-[#164E3D] transition-all shadow-sm group focus:outline-none"
-                >
-                  <img
-                    src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'}
-                    alt={user.name}
-                    className="w-7 h-7 rounded-full object-cover border border-[#C5A869]"
-                  />
-                  <div className="text-left hidden xl:block pr-1">
-                    <span className="block text-xs font-bold text-white line-clamp-1 max-w-[120px]">
-                      {user.name.split(' ')[0]}
-                    </span>
-                    <span className="block text-[10px] text-[#E4D5B7] uppercase font-semibold leading-none">
-                      {user.role === 'owner' ? 'Owner' : 'Buyer'}
-                    </span>
-                  </div>
-                  <ChevronDown className={`w-3.5 h-3.5 text-[#E4D5B7] transition-transform ${profileDropdownOpen ? 'rotate-180' : ''}`} />
-                </button>
-
-                {/* Dropdown Menu */}
-                {profileDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 py-2 text-gray-800 z-50 animate-fadeIn">
-                    
-                    {/* User Info Header in Dropdown */}
-                    <div className="px-4 py-3 border-b border-gray-100 bg-[#FAF8F5]">
-                      <p className="text-xs font-bold text-[#0F382C] line-clamp-1">{user.name}</p>
-                      <p className="text-[11px] text-gray-500 truncate">{user.email}</p>
-                      <span className="inline-block mt-1 text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#E4D5B7] text-[#0F382C]">
-                        {user.role === 'owner' ? 'Property Owner' : 'Investor'}
-                      </span>
-                    </div>
-
-                    <div className="py-1">
-                      <button
-                        type="button"
-                        id="dropdown-my-dashboard-btn"
-                        onClick={() => {
-                          onNavigate('dashboard');
-                          setProfileDropdownOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-bold text-gray-700 hover:bg-emerald-50 hover:text-[#0F382C] flex items-center gap-2.5 transition-colors"
-                      >
-                        <LayoutDashboard className="w-4 h-4 text-[#0F382C]" />
-                        <span>My Dashboard</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        id="dropdown-listed-props-btn"
-                        onClick={() => {
-                          onNavigate('dashboard');
-                          setProfileDropdownOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-medium text-gray-700 hover:bg-emerald-50 hover:text-[#0F382C] flex items-center gap-2.5 transition-colors"
-                      >
-                        <Building2 className="w-4 h-4 text-gray-500" />
-                        <span>My Listed Properties</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        id="dropdown-profile-settings-btn"
-                        onClick={() => {
-                          onNavigate('dashboard');
-                          setProfileDropdownOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-medium text-gray-700 hover:bg-emerald-50 hover:text-[#0F382C] flex items-center gap-2.5 transition-colors"
-                      >
-                        <User className="w-4 h-4 text-gray-500" />
-                        <span>Profile Settings</span>
-                      </button>
-                    </div>
-
-                    <div className="pt-1 border-t border-gray-100">
-                      <button
-                        type="button"
-                        id="dropdown-logout-btn"
-                        onClick={() => {
-                          onLogout();
-                          setProfileDropdownOpen(false);
-                        }}
-                        className="w-full text-left px-4 py-2.5 text-xs font-bold text-rose-600 hover:bg-rose-50 flex items-center gap-2.5 transition-colors"
-                      >
-                        <LogOut className="w-4 h-4 text-rose-500" />
-                        <span>Logout</span>
-                      </button>
-                    </div>
-
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* White pill button reading "POST PROPERTY" */}
-            <a
-              href="?screen=sell-rent"
-              id="nav-post-property-btn"
-              onClick={(e) => {
-                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                  e.preventDefault();
-                  onOpenPostProperty();
-                }
-              }}
-              className="bg-white text-[#0F382C] hover:bg-[#FAF8F5] px-5 py-2.5 rounded-full font-bold text-xs tracking-wider uppercase shadow-md hover:shadow-lg transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] focus:outline-none inline-block text-center"
-            >
-              POST PROPERTY
-            </a>
-          </div>
-
           {/* Mobile menu trigger */}
           <div className="flex md:hidden items-center space-x-2">
             <button
@@ -338,47 +212,6 @@ export const Navbar: React.FC<NavbarProps> = ({
             </a>
           )}
 
-          <div className="pt-4 border-t border-[#164E3D] flex flex-col gap-3">
-            {!user ? (
-              <button
-                id="mobile-login-btn"
-                onClick={() => {
-                  onOpenLogin();
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full py-2.5 text-center text-sm font-semibold text-white/90 hover:text-white border border-white/20 rounded-full"
-              >
-                Login / Sign Up
-              </button>
-            ) : (
-              <button
-                id="mobile-logout-btn"
-                onClick={() => {
-                  onLogout();
-                  setMobileMenuOpen(false);
-                }}
-                className="w-full py-2.5 text-center text-sm font-semibold text-rose-300 hover:text-rose-200 border border-rose-500/30 rounded-full flex items-center justify-center gap-2"
-              >
-                <LogOut className="w-4 h-4" />
-                <span>Logout</span>
-              </button>
-            )}
-
-            <a
-              href="?screen=sell-rent"
-              id="mobile-post-btn"
-              onClick={(e) => {
-                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                  e.preventDefault();
-                  onOpenPostProperty();
-                  setMobileMenuOpen(false);
-                }
-              }}
-              className="w-full bg-white text-[#0F382C] py-3 rounded-full font-bold text-xs tracking-wider uppercase shadow-md text-center block"
-            >
-              POST PROPERTY
-            </a>
-          </div>
         </div>
       )}
     </header>

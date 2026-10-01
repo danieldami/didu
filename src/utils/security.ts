@@ -1,4 +1,4 @@
-﻿import { Property, UserProfile } from '../types';
+import { Property, UserProfile } from '../types';
 
 export interface LeadSubmission {
   id: string;

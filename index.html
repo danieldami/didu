@@ -16,12 +16,16 @@
   </head>
   <body class="bg-[#F8F9FA] text-[#1A2E26] font-sans antialiased selection:bg-[#0F382C] selection:text-white">
     <div id="root">
-      <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#FAF8F5;font-family:Arial,sans-serif">
-        <img src="/didu-homes-logo.svg" alt="DIDU Homes" width="220" height="56" />
-        <div style="width:140px;height:3px;background:#e8e4dc;border-radius:99px;overflow:hidden;position:relative;margin-top:24px"><div style="position:absolute;inset:0 auto 0 0;width:40%;background:#142A23;animation:preloaderAnim 1.2s infinite ease-in-out"></div></div>
-        <style>@keyframes preloaderAnim{0%{left:-40%;width:40%}50%{left:40%;width:60%}100%{left:100%;width:40%}}</style>
-      </div>
-    </div>
-    <script type="module" src="/src/main.tsx"></script>
+      <main style="font-family:Arial,sans-serif;color:#142A23;background:#FAF8F5;padding:48px max(20px,calc((100% - 1120px)/2))">
+        <header style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap"><a href="/" aria-label="DIDU Homes"><img src="/didu-homes-logo.svg" alt="DIDU Homes" width="180" /></a><nav aria-label="Main navigation"><a href="/?screen=properties">Buy</a> &nbsp; <a href="/?screen=sell-rent">Sell/Rent</a> &nbsp; <a href="/?screen=projects">Projects</a> &nbsp; <a href="/?screen=about">About</a> &nbsp; <a href="/?screen=contact">Contact</a></nav></header>
+        <section style="padding:64px 0"><p>CONSIDERED HOMES IN LAGOS</p><h1 style="font-size:clamp(36px,6vw,64px);max-width:760px">Find your place in Lagos.</h1><p>Discover considered homes and investment properties across Ikoyi, Victoria Island, Banana Island and Lekki with DIDU Homes.</p><h2>Featured Luxury Estates in Lagos</h2><p>A considered collection of residences across Lagos, selected for their setting, design and lifestyle.</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px">
+          <article><img style="width:100%;height:140px;object-fit:cover" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="The Meridian Residence"/><h3>The Meridian Residence</h3><p>Penthouse · Old Ikoyi · ₦1.85bn · 4 beds · 5 baths · 4,200 sq.ft</p></article>
+          <article><img style="width:100%;height:140px;object-fit:cover" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Garden Court Villa"/><h3>Garden Court Villa</h3><p>Detached House · Victoria Garden City · ₦1.25bn · 5 beds · 6 baths · 4,450 sq.ft</p></article>
+          <article><img style="width:100%;height:140px;object-fit:cover" src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Banana Island Waterfront"/><h3>Banana Island Waterfront</h3><p>Luxury Apartment · Banana Island · ₦2.45bn · 4 beds · 4 baths · 4,200 sq.ft</p></article>
+          <article><h3>Palm House</h3><p>Detached House · Lekki Phase 1 · ₦780m · 4 beds · 5 baths · 4,450 sq.ft</p></article><article><h3>Atlantic View Collection</h3><p>Penthouse · Eko Atlantic · ₦1.65bn · 3 beds · 3 baths · 3,950 sq.ft</p></article><article><h3>Parkview Signature Home</h3><p>Terrace House · Parkview Estate · ₦960m · 4 beds · 4 baths · 3,600 sq.ft</p></article>
+        </div><h2>Explore Lagos's Prime Neighborhoods</h2><p>Ikoyi &amp; Old Ikoyi: Avg: ₦900m – ₦2bn · Banana Island: Avg: ₦2bn – ₦6bn · Victoria Island: Avg: ₦600m – ₦1.8bn · Lekki Phase 1: Avg: ₦450m – ₦1.2bn</p></section>
+        <footer>© 2026 DIDU Homes. Managed by Amara Okafor &amp; Tunde Adebayo. All rights reserved.</footer>
+      </main>
+    </div>    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

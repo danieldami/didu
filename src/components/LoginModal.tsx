@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserProfile } from '../types';
 import { ADMIN_CREDENTIALS } from '../utils/security';
 import { saveFirestoreAccount, fetchFirestoreAccounts, getFirestoreAccount } from '../services/firebaseService';
@@ -624,7 +624,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   <label className="block text-[11px] font-bold text-gray-600 uppercase mb-1">Target Budget</label>
                   <input
                     type="text"
-                    placeholder="e.g. NGN 2.5bn+"
+                    placeholder="e.g. ₦ 2.5bn+"
                     value={signupBudgetType}
                     onChange={(e) => setSignupBudgetType(e.target.value)}
                     className="w-full px-2.5 py-1.5 text-xs bg-gray-50 border border-gray-200 rounded-lg text-gray-900"

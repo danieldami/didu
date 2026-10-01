@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Property } from '../types';
 import { X, Calendar, CheckCircle2, ShieldCheck, User, Phone, Mail, Clock } from 'lucide-react';
 import { LeadSubmission } from '../utils/security';
@@ -27,6 +27,9 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!buyerName || !phone || !email || !preferredTime) return;
+
+    const whatsappMessage = `Hi, I would like to arrange ${preferredTime.trim()} for ${property?.title || 'a DIDU Homes property'}. My name is ${buyerName.trim()} and my phone number is ${phone.trim()}.`;
+    window.open(`https://wa.me/2349125882627?text=${encodeURIComponent(whatsappMessage)}`, '_blank', 'noopener,noreferrer');
 
     const newLead: LeadSubmission = {
       id: `LEAD-${Math.floor(1000 + Math.random() * 9000)}`,
@@ -172,7 +175,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
                 id="submit-lead-inquiry-btn"
                 className="w-full py-3 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
               >
-                Submit Inquiry & Book Tour
+                Continue on WhatsApp
               </button>
             </form>
           )}

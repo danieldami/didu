@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Property, UserProfile } from '../types';
 import { isAdmin, isPropertyOwnerOrAdmin } from '../utils/security';
 import { saveFirestoreLead } from '../services/firebaseService';
@@ -411,7 +411,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div>
                     <MapComponent lat={property.coordinates?.lat ?? 6.4541} lng={property.coordinates?.lng ?? 3.4331} />
                     <p className="text-[11px] text-gray-500 mt-2 flex items-center gap-1">
-                      <span className="font-semibold text-emerald-800">Exact GPS Coordinates:</span> {(property.coordinates?.lat ?? 27.1767).toFixed(4)}ÂN, {(property.coordinates?.lng ?? 78.0081).toFixed(4)}ÂE (Visible exclusively to Admin account)
+                      <span className="font-semibold text-emerald-800">Exact GPS Coordinates:</span> {(property.coordinates?.lat ?? 27.1767).toFixed(4)}N, {(property.coordinates?.lng ?? 78.0081).toFixed(4)}E (Visible exclusively to Admin account)
                     </p>
                   </div>
                 ) : (
@@ -455,7 +455,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   Schedule Private Site Tour
                 </h4>
                 <p className="text-[11px] text-gray-500 mb-4">
-                  Complimentary luxury chauffeur transfer available for Lagos site visits.
+                  Complimentary luxury chauffeur transfer available for property visits.
                 </p>
 
                 {inquirySubmitted ? (

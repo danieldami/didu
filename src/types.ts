@@ -1,4 +1,4 @@
-﻿export type PropertyType = string;
+export type PropertyType = string;
 
 export type ListingType = 'Buy' | 'Rent' | 'Commercial' | 'Projects' | 'Plots';
 
@@ -10,6 +10,8 @@ export interface Property {
   listingType: 'Sale' | 'Rent';
   price: number; // in Nigerian naira
   priceDisplay: string; // formatted for the Lagos market
+  badge?: string;
+  tags?: string[];
   pricePerSqFt: number; // e.g., 8500
   location: string;
   locality: string;

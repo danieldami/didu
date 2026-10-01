@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ActiveScreen, Property, Project, FilterState, PropertyType, ListingType, UserProfile } from './types';
 import { isAdmin, getMaskedProperty, LeadSubmission } from './utils/security';
 import { 
@@ -63,7 +63,7 @@ export default function App() {
     if (cached && cached.length > 0) {
       return cached.filter(p => !p.isDeleted);
     }
-    return [];
+    return PROPERTIES_DATA;
   });
 
   // Sync user state to localStorage

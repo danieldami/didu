@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Compass, Award } from 'lucide-react';
 
 interface WhyRoyalLagosProps {
@@ -71,7 +71,7 @@ export const WhyRoyalLagos: React.FC<WhyRoyalLagosProps> = ({ onContactAdvisory 
         <div className="mt-12 text-center">
           <button
             type="button"
-            onClick={onContactAdvisory}
+            onClick={() => window.open(`https://wa.me/2349125882627?text=${encodeURIComponent("Hi, I would like to schedule a private advisory consultation." )}`, "_blank", "noopener,noreferrer")}
             className="inline-flex items-center gap-2 bg-[#C5A869] hover:bg-[#b09355] text-[#0F382C] px-8 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-widest shadow-lg hover:shadow-xl transition-all cursor-pointer"
           >
             <span>Schedule Private Advisory Consultation</span>

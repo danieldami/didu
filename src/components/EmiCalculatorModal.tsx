@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Calculator, ShieldCheck } from 'lucide-react';
 import { formatNaira } from '../utils/format';
 

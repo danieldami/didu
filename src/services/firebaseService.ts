@@ -1,4 +1,4 @@
-﻿import { Property, Project } from '../types';
+import { Property, Project } from '../types';
 import { PROPERTIES_DATA, PROJECTS_DATA } from '../data/mockData';
 import { LeadSubmission } from '../utils/security';
 

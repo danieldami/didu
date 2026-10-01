@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Property, PropertyType } from '../types';
 import { PropertyCard } from './PropertyCard';
@@ -159,14 +159,8 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
           </div>
 
           <a
-            href="?screen=contact"
+            href={`https://wa.me/2349125882627?text=${encodeURIComponent("Hi, I would like private property advisory.")}`} target="_blank" rel="noopener"
             id="featured-vip-advisory-btn"
-            onClick={(e) => {
-              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                e.preventDefault();
-                onExploreAll();
-              }
-            }}
             className="bg-[#E4D5B7] hover:bg-[#FAF8F5] text-[#0F382C] px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all shrink-0 inline-block text-center"
           >
             Request Private Advisory

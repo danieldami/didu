@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Property, PropertyType, UserProfile } from '../types';
 import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
 import { isAdmin } from '../utils/security';
@@ -151,7 +151,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
     'EV Charging Point'
   ];
 
-  const formatNGNCommas = (numStr: string): string => {
+  const format₦Commas = (numStr: string): string => {
     const clean = numStr.replace(/[^0-9]/g, '');
     const num = parseFloat(clean);
     if (isNaN(num)) return '';
@@ -1059,7 +1059,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                     {/* Asking Price with Comma Format & Word Breakdown */}
                     <div className="space-y-2 sm:col-span-2">
                       <label className="block text-xs font-bold text-gray-700 uppercase">
-                        {listingIntent === 'Sale' ? 'Expected Sale Price (NGN  NGN) *' : 'Expected Monthly Rent (NGN  NGN) *'}
+                        {listingIntent === 'Sale' ? 'Expected Sale Price (₦  ₦) *' : 'Expected Monthly Rent (₦  ₦) *'}
                       </label>
                       <input
                         type="text"
@@ -1084,8 +1084,8 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       {askingPrice && Number(askingPrice) > 0 && (
                         <div className="p-3 bg-emerald-50/80 border border-emerald-200 rounded-xl text-xs space-y-1">
                           <div className="flex items-center justify-between text-emerald-950 font-mono font-bold">
-                            <span>Formatted Amount (NGN):</span>
-                            <span className="text-sm">NGN  {formatNGNCommas(askingPrice)}</span>
+                            <span>Formatted Amount (₦):</span>
+                            <span className="text-sm">₦  {format₦Commas(askingPrice)}</span>
                           </div>
                           <div className="text-emerald-900 font-medium text-[11px] capitalize">
                             <strong>Price:</strong> {amountInWords(Number(askingPrice))}

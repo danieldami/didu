@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   MapPin, 
   Navigation, 
@@ -205,7 +205,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
         {/* Top-Left Live Coordinate Tag */}
         <div className="absolute top-2 left-2 bg-black/80 backdrop-blur-xs text-white text-[11px] font-mono px-2.5 py-1 rounded-md shadow-md flex items-center gap-1.5 z-10 border border-white/20 pointer-events-none">
           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-          <span>GPS Pin: {coordinates.lat.toFixed(5)}ÂN, {coordinates.lng.toFixed(5)}ÂE</span>
+          <span>GPS Pin: {coordinates.lat.toFixed(5)}N, {coordinates.lng.toFixed(5)}E</span>
         </div>
 
         {/* Top-Right Quick Zoom Controls */}
@@ -327,7 +327,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
         {showCoordinateInputs && (
           <div className="grid grid-cols-2 gap-3 pt-2">
             <div>
-              <label className="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Latitude (ÂN)</label>
+              <label className="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Latitude (N)</label>
               <input
                 type="number"
                 step="0.000001"
@@ -337,7 +337,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
               />
             </div>
             <div>
-              <label className="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Longitude (ÂE)</label>
+              <label className="block text-[10px] font-bold text-gray-600 uppercase mb-0.5">Longitude (E)</label>
               <input
                 type="number"
                 step="0.000001"

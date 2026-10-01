@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { ActiveScreen } from '../types';
 import { Landmark, MapPin, Phone, Mail } from 'lucide-react';
 
@@ -62,14 +62,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           <div className="text-xs text-gray-300 space-y-1.5 flex flex-col items-center md:items-end">
             <div className="flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-[#C5A869]" />
-              <a href="tel:+2348035550148" className="hover:text-white transition-colors">
-                Amara Okafor: +234 803 555 0148
+              <a href="https://wa.me/2349125882627" target="_blank" rel="noopener" className="hover:text-white transition-colors">
+                Amara Okafor: +234 912 588 2627
               </a>
             </div>
             <div className="flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-[#C5A869]" />
-              <a href="tel:+2348095550182" className="hover:text-white transition-colors">
-                Tunde Adebayo: +234 809 555 0182
+              <a href="https://wa.me/2349125882627" target="_blank" rel="noopener" className="hover:text-white transition-colors">
+                Tunde Adebayo: +234 912 588 2627
               </a>
             </div>
             <div className="flex items-center gap-2 pt-1">
@@ -87,7 +87,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-3 text-center sm:text-left">
           <span>
-            Â {new Date().getFullYear()} DIDU Homes. Managed by Amara Okafor & Tunde Adebayo. All rights reserved.
+            © 2026 DIDU Homes. Managed by Amara Okafor & Tunde Adebayo. All rights reserved.
           </span>
         </div>
 

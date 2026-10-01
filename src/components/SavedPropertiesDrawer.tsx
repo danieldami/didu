@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Property } from '../types';
 import { X, Heart, Trash2, ArrowRight } from 'lucide-react';
 

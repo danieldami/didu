@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { PropertyType, FilterState } from '../types';
 import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
 import { Search, MapPin, Home, ChevronDown, ArrowRight } from 'lucide-react';
@@ -11,10 +11,10 @@ interface HeroSectionProps {
 
 const budgets = [
   { value: 'all', label: 'Any budget', min: 0, max: 5000000000 },
-  { value: 'under-1bn', label: 'Under NGN 1bn', min: 0, max: 1000000000 },
-  { value: '1-1.5bn', label: 'NGN 1bn   NGN 1.5bn', min: 1000000000, max: 1500000000 },
-  { value: '1.5-2bn', label: 'NGN 1.5bn   NGN 2bn', min: 1500000000, max: 2000000000 },
-  { value: '2bn-plus', label: 'NGN 2bn and above', min: 2000000000, max: 5000000000 },
+  { value: 'under-1bn', label: 'Under ₦ 1bn', min: 0, max: 1000000000 },
+  { value: '1-1.5bn', label: '₦ 1bn   ₦ 1.5bn', min: 1000000000, max: 1500000000 },
+  { value: '1.5-2bn', label: '₦ 1.5bn   ₦ 2bn', min: 1500000000, max: 2000000000 },
+  { value: '2bn-plus', label: '₦ 2bn and above', min: 2000000000, max: 5000000000 },
 ];
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {

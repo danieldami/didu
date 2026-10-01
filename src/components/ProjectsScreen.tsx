@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Project } from '../types';
 import { Building2, MapPin, CheckCircle, Download, Calendar, ShieldCheck, ArrowRight, PlusCircle, Edit3, Trash2, X } from 'lucide-react';
 
@@ -90,7 +90,7 @@ Website:                DIDU Homes showcase
     setFormName('');
     setFormDeveloper('DIDU Homes Developers');
     setFormLocality('Ikoyi, Lagos');
-    setFormPriceStarting('NGN 2.10bn onwards');
+    setFormPriceStarting('₦ 2.10bn onwards');
     setFormUnits('32 Luxury Units');
     setFormStatus('Under Construction');
     setFormPossession('December 2026');
@@ -121,7 +121,7 @@ Website:                DIDU Homes showcase
       name: formName.trim() || 'New Luxury Project',
       developer: formDeveloper.trim() || 'DIDU Homes Developers',
       locality: formLocality.trim() || 'Ikoyi, Lagos',
-      priceStarting: formPriceStarting.trim() || 'NGN 2.00bn onwards',
+      priceStarting: formPriceStarting.trim() || '₦ 2.00bn onwards',
       units: formUnits.trim() || '50 Units',
       status: formStatus,
       possessionDate: formPossession.trim() || 'December 2026',
@@ -327,7 +327,7 @@ Website:                DIDU Homes showcase
                   <button
                     type="button"
                     id={`inquire-proj-btn-${project.id}`}
-                    onClick={() => onContactProject(project.name)}
+                    onClick={() => window.open(`https://wa.me/2349125882627?text=${encodeURIComponent(`Hi, I would like pricing and a site visit for ${project.name}.`)}`, '_blank', 'noopener,noreferrer')}
                     className="w-full sm:w-auto px-6 py-2.5 bg-[#0F382C] hover:bg-[#164E3D] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2"
                   >
                     <span>Request Pricing & Site Visit</span>

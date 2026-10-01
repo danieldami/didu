@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Landmark, ShieldCheck, Users, Compass, CheckCircle2, FileCheck, Scale, Phone } from 'lucide-react';
 
 export const AboutScreen: React.FC = () => {
@@ -157,4 +157,3 @@ export const AboutScreen: React.FC = () => {
     </div>
   );
 };
-

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Property, PropertyType } from '../types';
 import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
 import { formatNaira } from '../utils/format';
@@ -366,7 +366,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                Asking Price (NGN  NGN)
+                Asking Price (₦  ₦)
               </label>
               <input
                 type="number"

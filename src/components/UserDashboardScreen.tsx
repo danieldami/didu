@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { UserProfile, Property, UserDashboardTab } from '../types';
 import { isAdmin, LeadSubmission, ADMIN_CREDENTIALS } from '../utils/security';
 import { 
@@ -982,7 +982,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     type="text"
                     value={preferredBudget}
                     onChange={(e) => setPreferredBudget(e.target.value)}
-                    placeholder="e.g. NGN 2.5bn+ luxury home"
+                    placeholder="e.g. ₦ 2.5bn+ luxury home"
                     className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
                   />
                 </div>

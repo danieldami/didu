@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Property, FilterState, PropertyType, ListingType } from '../types';
 import { PropertyCard } from './PropertyCard';

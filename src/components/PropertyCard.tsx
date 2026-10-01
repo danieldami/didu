@@ -1,7 +1,7 @@
-﻿import React from 'react';
+import React from 'react';
 import { Property } from '../types';
 import { formatNaira } from '../utils/format';
-import { Bed, Bath, Maximize, MapPin, ShieldCheck, Heart, Eye, Calendar, ArrowRight, MessageSquare, Trash2 } from 'lucide-react';
+import { Bed, Bath, Maximize, MapPin, ShieldCheck, Heart, Eye, ArrowRight, MessageSquare } from 'lucide-react';
 
 interface PropertyCardProps {
   property: Property;
@@ -32,16 +32,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     <div className="bg-white rounded-xl overflow-hidden border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group h-full">
       
       {/* Media & Badges Container */}
-      <a
-        href={`?property=${property.id}`}
-        onClick={(e) => {
-          if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-            e.preventDefault();
-            onSelect(property);
-          }
-        }}
-        className="relative aspect-[16/10] overflow-hidden bg-gray-100 cursor-pointer block"
-      >
+      <div className="relative aspect-[16/10] overflow-hidden bg-gray-100 block">
         <img
           src={property.coverImage}
           alt={property.title}
@@ -70,28 +61,13 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           )}
 
           {/* Secondary Badge if exclusive */}
-          {property.isExclusive && (
+          {(property.badge || property.isExclusive) && (
             <span className="px-2 py-0.5 rounded bg-[#C5A869] text-[#0F382C] text-[10px] font-bold tracking-wider uppercase shadow-xs flex items-center gap-1">
               <ShieldCheck className="w-3 h-3 text-[#0F382C]" />
-              Exclusive
+              {property.badge || 'Exclusive'}
             </span>
           )}
         </div>
-
-        {/* Top-Right: Favorite Button (Gated if unauthenticated handled in App.tsx) */}
-        <button
-          type="button"
-          id={`fav-btn-${property.id}`}
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggleSave(property.id);
-          }}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-gray-700 hover:text-red-500 flex items-center justify-center shadow-md transition-transform hover:scale-110 pointer-events-auto z-10"
-          aria-label="Save property"
-          title="Save property (Requires Login)"
-        >
-          <Heart className={`w-4 h-4 ${isSaved ? 'fill-red-500 text-red-500' : 'text-gray-700'}`} />
-        </button>
 
         {/* Bottom Image Info: Property Type & Rate / Sq.Ft cleanly docked */}
         <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white z-10 pointer-events-none">
@@ -118,7 +94,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             {formatNaira(property.pricePerSqFt ?? Math.round((property.price || 0) / (property.superAreaSqFt || 1)))}/sq.ft
           </span>
         </div>
-      </a>
+      </div>
 
       {/* Body Content */}
       <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
@@ -144,17 +120,9 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
             id={`prop-title-${property.id}`}
             className="text-base sm:text-lg font-serif-luxury font-bold text-[#0F382C] hover:text-[#164E3D] cursor-pointer line-clamp-1 transition-colors"
           >
-            <a
-              href={`?property=${property.id}`}
-              onClick={(e) => {
-                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                  e.preventDefault();
-                  onSelect(property);
-                }
-              }}
-            >
+            <span>
               {property.title || 'Luxury Estate'}
-            </a>
+            </span>
           </h3>
 
           {/* Subtitle / Tagline */}
@@ -206,85 +174,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         </div>
 
         {/* Card Footer Actions */}
-        <div className="space-y-2 pt-3 mt-2 border-t border-gray-100">
-          
-          {/* Unified Clean "Inquire / Contact" Button */}
-          <a
-            href={`https://wa.me/2348035550148?text=${encodeURIComponent(
-              `Hi DIDU Homes, I am interested in Property ID #${property.id}.`
-            )}`}
-            target="_blank"
-            rel="noreferrer"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (onInquireContact) onInquireContact(property);
-            }}
-            className="w-full py-2 bg-[#25D366] hover:bg-[#1ebd54] text-white rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs transition-all"
-            title="Inquire via WhatsApp & Log Inquiry"
-          >
-            <MessageSquare className="w-3.5 h-3.5 fill-white" />
-            <span>Inquire / Contact</span>
-          </a>
-
-          <div className="flex items-center justify-between gap-2 pt-1">
-            {onToggleCompare && (
-              <button
-                type="button"
-                id={`compare-btn-${property.id}`}
-                onClick={() => onToggleCompare(property)}
-                className={`text-xs font-medium px-2.5 py-1.5 rounded transition-colors ${
-                  isComparing
-                    ? 'bg-[#0F382C] text-white font-semibold'
-                    : 'text-gray-600 hover:text-[#0F382C] hover:bg-gray-100'
-                }`}
-              >
-                {isComparing ? '  Comparing' : '+ Compare'}
-              </button>
-            )}
-
-            <div className="flex items-center gap-2 ml-auto">
-              {isAdminUser && onDeleteProperty && (
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (window.confirm(`Delete property #${property.id}?`)) {
-                      onDeleteProperty(property.id);
-                    }
-                  }}
-                  className="text-xs font-semibold bg-rose-600 hover:bg-rose-700 text-white px-2.5 py-1.5 rounded shadow-xs transition-all flex items-center gap-1"
-                  title="Admin Delete Property"
-                >
-                  <Trash2 className="w-3.5 h-3.5" />
-                  <span>Delete</span>
-                </button>
-              )}
-
-              <button
-                type="button"
-                id={`book-tour-btn-${property.id}`}
-                onClick={() => onBookVisit(property)}
-                className="text-xs font-semibold text-[#0F382C] hover:text-[#164E3D] px-2.5 py-1.5 rounded border border-[#0F382C]/30 hover:bg-[#0F382C]/5 transition-colors flex items-center gap-1"
-              >
-                <Calendar className="w-3.5 h-3.5" />
-                <span>Book Tour</span>
-              </button>
-
-              <a
-                href={`?property=${property.id}`}
-                id={`view-details-btn-${property.id}`}
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                    e.preventDefault();
-                    onSelect(property);
-                  }
-                }}
-                className="text-xs font-semibold bg-[#0F382C] hover:bg-[#164E3D] text-white px-3.5 py-1.5 rounded shadow-xs hover:shadow-sm transition-all flex items-center gap-1"
-              >
-                <span>View</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
+        <div className="flex items-center gap-2 pt-3 mt-2 border-t border-gray-100">
+          <a href={`?property=${property.id}`} onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) { e.preventDefault(); onSelect(property); } }} className="text-xs font-semibold bg-[#0F382C] hover:bg-[#164E3D] text-white px-3.5 py-2 rounded shadow-xs flex items-center gap-1"><span>View</span><ArrowRight className="w-3.5 h-3.5" /></a>
+          <a href={`https://wa.me/2349125882627?text=${encodeURIComponent(`Hi, I'm interested in ${property.title} (${property.priceDisplay})`)}`} target="_blank" rel="noopener" className="flex-1 py-2 bg-[#25D366] hover:bg-[#1ebd54] text-white rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs"><MessageSquare className="w-3.5 h-3.5" /><span>Chat on WhatsApp</span></a>
+        </div>      </div>
           </div>
         </div>
 
