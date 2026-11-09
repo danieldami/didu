@@ -94,7 +94,7 @@ const RouteShell: React.FC = () => {
     <div className="flex-1">
       <Suspense fallback={<div className="mx-auto min-h-[60vh] max-w-7xl px-5 py-20 text-sm text-gray-500">Loading page…</div>}>
         <Routes>
-          <Route path="/" element={<HomePage onSearch={makePropertySearch} onSelectProperty={onSelectProperty} onToggleSave={toggleSaved} savedIds={savedIds} onBookVisit={openWhatsApp} onToggleCompare={toggleCompare} compareList={compareList} onExploreAll={() => navigate('/properties')} onContact={() => navigate('/contact')} />} />
+          <Route path="/" element={<HomePage onSearch={makePropertySearch} onSelectProperty={onSelectProperty} onToggleSave={toggleSaved} savedIds={savedIds} onBookVisit={openWhatsApp} onToggleCompare={toggleCompare} compareList={compareList} onExploreAll={() => navigate('/properties')} onContact={() => openWhatsApp()} />} />
           <Route path="/properties" element={<PropertiesPage onSelectProperty={onSelectProperty} onToggleSave={toggleSaved} savedIds={savedIds} onBookVisit={openWhatsApp} onToggleCompare={toggleCompare} compareList={compareList} onOpenCompare={() => setCompareOpen(true)} />} />
           <Route path="/properties/:slug" element={<PropertyPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
