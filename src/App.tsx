@@ -35,7 +35,7 @@ const OrganizationSchema: React.FC = () => {
   const data = useMemo(() => {
     const organization: Record<string, unknown> = {
       '@context': 'https://schema.org', '@type': 'RealEstateAgent', name: siteConfig.companyName,
-      url: `https://${siteConfig.domain}`, logo: `https://${siteConfig.domain}/logo.svg`,
+      url: `https://${siteConfig.domain}`, logo: `https://${siteConfig.domain}/chubank-skyline.png`,
     };
     if (!siteConfig.phone.startsWith('TODO_')) organization.telephone = siteConfig.phone;
     if (!siteConfig.email.startsWith('TODO_')) organization.email = siteConfig.email;

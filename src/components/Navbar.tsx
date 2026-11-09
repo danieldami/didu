@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ActiveScreen } from '../types';
 import { Menu, MessageCircle, X } from 'lucide-react';
 import { siteConfig } from '../config/site';
+import { BrandLogo } from './BrandLogo';
 
 interface NavbarProps {
   activeScreen: ActiveScreen;
@@ -20,7 +21,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeScreen, onNavigate, onOpen
   const go = (screen: ActiveScreen) => { onNavigate(screen); setMenuOpen(false); };
   return <header className="sticky top-0 z-50 border-b border-[#e8e6df] bg-brand-cream/95 text-[#1c2a23] shadow-sm backdrop-blur-xl">
     <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
-      <a href="/" onClick={event => { event.preventDefault(); go('home'); }} aria-label={`${siteConfig.shortName} home`}><img src="/logo.svg" alt={siteConfig.shortName} width="230" height="48" className="h-11 w-auto" /></a>
+      <a href="/" onClick={event => { event.preventDefault(); go('home'); }} aria-label={`${siteConfig.shortName} home`}><BrandLogo /></a>
       <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">{links.map(link => <button key={link.screen} type="button" onClick={() => go(link.screen)} className={`rounded-full px-4 py-2.5 text-[13px] transition-colors ${activeScreen === link.screen ? 'bg-[#eaece6] font-semibold text-brand-primary' : 'text-[#626a63] hover:bg-white'}`}>{link.label}</button>)}</nav>
       <div className="hidden items-center gap-2 md:flex">
         <button type="button" onClick={onOpenSaved} className="rounded-full px-3 py-2.5 text-[13px] font-medium text-[#536056] hover:bg-white">Saved{savedCount > 0 ? ` (${savedCount})` : ''}</button>
