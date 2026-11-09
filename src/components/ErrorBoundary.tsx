@@ -63,10 +63,10 @@ export class ErrorBoundary extends React.Component<Props, State> {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#FAF8F5',
+          backgroundColor: 'var(--color-brand-cream)',
           fontFamily: 'system-ui, -apple-system, sans-serif',
           padding: '24px',
-          color: '#1A2E26'
+          color: 'var(--color-brand-ink)'
         }}>
           <div style={{
             maxWidth: '480px',
@@ -82,8 +82,8 @@ export class ErrorBoundary extends React.Component<Props, State> {
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-              backgroundColor: '#0F382C',
-              color: '#C5A869',
+              backgroundColor: 'var(--color-brand-primary)',
+              color: 'var(--color-brand-accent)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -96,7 +96,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
             <h1 style={{
               fontSize: '22px',
               fontWeight: '700',
-              color: '#0F382C',
+              color: 'var(--color-brand-primary)',
               marginBottom: '10px',
               letterSpacing: '-0.02em'
             }}>
@@ -109,7 +109,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
               lineHeight: '1.6',
               marginBottom: '28px'
             }}>
-              We encountered a temporary loading issue. Please refresh or reset the cache to load the latest luxury listings in Lagos.
+              We encountered a temporary loading issue. Please refresh the page and try again.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -119,7 +119,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
                 style={{
                   width: '100%',
                   padding: '13px',
-                  backgroundColor: '#0F382C',
+                  backgroundColor: 'var(--color-brand-primary)',
                   color: '#FFFFFF',
                   fontWeight: '700',
                   fontSize: '13px',

@@ -20,7 +20,7 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 const screenByPath = (path: string): ActiveScreen => {
   if (path === '/properties') return 'properties';
-  if (path.startsWith('/properties/')) return 'property-detail';
+  if (path.startsWith('/properties/')) return 'properties';
   if (path === '/projects') return 'projects';
   if (path === '/about') return 'about';
   if (path === '/contact') return 'contact';
@@ -28,7 +28,7 @@ const screenByPath = (path: string): ActiveScreen => {
 };
 
 const pathByScreen: Record<ActiveScreen, string> = {
-  home: '/', properties: '/properties', 'property-detail': '/properties', projects: '/projects', about: '/about', contact: '/contact',
+  home: '/', properties: '/properties', projects: '/projects', about: '/about', contact: '/contact',
 };
 
 const OrganizationSchema: React.FC = () => {
@@ -105,7 +105,7 @@ const RouteShell: React.FC = () => {
       </Suspense>
     </div>
     <Footer onNavigate={navigateScreen} onOpenWhatsApp={() => openWhatsApp()} />
-    <FloatingWhatsApp />
+    <FloatingWhatsApp compareVisible={compareList.length > 0} />
     <CompareModal isOpen={compareOpen} onClose={() => setCompareOpen(false)} compareList={compareList} onRemoveFromCompare={slug => setCompareList(previous => previous.filter(property => property.slug !== slug))} onSelectProperty={property => { setCompareOpen(false); onSelectProperty(property); }} />
     <SavedPropertiesDrawer isOpen={savedDrawerOpen} onClose={() => setSavedDrawerOpen(false)} savedProperties={savedProperties} onRemove={toggleSaved} onSelectProperty={property => { setSavedDrawerOpen(false); onSelectProperty(property); }} />
     {compareList.length > 0 && <button type="button" onClick={() => setCompareOpen(true)} className="fixed bottom-5 right-5 z-40 rounded-full bg-brand-primary px-5 py-3 text-sm font-semibold text-white shadow-xl">Compare {compareList.length} properties</button>}

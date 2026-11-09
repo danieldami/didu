@@ -64,4 +64,4 @@ export interface FilterState {
   sortBy: 'available' | 'price-asc' | 'price-desc' | 'newest';
 }
 
-export type ActiveScreen = 'home' | 'properties' | 'property-detail' | 'projects' | 'about' | 'contact';
+export type ActiveScreen = 'home' | 'properties' | 'projects' | 'about' | 'contact';
