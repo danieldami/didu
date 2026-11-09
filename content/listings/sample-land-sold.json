@@ -1,0 +1,19 @@
+{
+  "title": "SAMPLE — Sold land listing (replace before launch)",
+  "status": "sold",
+  "listingType": "sale",
+  "propertyType": "Land",
+  "price": 0,
+  "location": "TODO_LOCATION",
+  "state": "TODO_STATE",
+  "plotSize": "TODO_PLOT_SIZE",
+  "titleDocuments": ["TODO_TITLE_DOCUMENT"],
+  "documentsVerified": false,
+  "featured": false,
+  "coverImage": "placeholder.svg",
+  "images": ["placeholder.svg"],
+  "description": "SAMPLE PLACEHOLDER — SOLD. Replace with an approved previously sold listing or remove this sample.",
+  "highlights": ["SAMPLE — replace before launch"],
+  "amenities": [],
+  "datePosted": "2026-01-02"
+}

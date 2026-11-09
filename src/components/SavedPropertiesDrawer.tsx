@@ -1,98 +1,12 @@
 import React from 'react';
-import { Property } from '../types';
-import { X, Heart, Trash2, ArrowRight } from 'lucide-react';
+import { Heart, X } from 'lucide-react';
+import type { Property } from '../types';
+import { formatNaira } from '../utils/format';
 
-interface SavedPropertiesDrawerProps {
-  isOpen: boolean;
-  onClose: () => void;
-  savedProperties: Property[];
-  onRemove: (id: string) => void;
-  onSelectProperty: (property: Property) => void;
-}
+interface SavedPropertiesDrawerProps { isOpen: boolean; onClose: () => void; savedProperties: Property[]; onRemove: (slug: string) => void; onSelectProperty: (property: Property) => void; }
 
-export const SavedPropertiesDrawer: React.FC<SavedPropertiesDrawerProps> = ({
-  isOpen,
-  onClose,
-  savedProperties,
-  onRemove,
-  onSelectProperty
-}) => {
-  if (!isOpen) return null;
-
-  return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-xs flex justify-end animate-fadeIn">
-      <div className="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between">
-        
-        {/* Header */}
-        <div className="p-5 bg-brand-primary text-white flex items-center justify-between border-b border-brand-primary-light">
-          <div className="flex items-center gap-2">
-            <Heart className="w-5 h-5 text-brand-accent-soft fill-brand-accent-soft" />
-            <h3 className="font-serif-luxury font-bold text-lg text-white">
-              Saved Favorites ({savedProperties.length})
-            </h3>
-          </div>
-          <button
-            type="button"
-            onClick={onClose}
-            className="p-1 text-white/80 hover:text-white rounded-full hover:bg-brand-primary-light"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* List */}
-        <div className="p-4 overflow-y-auto flex-1 space-y-3">
-          {savedProperties.length === 0 ? (
-            <div className="text-center py-16 text-gray-500 space-y-2">
-              <Heart className="w-10 h-10 text-gray-300 mx-auto" />
-              <p className="font-semibold text-sm">No saved properties yet</p>
-              <p className="text-xs text-gray-400">Click the heart icon on any estate card to save for later.</p>
-            </div>
-          ) : (
-            savedProperties.map((p) => (
-              <div
-                key={p.id}
-                className="bg-gray-50 p-3 rounded-xl border border-gray-200 flex gap-3 items-center group relative hover:bg-gray-100/80 transition-colors"
-              >
-                <img src={p.coverImage} alt={p.title} className="w-20 h-16 object-cover rounded-lg shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <h4
-                    onClick={() => {
-                      onSelectProperty(p);
-                      onClose();
-                    }}
-                    className="text-xs font-bold text-brand-primary hover:underline truncate cursor-pointer"
-                  >
-                    {p.title}
-                  </h4>
-                  <span className="text-[11px] text-gray-500 block truncate">{p.locality}</span>
-                  <span className="text-xs font-serif-luxury font-bold text-gray-900 block mt-0.5">{p.priceDisplay}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => onRemove(p.id)}
-                  className="p-2 text-gray-400 hover:text-red-600 transition-colors"
-                  title="Remove from saved"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* Footer */}
-        <div className="p-4 border-t border-gray-100 bg-gray-50">
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-full py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white rounded-lg text-xs font-bold uppercase tracking-wider"
-          >
-            Continue Browsing
-          </button>
-        </div>
-
-      </div>
-    </div>
-  );
-};
+export const SavedPropertiesDrawer: React.FC<SavedPropertiesDrawerProps> = ({ isOpen, onClose, savedProperties, onRemove, onSelectProperty }) => isOpen ? <div className="fixed inset-0 z-[80] bg-black/40" onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}>
+  <aside role="dialog" aria-modal="true" aria-label="Saved properties" className="ml-auto flex h-full w-full max-w-md flex-col bg-white shadow-2xl"><header className="flex items-center justify-between border-b border-gray-100 p-5"><div className="flex items-center gap-2"><Heart className="h-5 w-5 text-brand-primary" /><h2 className="font-serif-luxury text-xl text-brand-primary">Saved properties</h2></div><button type="button" onClick={onClose} aria-label="Close saved properties"><X className="h-5 w-5" /></button></header>
+    <div className="flex-1 space-y-3 overflow-y-auto p-4">{savedProperties.length === 0 ? <p className="py-12 text-center text-sm text-gray-500">You have not saved any properties yet.</p> : savedProperties.map(property => <article key={property.slug} className="flex gap-3 rounded-xl border border-gray-100 p-3"><button type="button" onClick={() => onSelectProperty(property)} className="flex min-w-0 flex-1 gap-3 text-left"><img src={property.coverImage} alt="" loading="lazy" className="h-20 w-24 shrink-0 rounded-lg object-cover" /><span className="min-w-0"><span className="block truncate font-semibold text-brand-primary">{property.title}</span><span className="mt-1 block text-xs text-gray-500">{property.location}, {property.state}</span><span className="mt-2 block text-sm font-bold">{formatNaira(property.price)}</span></span></button><button type="button" onClick={() => onRemove(property.slug)} className="self-start p-2 text-gray-400 hover:text-rose-600" aria-label={`Remove ${property.title}`}><X className="h-4 w-4" /></button></article>)}</div>
+  </aside>
+</div> : null;

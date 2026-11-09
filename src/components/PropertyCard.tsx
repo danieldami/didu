@@ -1,185 +1,29 @@
 import React from 'react';
-import { Property } from '../types';
+import { ArrowUpRight, BedDouble, Heart, MapPin, Ruler } from 'lucide-react';
+import type { Property } from '../types';
 import { formatNaira } from '../utils/format';
-import { siteConfig } from '../config/site';
-import { Bed, Bath, Maximize, MapPin, ShieldCheck, Heart, Eye, ArrowRight, MessageSquare } from 'lucide-react';
 
 interface PropertyCardProps {
   property: Property;
   onSelect: (property: Property) => void;
-  onToggleSave: (id: string) => void;
+  onToggleSave: (slug: string) => void;
   isSaved: boolean;
   onBookVisit: (property: Property) => void;
   onToggleCompare?: (property: Property) => void;
   isComparing?: boolean;
-  onInquireContact?: (property: Property) => void;
-  isAdminUser?: boolean;
-  onDeleteProperty?: (id: string) => void;
 }
 
-export const PropertyCard: React.FC<PropertyCardProps> = ({
-  property,
-  onSelect,
-  onToggleSave,
-  isSaved,
-  onBookVisit,
-  onToggleCompare,
-  isComparing,
-  onInquireContact,
-  isAdminUser,
-  onDeleteProperty
-}) => {
-  return (
-    <div className="bg-white rounded-xl overflow-hidden border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group h-full">
-      
-      {/* Media & Badges Container */}
-      <div className="relative aspect-[16/10] overflow-hidden bg-gray-100 block">
-        <img
-          src={property.coverImage}
-          alt={property.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
-        />
-
-        {/* Subtle Gradient Overlays for top and bottom readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40 pointer-events-none" />
-
-        {/* Top-Left: Price Tag Badge + Optional Exclusive tags + Status */}
-        <div className="absolute top-3 left-3 flex flex-col items-start gap-1.5 pointer-events-none z-10">
-          {/* Main Price Tag Badge */}
-          <div className="bg-white text-brand-primary px-3.5 py-1.5 rounded-lg shadow-lg border border-gray-100 flex items-center gap-1">
-            <span className="text-sm sm:text-base font-sans font-black tracking-normal text-brand-primary">
-              {property.priceDisplay}
-            </span>
-          </div>
-
-          {property.status && property.status !== 'Active' && property.status.toLowerCase() !== 'published' && (
-            <div className={`px-2.5 py-0.5 rounded-md shadow-md text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 ${
-              property.status === 'Pending Approval' ? 'bg-amber-700 text-white' : 'bg-amber-600 text-white'
-            }`}>
-              <span>{property.status}</span>
-            </div>
-          )}
-
-          {/* Secondary Badge if exclusive */}
-          {(property.badge || property.isExclusive) && (
-            <span className="px-2 py-0.5 rounded bg-brand-accent text-brand-primary text-[10px] font-bold tracking-wider uppercase shadow-xs flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3 text-brand-primary" />
-              {property.badge || 'Exclusive'}
-            </span>
-          )}
-        </div>
-
-        {/* Bottom Image Info: Property Type & Rate / Sq.Ft cleanly docked */}
-        <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white z-10 pointer-events-none">
-          <div className="flex items-center gap-1.5">
-            <span className="text-[11px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-black/60 backdrop-blur-xs text-brand-accent-soft border border-white/10">
-              {property.propertyType}
-            </span>
-            {property.verified ? (
-              <span 
-                className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-emerald-950/85 backdrop-blur-xs text-emerald-300 border border-emerald-500/30 flex items-center gap-1" 
-                title="Seller-provided details; not independently verified"
-              >
-                <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                Seller reported
-              </span>
-            ) : property.verificationStatus === 'In Process' ? (
-              <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-amber-950/85 backdrop-blur-xs text-amber-300 border border-amber-500/30 flex items-center gap-1">
-                In Process
-              </span>
-            ) : null}
-          </div>
-
-          <span className="text-[11px] bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded text-gray-200 border border-white/10 font-mono">
-            {formatNaira(property.pricePerSqFt ?? Math.round((property.price || 0) / (property.superAreaSqFt || 1)))}/sq.ft
-          </span>
-        </div>
-      </div>
-
-      {/* Body Content */}
-      <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
-        
-        <div>
-          {/* Location Line */}
-          <div className="flex items-center gap-1 text-xs text-gray-500 font-medium mb-1.5">
-            <MapPin className="w-3.5 h-3.5 text-brand-primary shrink-0" />
-            <span className="truncate" title={isAdminUser && property.address ? property.address : undefined}>
-              {isAdminUser && property.address
-                ? property.address
-                : (property.locality ? (property.locality.toLowerCase().includes('lagos') ? property.locality : `${property.locality}, Lagos`) : (property.location || 'Lagos'))}
-            </span>
-            {isAdminUser && property.address && (
-              <span className="ml-auto text-[9px] font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200 shrink-0">
-                Admin Address View
-              </span>
-            )}
-          </div>
-
-          {/* Property Title */}
-          <h3
-            id={`prop-title-${property.id}`}
-            className="text-base sm:text-lg font-serif-luxury font-bold text-brand-primary hover:text-brand-primary-light cursor-pointer line-clamp-1 transition-colors"
-          >
-            <span>
-              {property.title || 'Luxury Estate'}
-            </span>
-          </h3>
-
-          {/* Subtitle / Tagline */}
-          <p className="text-xs text-gray-600 mt-1 line-clamp-2 leading-relaxed">
-            {property.tagline || property.description || ''}
-          </p>
-
-          {/* Key Specs Strip */}
-          <div className="grid grid-cols-3 gap-2 py-3 my-3 border-y border-gray-100 text-gray-700">
-            {(property.bedrooms || 0) > 0 ? (
-              <div className="flex items-center gap-1.5 text-xs font-medium">
-                <Bed className="w-4 h-4 text-gray-400 shrink-0" />
-                <span>{property.bedrooms} Beds</span>
-              </div>
-            ) : (
-              <div className="flex items-center gap-1.5 text-xs font-medium">
-                <ShieldCheck className="w-4 h-4 text-gray-400 shrink-0" />
-                <span>Commercial</span>
-              </div>
-            )}
-
-            {(property.bathrooms || 0) > 0 && (
-              <div className="flex items-center gap-1.5 text-xs font-medium">
-                <Bath className="w-4 h-4 text-gray-400 shrink-0" />
-                <span>{property.bathrooms} Baths</span>
-              </div>
-            )}
-
-            <div className="flex items-center gap-1.5 text-xs font-medium">
-              <Maximize className="w-4 h-4 text-gray-400 shrink-0" />
-              <span>{(property.superAreaSqFt || 0).toLocaleString('en-NG')} sq.ft</span>
-            </div>
-          </div>
-
-          {/* Highlights Mini Pills */}
-          <div className="flex items-center gap-1.5 flex-wrap mb-2">
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-brand-cream text-brand-primary border border-brand-primary/10">
-              {property.possession}
-            </span>
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-gray-50 text-gray-600 border border-gray-200">
-              {property.furnishing}
-            </span>
-            {property.gatedSecurity && (
-              <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100">
-                24/7 Gated
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Card Footer Actions */}
-        <div className="flex items-center gap-2 pt-3 mt-2 border-t border-gray-100">
-          <a href={`?property=${property.id}`} onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) { e.preventDefault(); onSelect(property); } }} className="text-xs font-semibold bg-brand-primary hover:bg-brand-primary-light text-white px-3.5 py-2 rounded shadow-xs flex items-center gap-1"><span>View</span><ArrowRight className="w-3.5 h-3.5" /></a>
-          <a href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(`Hello, I am interested in ${property.title}.`)}`} target="_blank" rel="noopener" className="flex-1 py-2 bg-[#25D366] hover:bg-[#1ebd54] text-white rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs"><MessageSquare className="w-3.5 h-3.5" /><span>Chat on WhatsApp</span></a>
-        </div>
-      </div>
-    </div>
-  );
-};
+export const PropertyCard: React.FC<PropertyCardProps> = ({ property, onSelect, onToggleSave, isSaved, onBookVisit, onToggleCompare, isComparing = false }) => <article className="group overflow-hidden rounded-2xl border border-[#e7e5de] bg-white shadow-sm transition-shadow hover:shadow-xl">
+  <div className="relative"><button type="button" onClick={() => onSelect(property)} className="block w-full text-left"><img src={property.coverImage} alt={property.title} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" /></button>
+    <div className="absolute left-3 top-3 rounded-full bg-white px-3 py-1.5 text-sm font-bold text-brand-primary shadow">{formatNaira(property.price)}{property.pricePeriod ? <span className="ml-1 text-[10px] font-medium">{property.pricePeriod}</span> : null}</div>
+    {property.status !== 'available' && <span className={`absolute bottom-3 left-3 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white ${property.status === 'sold' ? 'bg-gray-800' : 'bg-amber-700'}`}>{property.status === 'under-offer' ? 'Under offer' : property.status}</span>}
+    <button type="button" onClick={() => onToggleSave(property.slug)} aria-label={isSaved ? 'Remove from saved homes' : 'Save property'} className="absolute right-3 top-3 rounded-full bg-white/95 p-2.5 text-brand-primary shadow"><Heart className={`h-4 w-4 ${isSaved ? 'fill-current' : ''}`} /></button>
+  </div>
+  <div className="p-5"><div className="flex items-center justify-between gap-2 text-[10px] font-semibold uppercase tracking-[.14em] text-brand-primary"><span>{property.propertyType} · {property.listingType}</span>{property.documentsVerified && <span>Documents checked</span>}</div>
+    <button type="button" onClick={() => onSelect(property)} className="mt-2 text-left"><h2 className="font-serif-luxury text-xl text-[#24382d]">{property.title}</h2></button>
+    <p className="mt-2 flex items-center gap-1.5 text-sm text-gray-500"><MapPin className="h-3.5 w-3.5" />{property.location}, {property.state}</p>
+    <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t border-gray-100 pt-4 text-xs text-gray-600">{property.bedrooms !== undefined && <span className="inline-flex items-center gap-1"><BedDouble className="h-3.5 w-3.5" />{property.bedrooms} beds</span>}{property.sizeSqm !== undefined && <span className="inline-flex items-center gap-1"><Ruler className="h-3.5 w-3.5" />{property.sizeSqm.toLocaleString()} m²</span>}{property.plotSize && <span>{property.plotSize}</span>}</div>
+    <div className="mt-5 flex gap-2"><button type="button" onClick={() => onBookVisit(property)} className="flex-1 rounded-full bg-brand-primary px-3 py-2.5 text-xs font-semibold text-white hover:bg-brand-primary-light">Book inspection</button><button type="button" onClick={() => onSelect(property)} aria-label="View property details" className="rounded-full border border-gray-200 px-3 text-brand-primary hover:bg-gray-50"><ArrowUpRight className="h-4 w-4" /></button></div>
+    {onToggleCompare && <button type="button" onClick={() => onToggleCompare(property)} className={`mt-3 text-xs ${isComparing ? 'font-semibold text-brand-primary' : 'text-gray-500 hover:text-brand-primary'}`}>{isComparing ? 'Remove from compare' : 'Compare property'}</button>}
+  </div>
+</article>;

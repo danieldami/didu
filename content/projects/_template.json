@@ -1,0 +1,11 @@
+{
+  "title": "TODO_PROJECT_TITLE",
+  "location": "TODO_LOCATION",
+  "state": "TODO_STATE",
+  "status": "TODO_STATUS",
+  "coverImage": "placeholder.svg",
+  "images": ["placeholder.svg"],
+  "description": "TODO_DESCRIPTION",
+  "highlights": [],
+  "featured": false
+}

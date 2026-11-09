@@ -1,0 +1,22 @@
+{
+  "title": "SAMPLE — Apartment (replace before launch)",
+  "status": "under-offer",
+  "listingType": "sale",
+  "propertyType": "Apartment",
+  "price": 0,
+  "location": "TODO_LOCATION",
+  "state": "TODO_STATE",
+  "bedrooms": 0,
+  "bathrooms": 0,
+  "parking": 0,
+  "sizeSqm": 0,
+  "titleDocuments": ["TODO_TITLE_DOCUMENT"],
+  "documentsVerified": false,
+  "featured": false,
+  "coverImage": "placeholder.svg",
+  "images": ["placeholder.svg"],
+  "description": "SAMPLE PLACEHOLDER. Replace this listing with approved property details before launch.",
+  "highlights": ["SAMPLE — replace before launch"],
+  "amenities": [],
+  "datePosted": "2026-01-05"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "SAMPLE — Commercial property (replace before launch)",
+  "status": "available",
+  "listingType": "sale",
+  "propertyType": "Commercial",
+  "price": 0,
+  "location": "TODO_LOCATION",
+  "state": "TODO_STATE",
+  "sizeSqm": 0,
+  "titleDocuments": ["TODO_TITLE_DOCUMENT"],
+  "documentsVerified": false,
+  "featured": false,
+  "coverImage": "placeholder.svg",
+  "images": ["placeholder.svg"],
+  "description": "SAMPLE PLACEHOLDER. Replace this listing with approved property details before launch.",
+  "highlights": ["SAMPLE — replace before launch"],
+  "amenities": [],
+  "datePosted": "2026-01-06"
+}

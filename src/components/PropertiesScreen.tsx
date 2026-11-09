@@ -1,22 +1,7 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Property, FilterState, PropertyType, ListingType } from '../types';
+import React, { useMemo } from 'react';
+import { RotateCcw, Search } from 'lucide-react';
+import type { FilterState, Property } from '../types';
 import { PropertyCard } from './PropertyCard';
-import { PropertySkeletonGrid } from './PropertyCardSkeleton';
-import { LISTING_LOCATIONS, PROPERTY_TYPES } from '../data/mockData';
-import { 
-  Search, 
-  SlidersHorizontal, 
-  LayoutGrid, 
-  List, 
-  Map, 
-  X, 
-  Banknote, 
-  RotateCcw,
-  MapPin,
-  Building,
-  Check
-} from 'lucide-react';
 
 interface PropertiesScreenProps {
   properties: Property[];
@@ -24,504 +9,52 @@ interface PropertiesScreenProps {
   onUpdateFilters: (filters: Partial<FilterState>) => void;
   onResetFilters: () => void;
   onSelectProperty: (property: Property) => void;
-  onToggleSave: (id: string) => void;
+  onToggleSave: (slug: string) => void;
   savedIds: string[];
   onBookVisit: (property: Property) => void;
   onToggleCompare: (property: Property) => void;
   compareList: Property[];
   onOpenCompareModal: () => void;
-  onInquireContact?: (property: Property) => void;
-  isAdminUser?: boolean;
-  onDeleteProperty?: (id: string) => void;
 }
 
-export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
-  properties,
-  filterState,
-  onUpdateFilters,
-  onResetFilters,
-  onSelectProperty,
-  onToggleSave,
-  savedIds,
-  onBookVisit,
-  onToggleCompare,
-  compareList,
-  onOpenCompareModal,
-  onInquireContact,
-  isAdminUser,
-  onDeleteProperty
-}) => {
-  const [viewMode, setViewMode] = useState<'grid' | 'list' | 'map'>('grid');
-  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+const fieldClass = 'rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-700 outline-none focus:border-brand-primary';
 
-  // Trigger skeleton loading briefly when filters or search query changes
-  useEffect(() => {
-    setIsLoading(true);
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 280);
-    return () => clearTimeout(timer);
-  }, [
-    filterState.searchQuery,
-    filterState.locality,
-    filterState.propertyType,
-    filterState.listingType,
-    filterState.priceRange?.[0],
-    filterState.priceRange?.[1],
-    filterState.bhk,
-    filterState.possession,
-    filterState.furnishing,
-    filterState.sortBy
-  ]);
-
-  // Filtered properties computation
+export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({ properties, filterState, onUpdateFilters, onResetFilters, onSelectProperty, onToggleSave, savedIds, onBookVisit, onToggleCompare, compareList, onOpenCompareModal }) => {
+  const locations = [...new Set(properties.map(property => property.location).filter(Boolean))].sort();
+  const types = [...new Set(properties.map(property => property.propertyType).filter(Boolean))].sort();
   const filteredProperties = useMemo(() => {
-    return properties.filter((item) => {
-      // 0. Deletion & Live Status Guard
-      if (item.isDeleted) return false;
-      if (!isAdminUser) {
-        const isLive = item.status === 'published' || item.status === 'Active' || item.isApproved === true || item.status === 'Sold' || item.status === 'Rented' || item.isUserListing || !item.status;
-        const isExplicitlyRejected = item.status === 'rejected';
-        if (!isLive || isExplicitlyRejected) return false;
-      }
-
-      // 1. Search Query
-      if (filterState.searchQuery) {
-        const query = (filterState.searchQuery || '').toLowerCase();
-        const matchTitle = (item.title || '').toLowerCase().includes(query);
-        const matchLocation = (item.location || '').toLowerCase().includes(query);
-        const matchLocality = (item.locality || '').toLowerCase().includes(query);
-        const matchDesc = (item.description || '').toLowerCase().includes(query);
-        if (!matchTitle && !matchLocation && !matchLocality && !matchDesc) return false;
-      }
-
-      // 2. Listing Type
-      if (filterState.listingType === 'Rent' && item.listingType !== 'Rent') return false;
-      if (filterState.listingType === 'Buy' && item.listingType !== 'Sale') return false;
-      if (filterState.listingType === 'Commercial' && item.propertyType !== 'Commercial / Retail') return false;
-      if (filterState.listingType === 'Plots' && item.propertyType !== 'Gated Township Plot') return false;
-
-      // 3. Locality
-      if (filterState.locality && filterState.locality !== 'All Locations') {
-        const filterLoc = (filterState.locality || '').toLowerCase();
-        if (!(item.locality || '').toLowerCase().includes(filterLoc) &&
-            !(item.location || '').toLowerCase().includes(filterLoc)) {
-          return false;
-        }
-      }
-
-      // 4. Property Type
-      if (filterState.propertyType && filterState.propertyType !== 'All') {
-        if (item.propertyType !== filterState.propertyType) return false;
-      }
-
-      // 5. Price Range
-      if (filterState.priceRange) {
-        const [min, max] = filterState.priceRange;
-        const pPrice = item.price || 0;
-        if (pPrice < min || pPrice > max) return false;
-      }
-
-      // 6. bedroom
-      if (filterState.bhk) {
-        const bhkNum = parseInt(filterState.bhk, 10);
-        if (!isNaN(bhkNum)) {
-          const pBeds = item.bedrooms || 0;
-          if (bhkNum >= 5 ? pBeds < 5 : pBeds !== bhkNum) return false;
-        }
-      }
-
-      // 7. Possession
-      if (filterState.possession && filterState.possession !== 'all') {
-        if (!(item.possession || '').toLowerCase().includes((filterState.possession || '').toLowerCase())) return false;
-      }
-
-      // 8. Furnishing
-      if (filterState.furnishing && filterState.furnishing !== 'all') {
-        if (item.furnishing !== filterState.furnishing) return false;
-      }
-
+    const query = filterState.searchQuery.trim().toLowerCase();
+    const results = properties.filter(property => {
+      if (query && !`${property.title} ${property.location} ${property.state} ${property.description}`.toLowerCase().includes(query)) return false;
+      if (filterState.location && property.location !== filterState.location) return false;
+      if (filterState.propertyType && property.propertyType !== filterState.propertyType) return false;
+      if (filterState.listingType !== 'all' && property.listingType !== filterState.listingType) return false;
+      if (property.price < filterState.priceRange[0] || property.price > filterState.priceRange[1]) return false;
+      if (filterState.status !== 'all' && property.status !== filterState.status) return false;
       return true;
-    }).sort((a, b) => {
-      if (filterState.sortBy === 'price-asc') return (a.price || 0) - (b.price || 0);
-      if (filterState.sortBy === 'price-desc') return (b.price || 0) - (a.price || 0);
-      if (filterState.sortBy === 'area-desc') return (b.superAreaSqFt || 0) - (a.superAreaSqFt || 0);
-      if (filterState.sortBy === 'newest') return (b.yearBuilt || 0) - (a.yearBuilt || 0);
-      return (b.featured ? 1 : 0) - (a.featured ? 1 : 0);
+    });
+    return results.sort((first, second) => {
+      if (filterState.sortBy === 'price-asc') return first.price - second.price;
+      if (filterState.sortBy === 'price-desc') return second.price - first.price;
+      if (filterState.sortBy === 'newest') return second.datePosted.localeCompare(first.datePosted);
+      const rank = { available: 0, 'under-offer': 1, sold: 2, let: 3 } as const;
+      return rank[first.status] - rank[second.status] || Number(second.featured) - Number(first.featured);
     });
   }, [properties, filterState]);
 
-  return (
-    <div className="bg-brand-cream min-h-screen py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Page Header */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div>
-              <h1 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-brand-primary">
-                Exclusive Lagos Property Portfolio
-              </h1>
-              <p className="text-sm text-gray-600 mt-1">
-                Showing <strong className="text-brand-primary">{filteredProperties.length}</strong> selected homes across Lagos.
-              </p>
-            </div>
-
-            {/* Quick Actions / Compare Bar Trigger */}
-            <div className="flex items-center gap-3">
-              {compareList.length > 0 && (
-                <button
-                  type="button"
-                  id="open-compare-bar-btn"
-                  onClick={onOpenCompareModal}
-                  className="bg-brand-primary text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-sm hover:bg-brand-primary-light flex items-center gap-2"
-                >
-                  <Building className="w-4 h-4 text-brand-accent-soft" />
-                  <span>Compare ({compareList.length}/3)</span>
-                </button>
-              )}
-
-              {/* View Layout Toggle */}
-              <div className="hidden sm:flex items-center bg-white border border-gray-200 rounded-lg p-1 shadow-2xs">
-                <button
-                  type="button"
-                  id="view-grid-btn"
-                  onClick={() => setViewMode('grid')}
-                  className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-brand-primary text-white' : 'text-gray-500 hover:text-brand-primary'}`}
-                  title="Grid View"
-                >
-                  <LayoutGrid className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  id="view-list-btn"
-                  onClick={() => setViewMode('list')}
-                  className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-brand-primary text-white' : 'text-gray-500 hover:text-brand-primary'}`}
-                  title="List View"
-                >
-                  <List className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  id="view-map-btn"
-                  onClick={() => setViewMode('map')}
-                  className={`p-1.5 rounded ${viewMode === 'map' ? 'bg-brand-primary text-white' : 'text-gray-500 hover:text-brand-primary'}`}
-                  title="Interactive Map"
-                >
-                  <Map className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Mobile Filter Trigger */}
-              <button
-                type="button"
-                id="mobile-filter-open-btn"
-                onClick={() => setMobileFilterOpen(true)}
-                className="lg:hidden bg-white border border-gray-200 text-brand-primary px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-2xs"
-              >
-                <SlidersHorizontal className="w-3.5 h-3.5" />
-                <span>Filters</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Quick Search & Sort Bar */}
-          <div className="mt-6 bg-white p-3.5 rounded-xl border border-gray-200/80 shadow-2xs flex flex-col md:flex-row items-center justify-between gap-3">
-            
-            {/* Search input */}
-            <div className="relative w-full md:max-w-md">
-              <input
-                type="text"
-                id="properties-search-input"
-                placeholder="Search by title or location (e.g. Ikoyi, Banana Island)..."
-                value={filterState.searchQuery}
-                onChange={(e) => onUpdateFilters({ searchQuery: e.target.value })}
-                className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
-              />
-              <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-            </div>
-
-            {/* Quick Listing Type Pills */}
-            <div className="flex items-center gap-1 overflow-x-auto w-full md:w-auto no-scrollbar">
-              {(['Buy', 'Rent', 'Commercial', 'Plots'] as ListingType[]).map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  onClick={() => onUpdateFilters({ listingType: tab })}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
-                    filterState.listingType === tab
-                      ? 'bg-brand-primary text-white shadow-2xs'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {tab === 'Plots' ? 'Plots / Land' : tab}
-                </button>
-              ))}
-            </div>
-
-            {/* Sort Dropdown */}
-            <div className="flex items-center gap-2 w-full md:w-auto justify-end">
-              <span className="text-xs text-gray-500 font-medium whitespace-nowrap">Sort:</span>
-              <select
-                id="properties-sort-select"
-                value={filterState.sortBy}
-                onChange={(e) => onUpdateFilters({ sortBy: e.target.value as any })}
-                className="text-xs font-semibold bg-gray-50 border border-gray-200 rounded-lg px-2.5 py-2 text-gray-800 focus:ring-1 focus:ring-brand-primary"
-              >
-                <option value="featured">Featured First</option>
-                <option value="price-asc">Price: Low to High</option>
-                <option value="price-desc">Price: High to Low</option>
-                <option value="area-desc">Area: Largest First</option>
-                <option value="newest">Newest Constructed</option>
-              </select>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Main Layout Grid: Sidebar Filters + Property Cards List */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          
-          {/* DESKTOP SIDEBAR FILTERS */}
-          <aside className="hidden lg:block lg:col-span-1">
-            <div className="bg-white rounded-xl border border-gray-200/80 p-5 shadow-2xs space-y-6 sticky top-24">
-              
-              <div className="flex items-center justify-between pb-3 border-b border-gray-100">
-                <div className="flex items-center gap-2">
-                  <SlidersHorizontal className="w-4 h-4 text-brand-primary" />
-                  <h3 className="font-serif-luxury font-bold text-base text-brand-primary">Filters</h3>
-                </div>
-                <button
-                  type="button"
-                  id="reset-filters-sidebar-btn"
-                  onClick={onResetFilters}
-                  className="text-xs text-gray-500 hover:text-brand-primary font-semibold flex items-center gap-1"
-                >
-                  <RotateCcw className="w-3 h-3" />
-                  <span>Reset</span>
-                </button>
-              </div>
-
-              {/* 1. Locality in Lagos */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Lagos Locality
-                </label>
-                <select
-                  value={filterState.locality}
-                  onChange={(e) => onUpdateFilters({ locality: e.target.value })}
-                  className="w-full p-2.5 text-xs bg-gray-50 border border-gray-200 rounded-lg font-medium text-gray-800 focus:bg-white focus:border-brand-primary"
-                >
-                  {LISTING_LOCATIONS.map((loc) => (
-                    <option key={loc} value={loc === 'All Locations' ? '' : loc}>
-                      {loc}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* 2. Property Type */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Property Type
-                </label>
-                <div className="space-y-1">
-                  {PROPERTY_TYPES.map((type) => {
-                    const isChecked = (type === 'All' && filterState.propertyType === 'All') || filterState.propertyType === type;
-                    return (
-                      <button
-                        key={type}
-                        type="button"
-                        onClick={() => onUpdateFilters({ propertyType: type as PropertyType })}
-                        className={`w-full text-left px-2.5 py-1.5 rounded text-xs font-medium flex items-center justify-between transition-colors ${
-                          isChecked ? 'bg-brand-primary text-white font-semibold' : 'text-gray-700 hover:bg-gray-100'
-                        }`}
-                      >
-                        <span>{type}</span>
-                        {isChecked && <Check className="w-3.5 h-3.5 text-brand-accent-soft" />}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* 3. bedroom Bedrooms */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Bedrooms / bedroom
-                </label>
-                <div className="grid grid-cols-4 gap-1.5">
-                  {['', '2', '3', '4', '5'].map((b) => (
-                    <button
-                      key={b}
-                      type="button"
-                      onClick={() => onUpdateFilters({ bhk: b })}
-                      className={`py-1.5 text-xs font-bold rounded border transition-all ${
-                        filterState.bhk === b
-                          ? 'bg-brand-primary text-white border-brand-primary'
-                          : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
-                      }`}
-                    >
-                      {b === '' ? 'Any' : b === '5' ? '5+' : `${b}bedroom`}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 4. Possession Status */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Possession
-                </label>
-                <select
-                  value={filterState.possession}
-                  onChange={(e) => onUpdateFilters({ possession: e.target.value })}
-                  className="w-full p-2.5 text-xs bg-gray-50 border border-gray-200 rounded-lg font-medium text-gray-800 focus:bg-white"
-                >
-                  <option value="all">Any Possession</option>
-                  <option value="Ready to Move">Ready to Move</option>
-                  <option value="Immediate">Immediate</option>
-                  <option value="Under Construction">Under Construction</option>
-                </select>
-              </div>
-
-              {/* 5. Furnishing */}
-              <div className="space-y-2">
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
-                  Furnishing
-                </label>
-                <select
-                  value={filterState.furnishing}
-                  onChange={(e) => onUpdateFilters({ furnishing: e.target.value })}
-                  className="w-full p-2.5 text-xs bg-gray-50 border border-gray-200 rounded-lg font-medium text-gray-800 focus:bg-white"
-                >
-                  <option value="all">Any Furnishing</option>
-                  <option value="Designer Fitted">Designer Fitted</option>
-                  <option value="Fully Furnished">Fully Furnished</option>
-                  <option value="Semi-Furnished">Semi-Furnished</option>
-                  <option value="Unfurnished">Unfurnished</option>
-                </select>
-              </div>
-
-            </div>
-          </aside>
-
-          {/* MAIN PROPERTIES CONTENT */}
-          <main className="lg:col-span-3">
-            
-            {/* View Mode: Map View */}
-            {viewMode === 'map' && (
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden p-4 mb-6 shadow-sm">
-                <div className="relative aspect-[16/9] bg-emerald-950 rounded-lg overflow-hidden flex items-center justify-center border border-brand-primary-light">
-                  
-                  {/* Decorative Map Vector Representation with plotted Lagos Pins */}
-                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#C5A869_1.5px,transparent_1.5px)] [background-size:24px_24px]" />
-                  
-                  {/* Lagos Landmarks on Map */}
-                  <div className="absolute top-1/4 left-1/3 text-center pointer-events-none">
-                    <div className="px-2 py-1 bg-amber-500/20 border border-amber-400 rounded text-[10px] text-amber-300 font-bold">
-                      
-                    </div>
-                  </div>
-
-                  <div className="absolute bottom-1/3 right-1/4 text-center pointer-events-none">
-                    <div className="px-2 py-1 bg-emerald-500/20 border border-emerald-400 rounded text-[10px] text-emerald-300 font-bold">
-                      
-                    </div>
-                  </div>
-
-                  <div className="absolute top-1/3 right-1/3 text-center pointer-events-none">
-                    <div className="px-2 py-1 bg-blue-500/20 border border-blue-400 rounded text-[10px] text-blue-300 font-bold">
-                      
-                    </div>
-                  </div>
-
-                  {/* Interactive Property Pin Markers */}
-                  <div className="relative z-10 flex flex-wrap items-center justify-center gap-3 p-6 max-w-lg text-center">
-                    {filteredProperties.slice(0, 4).map((p) => (
-                      <button
-                        key={p.id}
-                        type="button"
-                        onClick={() => onSelectProperty(p)}
-                        className="bg-white hover:bg-brand-accent-soft text-brand-primary px-3 py-1.5 rounded-full text-xs font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-1.5 border border-brand-primary"
-                      >
-                        <MapPin className="w-3.5 h-3.5 text-red-600" />
-                        <span>{p.title.split(' ')[0]} ({p.priceDisplay})</span>
-                      </button>
-                    ))}
-                  </div>
-
-                  <div className="absolute bottom-3 left-3 bg-black/70 backdrop-blur-xs text-white text-[11px] px-3 py-1.5 rounded-md">
-                    
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* View Mode: List View or Grid View with Skeleton Loading */}
-            {isLoading ? (
-              <PropertySkeletonGrid count={6} viewMode={viewMode === 'list' ? 'list' : 'grid'} />
-            ) : filteredProperties.length > 0 ? (
-              <motion.div 
-                layout
-                className={
-                  viewMode === 'list'
-                    ? 'space-y-6'
-                    : 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6'
-                }
-              >
-                <AnimatePresence mode="popLayout">
-                  {filteredProperties.map((property) => (
-                    <motion.div
-                      layout
-                      key={property.id}
-                      initial={{ opacity: 0, scale: 0.96 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.94 }}
-                      transition={{ duration: 0.25, ease: 'easeOut' }}
-                    >
-                      <PropertyCard
-                        property={property}
-                        onSelect={onSelectProperty}
-                        onToggleSave={onToggleSave}
-                        isSaved={savedIds.includes(property.id)}
-                        onBookVisit={onBookVisit}
-                        onToggleCompare={onToggleCompare}
-                        isComparing={compareList.some(p => p.id === property.id)}
-                        onInquireContact={onInquireContact}
-                        isAdminUser={isAdminUser}
-                        onDeleteProperty={onDeleteProperty}
-                      />
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
-              </motion.div>
-            ) : (
-              <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-                <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
-                  <Search className="w-7 h-7" />
-                </div>
-                <h3 className="text-xl font-serif-luxury font-bold text-brand-primary">
-                  No matching luxury properties found
-                </h3>
-                <p className="text-sm text-gray-500 mt-2 max-w-md mx-auto">
-                  Try broadening your search criteria, switching localities, or adjusting your price filters.
-                </p>
-                <button
-                  type="button"
-                  onClick={onResetFilters}
-                  className="mt-5 px-5 py-2.5 bg-brand-primary text-white text-xs font-semibold rounded-lg shadow-sm hover:bg-brand-primary-light"
-                >
-                  Reset All Filters
-                </button>
-              </div>
-            )}
-
-          </main>
-        </div>
-
-      </div>
+  return <section className="bg-brand-page px-5 py-12 sm:px-8 lg:px-12"><div className="mx-auto max-w-7xl">
+    <div><p className="text-xs font-semibold uppercase tracking-[.2em] text-brand-primary">Property collection</p><h1 className="mt-2 font-serif-luxury text-4xl text-brand-primary">Find your next property</h1><p className="mt-3 text-sm text-gray-600">{filteredProperties.length} {filteredProperties.length === 1 ? 'listing' : 'listings'} available to explore.</p></div>
+    <div className="mt-8 grid gap-3 rounded-2xl border border-gray-200 bg-[#f2f1eb] p-4 sm:grid-cols-2 lg:grid-cols-4">
+      <label className="relative sm:col-span-2 lg:col-span-1"><span className="sr-only">Search properties</span><Search className="absolute left-3 top-3 h-4 w-4 text-gray-400" /><input className={`${fieldClass} w-full pl-9`} placeholder="Search listings" value={filterState.searchQuery} onChange={event => onUpdateFilters({ searchQuery: event.target.value })} /></label>
+      <label><span className="sr-only">Location</span><select className={`${fieldClass} w-full`} value={filterState.location} onChange={event => onUpdateFilters({ location: event.target.value })}><option value="">All locations</option>{locations.map(location => <option key={location}>{location}</option>)}</select></label>
+      <label><span className="sr-only">Property type</span><select className={`${fieldClass} w-full`} value={filterState.propertyType} onChange={event => onUpdateFilters({ propertyType: event.target.value })}><option value="">All property types</option>{types.map(type => <option key={type}>{type}</option>)}</select></label>
+      <label><span className="sr-only">Listing type</span><select className={`${fieldClass} w-full`} value={filterState.listingType} onChange={event => onUpdateFilters({ listingType: event.target.value as FilterState['listingType'] })}><option value="all">Sale and rent</option><option value="sale">For sale</option><option value="rent">For rent</option></select></label>
+      <div className="flex gap-2"><label className="min-w-0 flex-1"><span className="sr-only">Minimum price in naira</span><input type="number" min="0" className={`${fieldClass} w-full`} placeholder="Min ₦" value={filterState.priceRange[0] || ''} onChange={event => onUpdateFilters({ priceRange: [Number(event.target.value) || 0, filterState.priceRange[1]] })} /></label><label className="min-w-0 flex-1"><span className="sr-only">Maximum price in naira</span><input type="number" min="0" className={`${fieldClass} w-full`} placeholder="Max ₦" value={filterState.priceRange[1] === Number.MAX_SAFE_INTEGER ? '' : filterState.priceRange[1]} onChange={event => onUpdateFilters({ priceRange: [filterState.priceRange[0], Number(event.target.value) || Number.MAX_SAFE_INTEGER] })} /></label></div>
+      <label><span className="sr-only">Listing status</span><select className={`${fieldClass} w-full`} value={filterState.status} onChange={event => onUpdateFilters({ status: event.target.value as FilterState['status'] })}><option value="all">All statuses</option><option value="available">Available</option><option value="under-offer">Under offer</option><option value="sold">Sold</option><option value="let">Let</option></select></label>
+      <label><span className="sr-only">Sort listings</span><select className={`${fieldClass} w-full`} value={filterState.sortBy} onChange={event => onUpdateFilters({ sortBy: event.target.value as FilterState['sortBy'] })}><option value="available">Available first</option><option value="newest">Newest first</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option></select></label>
+      <button type="button" onClick={onResetFilters} className="inline-flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-600"><RotateCcw className="h-4 w-4" />Reset filters</button>
     </div>
-  );
+    {compareList.length > 0 && <button type="button" onClick={onOpenCompareModal} className="mt-5 rounded-full bg-brand-primary px-5 py-3 text-sm font-semibold text-white">Compare {compareList.length} selected</button>}
+    {filteredProperties.length === 0 ? <p className="mt-10 rounded-2xl border border-dashed border-gray-300 bg-white p-10 text-center text-gray-600">No properties match those filters.</p> : <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">{filteredProperties.map(property => <PropertyCard key={property.slug} property={property} onSelect={onSelectProperty} onToggleSave={onToggleSave} isSaved={savedIds.includes(property.slug)} onBookVisit={onBookVisit} onToggleCompare={onToggleCompare} isComparing={compareList.some(item => item.slug === property.slug)} />)}</div>}
+  </div></section>;
 };

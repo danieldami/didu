@@ -1,120 +1,67 @@
-export type PropertyType = string;
+export type ListingStatus = 'available' | 'under-offer' | 'sold' | 'let';
+export type ListingType = 'sale' | 'rent';
 
-export type ListingType = 'Buy' | 'Rent' | 'Commercial' | 'Projects' | 'Plots';
+export interface PropertyLandmark {
+  name: string;
+  distance: string;
+}
 
+export interface PropertyCoordinates {
+  lat: number;
+  lng: number;
+}
+
+/** `slug` is derived from the content filename and is never stored in JSON. */
 export interface Property {
-  id: string;
+  slug: string;
   title: string;
-  tagline: string;
-  propertyType: PropertyType;
-  listingType: 'Sale' | 'Rent';
-  price: number; // in Nigerian naira
-  priceDisplay: string; // formatted for the Lagos market
-  badge?: string;
-  tags?: string[];
-  pricePerSqFt: number; // e.g., 8500
+  status: ListingStatus;
+  listingType: ListingType;
+  propertyType: string;
+  price: number;
+  pricePeriod?: string;
   location: string;
-  locality: string;
-  address: string;
-  bedrooms: number;
-  bathrooms: number;
-  balconies: number;
-  superAreaSqFt: number;
-  carpetAreaSqFt: number;
-  furnishing: 'Fully Furnished' | 'Semi-Furnished' | 'Unfurnished' | 'Designer Fitted';
-  facing: 'East' | 'North' | 'South' | 'West' | 'Park Facing' | 'Lagoon View';
-  reraId: string;
-  possession: 'Ready to Move' | 'Immediate' | 'Dec 2025' | 'Under Construction';
+  state: string;
+  address?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  parking?: number;
+  sizeSqm?: number;
+  plotSize?: string;
+  titleDocuments: string[];
+  documentsVerified: boolean;
   featured: boolean;
-  isExclusive: boolean;
-  verified: boolean;
-  verificationStatus?: 'Verified' | 'Not Verified' | 'In Process';
-  verifiedBy?: string;
-  verificationNumber?: string;
-  images: string[];
   coverImage: string;
+  images: string[];
   description: string;
   highlights: string[];
   amenities: string[];
-  landmarks: { name: string; distance: string; travelTime: string }[];
-  floorPlans?: { title: string; size: string; image: string }[];
-  yearBuilt: number;
-  parkingSpots: number;
-  gatedSecurity: boolean;
-  powerBackup: boolean;
-  coordinates: { lat: number; lng: number };
-  status?: 'Active' | 'Sold' | 'Rented' | 'pending_verification' | 'Pending Approval' | 'published' | 'rejected';
-  isApproved?: boolean;
-  isDeleted?: boolean;
-  isUserListing?: boolean;
+  landmarks?: PropertyLandmark[];
+  coordinates?: PropertyCoordinates;
+  datePosted: string;
 }
-
-export interface UserProfile {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  role: 'buyer' | 'owner' | 'admin';
-  avatar?: string;
-  memberSince: string;
-  city?: string;
-  preferredLocality?: string;
-  primaryInterest?: string;
-  preferredBudget?: string;
-  address?: string;
-  dob?: string;
-  profession?: string;
-}
-
-export type UserDashboardTab = 'listings' | 'profile' | 'saved' | 'inquiries' | 'leads' | 'approvals';
 
 export interface Project {
-  id: string;
-  name: string;
-  developer: string;
-  locality: string;
-  priceStarting: string;
-  units: string;
-  status: 'Ready to Move' | 'Under Construction' | 'Newly Launched';
-  possessionDate: string;
-  reraNumber: string;
+  slug: string;
+  title: string;
+  location: string;
+  state: string;
+  status: string;
   coverImage: string;
   images: string[];
   description: string;
   highlights: string[];
-  totalArea: string;
-  unitConfigurations: string[];
+  featured: boolean;
 }
-
-export interface Neighborhood {
-  id: string;
-  name: string;
-  tagline: string;
-  avgPriceSqFt: string;
-  totalListings: number;
-  image: string;
-  description: string;
-  keyFeatures: string[];
-  highlights: string;
-}
-
-export type ActiveScreen = 
-  | 'home' 
-  | 'properties' 
-  | 'property-detail' 
-  | 'projects' 
-  | 'about' 
-  | 'contact';
 
 export interface FilterState {
   searchQuery: string;
-  listingType: ListingType;
-  locality: string;
-  propertyType: PropertyType;
+  location: string;
+  propertyType: string;
+  listingType: 'all' | ListingType;
   priceRange: [number, number];
-  bhk: string;
-  possession: string;
-  furnishing: string;
-  facing: string;
-  sortBy: 'featured' | 'price-asc' | 'price-desc' | 'newest' | 'area-desc';
+  status: 'all' | ListingStatus;
+  sortBy: 'available' | 'price-asc' | 'price-desc' | 'newest';
 }
+
+export type ActiveScreen = 'home' | 'properties' | 'property-detail' | 'projects' | 'about' | 'contact';
