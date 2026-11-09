@@ -33,7 +33,7 @@ export const WhyChubank: React.FC<WhyChubankProps> = ({ onContactAdvisory }) => 
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent-soft/15 border border-brand-accent/30 text-brand-accent-soft text-xs font-bold uppercase tracking-wider mb-3">
             <Award className="w-3.5 h-3.5 text-brand-accent" />
-            <span>The Chubank standard</span>
+            <span>The {siteConfig.shortName} standard</span>
           </div>
           <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-white">
             A considered way to find your next property

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Property } from '../types';
+import { siteConfig } from '../config/site';
 import { 
   X, Check, Minus, Bed, Bath, Maximize, MapPin, Banknote, 
   Trash2, ShieldCheck, Navigation, Layers, Compass, 
@@ -98,7 +99,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
     if (found) {
       return `${found.distance} (${found.travelTime})`;
     }
-    return 'Ask Chubank Property';
+    return `Ask ${siteConfig.shortName}`;
   };
 
   return (

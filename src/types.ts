@@ -38,14 +38,6 @@ export interface Property {
   amenities: string[];
   landmarks: { name: string; distance: string; travelTime: string }[];
   floorPlans?: { title: string; size: string; image: string }[];
-  agent: {
-    name: string;
-    role: string;
-    phone: string;
-    email: string;
-    avatar: string;
-    experience: string;
-  };
   yearBuilt: number;
   parkingSpots: number;
   gatedSecurity: boolean;
@@ -55,19 +47,6 @@ export interface Property {
   isApproved?: boolean;
   isDeleted?: boolean;
   isUserListing?: boolean;
-  ownerId?: string;
-  userId?: string;
-  ownerName?: string;
-  ownerContact?: string;
-  ownerEmail?: string;
-  postedBy?: {
-    id?: string;
-    name?: string;
-    email?: string;
-    phone?: string;
-    role?: string;
-    avatar?: string;
-  };
 }
 
 export interface UserProfile {
@@ -123,11 +102,9 @@ export type ActiveScreen =
   | 'home' 
   | 'properties' 
   | 'property-detail' 
-  | 'sell-rent' 
   | 'projects' 
   | 'about' 
-  | 'contact'
-  | 'dashboard';
+  | 'contact';
 
 export interface FilterState {
   searchQuery: string;

@@ -1,7 +1,6 @@
 import { Property, Project, Neighborhood } from '../types';
 
 
-const agent = { name: 'Amara Okafor', role: 'Property Consultant', phone: '+234 803 555 0148', email: 'hello@chubankhomes.com', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', experience: 'Luxury Property Advisory' };
 const home = (id: string, title: string, locality: string, type: string, price: number, beds: number, image: string, tagline: string): Property => ({
   id, title, tagline, propertyType: type, listingType: 'Sale', price, priceDisplay: price >= 1_000_000_000 ? `₦${(price / 1_000_000_000).toLocaleString('en-NG', { maximumFractionDigits: 2 })}bn` : `₦${(price / 1_000_000).toLocaleString('en-NG')}m`, pricePerSqFt: Math.round(price / (3200 + beds * 250)),
   location: `${locality}, Lagos`, locality, address: `${locality}, Lagos`, bedrooms: beds, bathrooms: beds, balconies: 2,
@@ -9,7 +8,7 @@ const home = (id: string, title: string, locality: string, type: string, price: 
   featured: true, isExclusive: true, verified: false, verificationStatus: 'Not Verified', images: [image], coverImage: image,
   description: `${tagline} Set in ${locality}, Lagos, this illustrative demo residence features generous entertaining spaces, refined finishes and convenient access to the city.`,
   highlights: ['Premium finish throughout', 'Estate security', 'Dedicated parking', 'Viewing by appointment'], amenities: ['24-hour security', 'Swimming pool', 'Gym', 'Parking'],
-  landmarks: [{ name: 'Lagos business district', distance: 'Nearby', travelTime: 'A short drive' }], agent, yearBuilt: 2024, parkingSpots: 2, gatedSecurity: true, powerBackup: true,
+  landmarks: [{ name: 'Business district', distance: 'Nearby', travelTime: 'A short drive' }], yearBuilt: 2024, parkingSpots: 2, gatedSecurity: true, powerBackup: true,
   coordinates: { lat: 6.45, lng: 3.43 }, status: 'published', isApproved: true
 });
 
@@ -47,11 +46,7 @@ export const NEIGHBORHOODS_DATA: Neighborhood[] = [
   { id: 'n-4', name: 'Lekki Phase 1', tagline: 'Contemporary homes with everyday convenience', avgPriceSqFt: '₦450m – ₦1.2bn', totalListings: 31, image: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80', description: 'A popular residential neighbourhood with cafes, schools, shopping and a broad choice of modern homes.', keyFeatures: ['Modern homes', 'Shopping and dining', 'Lekki corridor access'], highlights: 'A balanced choice for work, family and leisure' }
 ];
 
-export const PROJECTS_DATA: Project[] = [
-  { id: 'proj-1', name: 'The Meridian, Ikoyi', developer: 'Chubank Property Showcase', locality: 'Old Ikoyi, Lagos', priceStarting: '₦1.85bn', units: 'Limited collection of 4-bedroom residences', status: 'Under Construction', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85'], description: 'An illustrative premium residential concept for the Ikoyi market.', highlights: ['Private residents lounge', 'Landscaped courtyard', 'Concierge reception'], totalArea: 'Illustrative concept', unitConfigurations: ['4-bedroom residence', 'Penthouse'] },
-  { id: 'proj-2', name: 'Lagoon House, Banana Island', developer: 'Chubank Property Showcase', locality: 'Banana Island, Lagos', priceStarting: '₦2.45bn', units: 'Waterfront residences', status: 'Newly Launched', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85'], description: 'A sample waterfront development concept created for this website demonstration.', highlights: ['Lagoon outlook', 'Private outdoor spaces', 'Residents  fitness suite'], totalArea: 'Illustrative concept', unitConfigurations: ['3-bedroom apartment', '4-bedroom penthouse'] },
-  { id: 'proj-3', name: 'Garden Court, VGC', developer: 'Chubank Property Showcase', locality: 'Victoria Garden City, Lagos', priceStarting: '₦1.25bn', units: 'Private family homes', status: 'Ready to Move', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85'], description: 'A sample gated-estate home concept for a family-focused Lagos property search.', highlights: ['Gated estate setting', 'Family-friendly layout', 'Covered parking'], totalArea: 'Illustrative concept', unitConfigurations: ['4-bedroom home', '5-bedroom home'] }
-];
+export const PROJECTS_DATA: Project[] = [];
 
 export const TESTIMONIALS_DATA = [];
 export const STATS_DATA = [

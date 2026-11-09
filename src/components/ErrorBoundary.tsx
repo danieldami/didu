@@ -1,4 +1,5 @@
 import React from 'react';
+import { siteConfig } from '../config/site';
 
 interface Props {
   children: React.ReactNode;
@@ -23,7 +24,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Uncaught Error in Chubank Property App:', error, errorInfo);
+    console.error(`Uncaught Error in ${siteConfig.shortName} App:`, error, errorInfo);
     
     // Auto-reload on chunk load failures (e.g. after a new deployment)
     const isChunkError = error.message?.includes('Loading chunk') || 
@@ -43,8 +44,6 @@ export class ErrorBoundary extends React.Component<Props, State> {
 
   private handleResetCacheAndReload = () => {
     try {
-      localStorage.removeItem('royal_lagos_properties_cache_v2');
-      localStorage.removeItem('royal_lagos_deleted_property_ids_v2');
       sessionStorage.clear();
     } catch (e) {
       // ignore
@@ -101,7 +100,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
               marginBottom: '10px',
               letterSpacing: '-0.02em'
             }}>
-              Chubank Property
+              {siteConfig.shortName}
             </h1>
             
             <p style={{

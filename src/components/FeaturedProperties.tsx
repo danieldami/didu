@@ -4,6 +4,7 @@ import { Property, PropertyType } from '../types';
 import { PropertyCard } from './PropertyCard';
 import { PropertySkeletonGrid } from './PropertyCardSkeleton';
 import { Award } from 'lucide-react';
+import { siteConfig } from '../config/site';
 
 interface FeaturedPropertiesProps {
   properties: Property[];
@@ -159,7 +160,7 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
           </div>
 
           <a
-            href={`https://wa.me/2349125882627?text=${encodeURIComponent("Hi, I would like private property advisory.")}`} target="_blank" rel="noopener"
+            href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent("Hello, I would like to enquire about your properties.")}`} target="_blank" rel="noopener"
             id="featured-vip-advisory-btn"
             className="bg-brand-accent-soft hover:bg-brand-cream text-brand-primary px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all shrink-0 inline-block text-center"
           >
