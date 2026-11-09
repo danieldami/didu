@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ActiveScreen, UserProfile } from '../types';
-import { Menu, X, Building2, User, LogOut, LayoutDashboard, ChevronDown } from 'lucide-react';
+import { ArrowUpRight, Heart, Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   activeScreen: ActiveScreen;
@@ -14,206 +14,61 @@ interface NavbarProps {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
-  activeScreen,
-  onNavigate,
-  onOpenLogin,
-  onOpenPostProperty,
-  user,
-  onLogout
+  activeScreen, onNavigate, onOpenLogin, onOpenPostProperty,
+  user, onLogout, savedCount = 0, onOpenSaved
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
   const navLinks: { label: string; screen: ActiveScreen }[] = [
     { label: 'Buy', screen: 'properties' },
-    { label: 'Sell/Rent', screen: 'sell-rent' },
     { label: 'Projects', screen: 'projects' },
-    { label: 'About', screen: 'about' },
+    { label: 'Our approach', screen: 'about' },
     { label: 'Contact', screen: 'contact' },
   ];
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setProfileDropdownOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const go = (screen: ActiveScreen) => { onNavigate(screen); setMobileMenuOpen(false); };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0F382C] text-white shadow-md border-b border-[#164E3D]/50 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
-          {/* DIDU Homes brand */}
-          <a
-            href="?screen=home"
-            id="brand-logo-btn"
-            onClick={(e) => {
-              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                e.preventDefault();
-                onNavigate('home');
-              }
-            }}
-            className="flex items-center gap-3 text-left group focus:outline-none"
-          >
-            <img src="/didu-homes-logo.svg" alt="DIDU Homes" className="h-12 w-auto" />
-          </a>
+    <header className="sticky top-0 z-50 border-b border-[#eae8e1] bg-[#fbfaf7]/95 text-[#1c2a23] shadow-[0_4px_20px_rgba(22,39,30,.04)] backdrop-blur-xl">
+      <div className="mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-12">
+        <a href="?screen=home" onClick={event => { event.preventDefault(); go('home'); }} aria-label="Chubank Property home" className="flex shrink-0 items-center">
+          <img src="/logo.svg" alt="Chubank Property" className="h-11 w-auto" />
+        </a>
 
-          {/* MIDDLE: Standard navigation links */}
-          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-3">
-            {navLinks.map((link) => {
-              const isActive = activeScreen === link.screen;
-              return (
-                <a
-                  key={link.screen}
-                  href={`?screen=${link.screen}`}
-                  id={`nav-link-${link.screen}`}
-                  onClick={(e) => {
-                    if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                      e.preventDefault();
-                      onNavigate(link.screen);
-                    }
-                  }}
-                  className="relative px-3.5 py-2.5 text-sm xl:text-base font-medium tracking-normal transition-colors group focus:outline-none"
-                >
-                  <span className={isActive ? 'text-white font-bold' : 'text-white/80 group-hover:text-white'}>
-                    {link.label}
-                  </span>
-                  
-                  {/* Underline ONLY the active nav tab */}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-2 right-2 h-[2.5px] bg-white rounded-full shadow-xs" />
-                  )}
-                </a>
-              );
-            })}
+        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+          {navLinks.map(link => {
+            const isActive = activeScreen === link.screen;
+            return <a key={link.screen} href={`?screen=${link.screen}`} onClick={event => { event.preventDefault(); go(link.screen); }} className={`rounded-full px-4 py-2.5 text-[13px] transition-colors ${isActive ? 'bg-[#eaece6] font-semibold text-[#17372c]' : 'text-[#626a63] hover:bg-[#f0efe9] hover:text-[#17372c]'}`}>{link.label}</a>;
+          })}
+          {user && <button type="button" onClick={() => go('dashboard')} className={`rounded-full px-4 py-2.5 text-[13px] transition-colors ${activeScreen === 'dashboard' ? 'bg-[#eaece6] font-semibold text-[#17372c]' : 'text-[#626a63] hover:bg-[#f0efe9]'}`}>Dashboard</button>}
+        </nav>
 
-            {/* If logged in, also show direct 'My Dashboard' link in main nav if active */}
-            {user && (
-              <a
-                href="?screen=dashboard"
-                id="nav-link-dashboard"
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                    e.preventDefault();
-                    onNavigate('dashboard');
-                  }
-                }}
-                className="relative px-3.5 py-2.5 text-sm xl:text-base font-medium tracking-normal transition-colors group focus:outline-none text-[#E4D5B7] hover:text-white"
-              >
-                <span className={activeScreen === 'dashboard' ? 'text-white font-bold' : 'text-[#E4D5B7] font-semibold'}>
-                  Dashboard
-                </span>
-                {activeScreen === 'dashboard' && (
-                  <span className="absolute bottom-0 left-2 right-2 h-[2.5px] bg-white rounded-full shadow-xs" />
-                )}
-              </a>
-            )}
-          </nav>
-
-          {/* RIGHT: Header Auth & Actions */}
-          {/* Mobile menu trigger */}
-          <div className="flex md:hidden items-center space-x-2">
-            <button
-              id="mobile-menu-toggle"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-white hover:text-[#C5A869] focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-
+        <div className="hidden items-center gap-2 md:flex">
+          <button type="button" onClick={onOpenSaved} aria-label={`Saved homes, ${savedCount}`} className="relative rounded-full p-2.5 text-[#465249] transition-colors hover:bg-[#f0efe9] hover:text-[#17372c]">
+            <Heart className="h-[18px] w-[18px]" />
+            {savedCount > 0 && <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#17372c] px-1 text-[9px] font-bold text-white">{savedCount}</span>}
+          </button>
+          <button type="button" onClick={onOpenPostProperty} className="rounded-full border border-[#d7d9d1] px-4 py-2.5 text-[13px] font-semibold text-[#36433a] transition-colors hover:border-[#17372c] hover:bg-white">List your property</button>
+          {user ? <div className="ml-1 flex items-center gap-2">
+            <button type="button" onClick={() => go('dashboard')} className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-[#e6e9e2] text-sm font-semibold text-[#17372c]" aria-label="Open dashboard">{user.avatar ? <img src={user.avatar} alt="" className="h-full w-full object-cover" /> : user.name.slice(0, 1).toUpperCase()}</button>
+            <button type="button" onClick={onLogout} className="text-xs text-[#747a73] hover:text-[#17372c]">Sign out</button>
+          </div> : <button type="button" onClick={onOpenLogin} className="rounded-full bg-[#17372c] px-5 py-2.5 text-[13px] font-semibold text-white transition-colors hover:bg-[#24513e]">Sign in</button>}
         </div>
+
+        <button type="button" onClick={() => setMobileMenuOpen(value => !value)} className="rounded-full p-2 text-[#17372c] hover:bg-[#f0efe9] md:hidden" aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileMenuOpen}>
+          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0B2B22] border-t border-[#164E3D] px-4 pt-3 pb-6 space-y-2">
-          
-          {/* User badge in mobile menu if logged in */}
-          {user && (
-            <div className="p-3 bg-[#0F382C] rounded-xl flex items-center justify-between border border-[#164E3D] mb-3">
-              <div className="flex items-center gap-3">
-                <img
-                  src={user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80'}
-                  alt={user.name}
-                  className="w-10 h-10 rounded-full object-cover border border-[#C5A869]"
-                />
-                <div>
-                  <h4 className="text-xs font-bold text-white">{user.name}</h4>
-                  <p className="text-[10px] text-[#E4D5B7] uppercase font-semibold">
-                    {user.role === 'owner' ? 'Property Owner' : 'Buyer'}
-                  </p>
-                </div>
-              </div>
-              <a
-                href="?screen=dashboard"
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                    e.preventDefault();
-                    onNavigate('dashboard');
-                    setMobileMenuOpen(false);
-                  }
-                }}
-                className="bg-[#164E3D] text-[#E4D5B7] hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold"
-              >
-                Dashboard
-              </a>
-            </div>
-          )}
-
-          {navLinks.map((link) => {
-            const isActive = activeScreen === link.screen;
-            return (
-              <a
-                key={link.screen}
-                href={`?screen=${link.screen}`}
-                id={`mobile-nav-${link.screen}`}
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                    e.preventDefault();
-                    onNavigate(link.screen);
-                    setMobileMenuOpen(false);
-                  }
-                }}
-                className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium flex items-center justify-between ${
-                  isActive ? 'bg-[#0F382C] text-white font-bold border-l-4 border-white shadow-xs' : 'text-white/80 hover:bg-[#0F382C]/50 hover:text-white'
-                }`}
-              >
-                <span>{link.label}</span>
-                {isActive && <div className="w-2 h-2 rounded-full bg-white" />}
-              </a>
-            );
-          })}
-
-          {user && (
-            <a
-              href="?screen=dashboard"
-              id="mobile-nav-dashboard"
-              onClick={(e) => {
-                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) {
-                  e.preventDefault();
-                  onNavigate('dashboard');
-                  setMobileMenuOpen(false);
-                }
-              }}
-              className={`w-full text-left px-4 py-3 rounded-lg text-base font-medium flex items-center justify-between ${
-                activeScreen === 'dashboard' ? 'bg-[#0F382C] text-white font-bold border-l-4 border-white shadow-xs' : 'text-[#E4D5B7] hover:bg-[#0F382C]/50'
-              }`}
-            >
-              <span>My Dashboard</span>
-              <LayoutDashboard className="w-4 h-4 text-[#E4D5B7]" />
-            </a>
-          )}
-
+      {mobileMenuOpen && <div className="border-t border-[#eae8e1] bg-[#fbfaf7] px-5 pb-6 pt-3 md:hidden">
+        <nav className="flex flex-col" aria-label="Mobile navigation">
+          {navLinks.map(link => <button key={link.screen} type="button" onClick={() => go(link.screen)} className={`flex items-center justify-between border-b border-[#eeece6] px-1 py-4 text-left text-[15px] ${activeScreen === link.screen ? 'font-semibold text-[#17372c]' : 'text-[#545d55]'}`}>{link.label}<ArrowUpRight className="h-4 w-4 text-[#9b9e96]" /></button>)}
+          {user && <button type="button" onClick={() => go('dashboard')} className="border-b border-[#eeece6] px-1 py-4 text-left text-[15px] text-[#545d55]">My dashboard</button>}
+        </nav>
+        <div className="mt-5 grid grid-cols-2 gap-2">
+          <button type="button" onClick={() => { onOpenSaved?.(); setMobileMenuOpen(false); }} className="flex items-center justify-center gap-2 rounded-full border border-[#d7d9d1] py-3 text-sm font-medium text-[#36433a]"><Heart className="h-4 w-4" /> Saved {savedCount > 0 && `(${savedCount})`}</button>
+          <button type="button" onClick={() => { onOpenPostProperty(); setMobileMenuOpen(false); }} className="rounded-full bg-[#17372c] py-3 text-sm font-semibold text-white">List a property</button>
         </div>
-      )}
+        {user ? <button type="button" onClick={() => { onLogout(); setMobileMenuOpen(false); }} className="mt-4 w-full py-2 text-center text-sm text-[#70776f]">Sign out</button> : <button type="button" onClick={() => { onOpenLogin(); setMobileMenuOpen(false); }} className="mt-4 w-full py-2 text-center text-sm font-semibold text-[#17372c]">Sign in or create an account</button>}
+      </div>}
     </header>
   );
 };

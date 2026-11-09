@@ -92,7 +92,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
         propertyTitle: property.title,
         buyerName: inquiryName.trim(),
         phone: inquiryPhone.trim(),
-        email: user?.email || 'visitor@diduhomes.com',
+        email: user?.email || 'visitor@chubankhomes.com',
         preferredTime: `${inquiryDate} ${chauffeurReq ? '(Chauffeur Included)' : ''}`,
         timestamp: new Date().toLocaleString()
       };
@@ -123,12 +123,12 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
       >
         
         {/* Modal Top Sticky Header */}
-        <div className="px-6 py-4 bg-[#0F382C] text-white flex items-center justify-between border-b border-[#164E3D] shrink-0">
+        <div className="px-6 py-4 bg-brand-primary text-white flex items-center justify-between border-b border-brand-primary-light shrink-0">
           <div className="flex items-center gap-3">
-            <span className="text-xs uppercase tracking-widest text-[#E4D5B7] font-semibold">
+            <span className="text-xs uppercase tracking-widest text-brand-accent-soft font-semibold">
               {property.propertyType}   {property.listingType === 'Rent' ? 'Rental Lease' : 'Freehold Sale'}
             </span>
-            <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-[#C5A869]" />
+            <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-brand-accent" />
             <span className="hidden sm:inline-block text-xs text-gray-300 font-medium">Lagos property showcase</span>
           </div>
 
@@ -137,19 +137,19 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
               type="button"
               id="detail-copy-link-btn"
               onClick={handleCopyLink}
-              className="p-2 text-white/80 hover:text-white rounded-full hover:bg-[#164E3D] transition-all flex items-center gap-1 focus:outline-none"
+              className="p-2 text-white/80 hover:text-white rounded-full hover:bg-brand-primary-light transition-all flex items-center gap-1 focus:outline-none"
               title="Copy property link to share"
             >
-              <Share2 className="w-5 h-5 text-[#E4D5B7]" />
+              <Share2 className="w-5 h-5 text-brand-accent-soft" />
               {copied ? (
-                <span className="text-[9px] bg-[#C5A869] text-[#0F382C] font-bold px-1.5 py-0.5 rounded">Copied!</span>
+                <span className="text-[9px] bg-brand-accent text-brand-primary font-bold px-1.5 py-0.5 rounded">Copied!</span>
               ) : null}
             </button>
             <button
               type="button"
               id="detail-save-btn"
               onClick={() => onToggleSave(property.id)}
-              className="p-2 text-white/80 hover:text-white rounded-full hover:bg-[#164E3D] transition-colors"
+              className="p-2 text-white/80 hover:text-white rounded-full hover:bg-brand-primary-light transition-colors"
               title="Save to favorites"
             >
               <Heart className={`w-5 h-5 ${isSaved ? 'fill-red-500 text-red-500' : ''}`} />
@@ -158,7 +158,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
               type="button"
               id="detail-close-btn"
               onClick={onClose}
-              className="p-2 text-white/80 hover:text-white rounded-full hover:bg-[#164E3D] transition-colors focus:outline-none"
+              className="p-2 text-white/80 hover:text-white rounded-full hover:bg-brand-primary-light transition-colors focus:outline-none"
               aria-label="Close modal"
             >
               <X className="w-6 h-6" />
@@ -178,10 +178,10 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                 className="w-full h-full object-cover transition-all duration-300"
               />
               <div className="absolute top-4 left-4 flex gap-2">
-                <span className="px-3 py-1 rounded-md bg-[#0F382C] text-[#E4D5B7] text-xs font-bold uppercase tracking-wider shadow-md">
+                <span className="px-3 py-1 rounded-md bg-brand-primary text-brand-accent-soft text-xs font-bold uppercase tracking-wider shadow-md">
                   {property.possession}
                 </span>
-                <span className="px-3 py-1 rounded-md bg-white/90 text-[#0F382C] text-xs font-bold tracking-wider shadow-md flex items-center gap-1">
+                <span className="px-3 py-1 rounded-md bg-white/90 text-brand-primary text-xs font-bold tracking-wider shadow-md flex items-center gap-1">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   Showcase listing
                 </span>
@@ -199,7 +199,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   type="button"
                   onClick={() => setActiveImageIndex(idx)}
                   className={`w-20 h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
-                    activeImageIndex === idx ? 'border-[#0F382C] scale-105 shadow-sm' : 'border-transparent opacity-60 hover:opacity-100'
+                    activeImageIndex === idx ? 'border-brand-primary scale-105 shadow-sm' : 'border-transparent opacity-60 hover:opacity-100'
                   }`}
                 >
                   <img src={img} alt={`Thumb ${idx}`} className="w-full h-full object-cover" />
@@ -213,7 +213,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-2">
                 <div className="flex items-center gap-1.5 text-xs text-gray-500 font-medium">
-                  <MapPin className="w-4 h-4 text-[#0F382C]" />
+                  <MapPin className="w-4 h-4 text-brand-primary" />
                   <span>{displayAddress}</span>
                   {isUserAdmin && property.address && (
                     <span className="ml-1 text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300">
@@ -239,7 +239,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                 )}
               </div>
 
-              <h2 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0F382C]">
+              <h2 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-brand-primary">
                 {property.title}
               </h2>
               <p className="text-sm text-gray-600 mt-1">
@@ -247,9 +247,9 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
               </p>
             </div>
 
-            <div className="text-left md:text-right shrink-0 bg-[#FAF8F5] p-4 rounded-xl border border-gray-200">
+            <div className="text-left md:text-right shrink-0 bg-brand-cream p-4 rounded-xl border border-gray-200">
               <span className="text-xs text-gray-500 font-semibold uppercase block">Price Guide</span>
-              <span className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0F382C] block">
+              <span className="text-2xl sm:text-3xl font-serif-luxury font-bold text-brand-primary block">
                 {property.priceDisplay}
               </span>
               <span className="text-xs text-gray-500 font-mono block mt-0.5">
@@ -258,7 +258,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
               <button
                 type="button"
                 onClick={() => onOpenEmiCalc(property.price || 0)}
-                className="mt-2 text-xs font-semibold text-[#0F382C] hover:underline flex items-center gap-1"
+                className="mt-2 text-xs font-semibold text-brand-primary hover:underline flex items-center gap-1"
               >
                 <Calculator className="w-3.5 h-3.5" />
                 <span>Calculate Mortgage EMI</span>
@@ -267,28 +267,28 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
           </div>
 
           {/* Quick Specs Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 bg-[#FAF8F5] rounded-xl border border-gray-200/80">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 bg-brand-cream rounded-xl border border-gray-200/80">
             <div>
               <span className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold block">Configuration</span>
-              <span className="text-sm font-bold text-[#0F382C] mt-0.5 block">
+              <span className="text-sm font-bold text-brand-primary mt-0.5 block">
                 {(property.bedrooms || 0) > 0 ? `${property.bedrooms} bedroom (${property.bathrooms || 0} Baths)` : 'Commercial Suite'}
               </span>
             </div>
             <div>
               <span className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold block">Super Built-up Area</span>
-              <span className="text-sm font-bold text-[#0F382C] mt-0.5 block">
+              <span className="text-sm font-bold text-brand-primary mt-0.5 block">
                 {(property.superAreaSqFt || 0).toLocaleString('en-NG')} sq.ft
               </span>
             </div>
             <div>
               <span className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold block">Facing / Orientation</span>
-              <span className="text-sm font-bold text-[#0F382C] mt-0.5 block">
+              <span className="text-sm font-bold text-brand-primary mt-0.5 block">
                 {property.facing}
               </span>
             </div>
             <div>
               <span className="text-[11px] uppercase tracking-wider text-gray-500 font-semibold block">Furnishing Status</span>
-              <span className="text-sm font-bold text-[#0F382C] mt-0.5 block">
+              <span className="text-sm font-bold text-brand-primary mt-0.5 block">
                 {property.furnishing}
               </span>
             </div>
@@ -301,7 +301,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
             <div className="lg:col-span-2 space-y-6">
               
               <div>
-                <h3 className="text-lg font-serif-luxury font-bold text-[#0F382C] mb-2">
+                <h3 className="text-lg font-serif-luxury font-bold text-brand-primary mb-2">
                   Architectural & Residence Overview
                 </h3>
                 <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
@@ -311,13 +311,13 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
 
               {/* Key Highlights */}
               <div>
-                <h4 className="text-sm font-bold text-[#0F382C] uppercase tracking-wider mb-3">
+                <h4 className="text-sm font-bold text-brand-primary uppercase tracking-wider mb-3">
                   Distinguished Highlights
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {property.highlights.map((h, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-gray-700 bg-gray-50 p-2.5 rounded-lg border border-gray-100">
-                      <ShieldCheck className="w-4 h-4 text-[#C5A869] shrink-0 mt-0.5" />
+                      <ShieldCheck className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
                       <span>{h}</span>
                     </div>
                   ))}
@@ -326,7 +326,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
 
               {/* Amenities */}
               <div>
-                <h4 className="text-sm font-bold text-[#0F382C] uppercase tracking-wider mb-3">
+                <h4 className="text-sm font-bold text-brand-primary uppercase tracking-wider mb-3">
                   Luxury Amenities
                 </h4>
                 <div className="flex flex-wrap gap-2">
@@ -344,14 +344,14 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
 
               {/* Nearby Landmarks & Connectivity */}
               <div>
-                <h4 className="text-sm font-bold text-[#0F382C] uppercase tracking-wider mb-3">
+                <h4 className="text-sm font-bold text-brand-primary uppercase tracking-wider mb-3">
                   Connectivity & Lagos Landmarks
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {property.landmarks.map((l, i) => (
                     <div key={i} className="flex items-center justify-between p-3 bg-white border border-gray-200 rounded-lg text-xs">
                       <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-[#0F382C]" />
+                        <MapPin className="w-4 h-4 text-brand-primary" />
                         <span className="font-semibold text-gray-800">{l.name}</span>
                       </div>
                       <div className="text-right">
@@ -369,7 +369,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-amber-800" />
-                      <span className="font-bold uppercase tracking-wider text-[#0F382C]">Admin Metadata   Linked User Account</span>
+                      <span className="font-bold uppercase tracking-wider text-brand-primary">Admin Metadata   Linked User Account</span>
                     </div>
                     <span className="px-2 py-0.5 rounded bg-amber-200 font-mono text-[10px] font-bold">
                       Account ID: #{property.ownerId || property.userId || 'N/A'}
@@ -391,8 +391,8 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
               {/* Map - Restricted to Admin Account Only */}
               <div className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                  <h4 className="text-sm font-bold text-[#0F382C] uppercase tracking-wider flex items-center gap-1.5">
-                    <MapPin className="w-4 h-4 text-[#0F382C]" />
+                  <h4 className="text-sm font-bold text-brand-primary uppercase tracking-wider flex items-center gap-1.5">
+                    <MapPin className="w-4 h-4 text-brand-primary" />
                     <span>Property Location</span>
                   </h4>
                   {isUserAdmin ? (
@@ -416,8 +416,8 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                   </div>
                 ) : (
                   <div className="p-5 bg-gradient-to-br from-gray-50 to-gray-100/80 border border-gray-200/90 rounded-xl text-center space-y-3 shadow-2xs">
-                    <div className="w-11 h-11 rounded-full bg-[#0F382C]/10 text-[#0F382C] flex items-center justify-center mx-auto shadow-2xs">
-                      <MapPin className="w-5 h-5 text-[#0F382C]" />
+                    <div className="w-11 h-11 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center mx-auto shadow-2xs">
+                      <MapPin className="w-5 h-5 text-brand-primary" />
                     </div>
                     <div className="space-y-1 max-w-md mx-auto">
                       <h5 className="text-xs font-bold text-gray-900 uppercase tracking-wide">
@@ -434,7 +434,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                           const formEl = document.querySelector('form');
                           if (formEl) formEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         }}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0F382C] hover:bg-[#164E3D] text-white text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold rounded-lg shadow-xs transition-colors cursor-pointer"
                       >
                         <span>Schedule Site Tour for Exact Directions</span>
                         <ArrowRight className="w-3.5 h-3.5" />
@@ -450,8 +450,8 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
             <div className="lg:col-span-1 space-y-6">
 
               {/* Schedule Private Viewing Form */}
-              <div className="bg-[#FAF8F5] p-5 rounded-xl border border-gray-200 shadow-2xs">
-                <h4 className="text-sm font-serif-luxury font-bold text-[#0F382C] mb-1">
+              <div className="bg-brand-cream p-5 rounded-xl border border-gray-200 shadow-2xs">
+                <h4 className="text-sm font-serif-luxury font-bold text-brand-primary mb-1">
                   Schedule Private Site Tour
                 </h4>
                 <p className="text-[11px] text-gray-500 mb-4">
@@ -474,7 +474,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                         placeholder="e.g. Vikram Singhania"
                         value={inquiryName}
                         onChange={(e) => setInquiryName(e.target.value)}
-                        className="w-full p-2 text-xs bg-white border border-gray-300 rounded-md focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
+                        className="w-full p-2 text-xs bg-white border border-gray-300 rounded-md focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
                       />
                     </div>
 
@@ -486,7 +486,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                         placeholder="+234 803 555 0148"
                         value={inquiryPhone}
                         onChange={(e) => setInquiryPhone(e.target.value)}
-                        className="w-full p-2 text-xs bg-white border border-gray-300 rounded-md focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
+                        className="w-full p-2 text-xs bg-white border border-gray-300 rounded-md focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
                       />
                     </div>
 
@@ -497,7 +497,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                         required
                         value={inquiryDate}
                         onChange={(e) => setInquiryDate(e.target.value)}
-                        className="w-full p-2 text-xs bg-white border border-gray-300 rounded-md focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
+                        className="w-full p-2 text-xs bg-white border border-gray-300 rounded-md focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
                       />
                     </div>
 
@@ -507,7 +507,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                         id="chauffeur-opt"
                         checked={chauffeurReq}
                         onChange={(e) => setChauffeurReq(e.target.checked)}
-                        className="rounded text-[#0F382C] focus:ring-[#0F382C]"
+                        className="rounded text-brand-primary focus:ring-brand-primary"
                       />
                       <label htmlFor="chauffeur-opt" className="text-[11px] text-gray-700">
                         Include luxury chauffeur pick-up in Lagos
@@ -517,7 +517,7 @@ export const PropertyDetailModal: React.FC<PropertyDetailModalProps> = ({
                     <button
                       type="submit"
                       id="submit-tour-inquiry-btn"
-                      className="w-full py-2.5 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
+                      className="w-full py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-sm transition-all"
                     >
                       Book Site Tour
                     </button>

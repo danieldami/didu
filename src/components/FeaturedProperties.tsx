@@ -54,17 +54,17 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
   ).filter(p => !p.isDeleted);
 
   return (
-    <section className="py-16 sm:py-24 bg-[#FAF8F5]">
+    <section className="py-16 sm:py-24 bg-brand-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="mb-10 pb-6 border-b border-gray-200">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0F382C]/10 text-[#0F382C] text-xs font-bold uppercase tracking-wider mb-2">
-              <Award className="w-3.5 h-3.5 text-[#0F382C]" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-wider mb-2">
+              <Award className="w-3.5 h-3.5 text-brand-primary" />
               <span>Handpicked Portfolio</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-[#0F382C]">
+            <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-brand-primary">
               Featured Luxury Estates in Lagos
             </h2>
             <p className="text-sm sm:text-base text-gray-600 mt-2 max-w-2xl">
@@ -85,7 +85,7 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
                 onClick={() => handleTabChange(tab.type)}
                 className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
                   isActive
-                    ? 'bg-[#0F382C] text-white shadow-sm'
+                    ? 'bg-brand-primary text-white shadow-sm'
                     : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
                 }`}
               >
@@ -137,7 +137,7 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
             <button
               type="button"
               onClick={() => handleTabChange('All')}
-              className="px-4 py-2 bg-[#0F382C] text-white text-xs font-semibold rounded-lg"
+              className="px-4 py-2 bg-brand-primary text-white text-xs font-semibold rounded-lg"
             >
               Reset Category
             </button>
@@ -145,9 +145,9 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
         )}
 
         {/* Bottom CTA Banner */}
-        <div className="mt-14 bg-gradient-to-r from-[#0F382C] to-[#0B2B22] rounded-2xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl border border-[#164E3D]">
+        <div className="mt-14 bg-gradient-to-r from-brand-primary to-brand-primary-dark rounded-2xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl border border-brand-primary-light">
           <div className="space-y-2 text-center md:text-left">
-            <span className="text-xs uppercase tracking-widest text-[#C5A869] font-bold">
+            <span className="text-xs uppercase tracking-widest text-brand-accent font-bold">
               Personalized Private Property Matchmaking
             </span>
             <h3 className="text-xl sm:text-2xl font-serif-luxury font-bold text-white">
@@ -161,7 +161,7 @@ export const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
           <a
             href={`https://wa.me/2349125882627?text=${encodeURIComponent("Hi, I would like private property advisory.")}`} target="_blank" rel="noopener"
             id="featured-vip-advisory-btn"
-            className="bg-[#E4D5B7] hover:bg-[#FAF8F5] text-[#0F382C] px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all shrink-0 inline-block text-center"
+            className="bg-brand-accent-soft hover:bg-brand-cream text-brand-primary px-6 py-3 rounded-full font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all shrink-0 inline-block text-center"
           >
             Request Private Advisory
           </a>

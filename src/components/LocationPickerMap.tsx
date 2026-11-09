@@ -150,7 +150,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-[#0F382C]" />
+            <MapPin className="w-4 h-4 text-brand-primary" />
             <span>Select Exact Location On Google Map</span>
           </label>
           <p className="text-[11px] text-gray-500 mt-0.5">
@@ -164,7 +164,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
             type="button"
             onClick={handleUseCurrentLocation}
             disabled={isLocating}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-[#0F382C] border border-emerald-300 rounded-lg text-xs font-bold transition-all shadow-2xs disabled:opacity-50 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 hover:bg-emerald-100 text-brand-primary border border-emerald-300 rounded-lg text-xs font-bold transition-all shadow-2xs disabled:opacity-50 cursor-pointer"
             title="Use device GPS to locate property"
           >
             <Navigation className="w-3.5 h-3.5 text-emerald-700" />
@@ -279,7 +279,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
           href={`https://www.google.com/maps?q=${coordinates.lat},${coordinates.lng}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-2 right-2 bg-white/95 hover:bg-white text-[#0F382C] text-[11px] font-bold px-2.5 py-1 rounded-md shadow-md border border-gray-200 backdrop-blur-xs transition-colors flex items-center gap-1 z-10"
+          className="absolute bottom-2 right-2 bg-white/95 hover:bg-white text-brand-primary text-[11px] font-bold px-2.5 py-1 rounded-md shadow-md border border-gray-200 backdrop-blur-xs transition-colors flex items-center gap-1 z-10"
         >
           <span>Open Full Map  </span>
         </a>
@@ -294,14 +294,14 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
             value={pasteInput}
             onChange={(e) => setPasteInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleParsePastedLocation())}
-            className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-gray-300 rounded-md focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
+            className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-gray-300 rounded-md focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
           />
           <Search className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-2.5 pointer-events-none" />
         </div>
         <button
           type="button"
           onClick={handleParsePastedLocation}
-          className="w-full sm:w-auto px-3 py-1.5 bg-[#0F382C] hover:bg-[#164E3D] text-white text-xs font-bold rounded-md transition-colors shrink-0 cursor-pointer shadow-2xs"
+          className="w-full sm:w-auto px-3 py-1.5 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold rounded-md transition-colors shrink-0 cursor-pointer shadow-2xs"
         >
           Apply Pin
         </button>
@@ -319,7 +319,7 @@ export const LocationPickerMap: React.FC<LocationPickerMapProps> = ({
         <button
           type="button"
           onClick={() => setShowCoordinateInputs(!showCoordinateInputs)}
-          className="text-[11px] text-[#0F382C] hover:underline font-semibold flex items-center gap-1 cursor-pointer"
+          className="text-[11px] text-brand-primary hover:underline font-semibold flex items-center gap-1 cursor-pointer"
         >
           <span>{showCoordinateInputs ? '  Hide Exact Coordinate Inputs' : '  Advanced: Enter Exact Latitude / Longitude Manually'}</span>
         </button>

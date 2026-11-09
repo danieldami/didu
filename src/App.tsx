@@ -25,7 +25,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { FeaturedProperties } from './components/FeaturedProperties';
 import { NeighborhoodExplorer } from './components/NeighborhoodExplorer';
-import { WhyRoyalLagos } from './components/WhyRoyalAgra';
+import { WhyChubank } from './components/WhyChubank';
 import { PropertiesScreen } from './components/PropertiesScreen';
 import { PropertyDetailModal } from './components/PropertyDetailModal';
 import { ProjectsScreen } from './components/ProjectsScreen';
@@ -49,7 +49,7 @@ export default function App() {
   // User Authentication State
   const [user, setUser] = useState<UserProfile | null>(() => {
     try {
-      const stored = localStorage.getItem('didu_user_profile_v1');
+      const stored = localStorage.getItem('chubank_user_profile_v1');
       if (stored) return JSON.parse(stored);
     } catch {
       // ignore
@@ -70,9 +70,9 @@ export default function App() {
   useEffect(() => {
     try {
       if (user) {
-        localStorage.setItem('didu_user_profile_v1', JSON.stringify(user));
+        localStorage.setItem('chubank_user_profile_v1', JSON.stringify(user));
       } else {
-        localStorage.removeItem('didu_user_profile_v1');
+        localStorage.removeItem('chubank_user_profile_v1');
       }
     } catch {
       // ignore
@@ -83,7 +83,7 @@ export default function App() {
   useEffect(() => {
     const migrateLocalAccountsToCloud = async () => {
       try {
-        const stored = localStorage.getItem('didu_demo_accounts');
+        const stored = localStorage.getItem('chubank_demo_accounts');
         if (stored) {
           const accounts = JSON.parse(stored);
           if (Array.isArray(accounts)) {
@@ -143,7 +143,7 @@ export default function App() {
   // Saved / Favorite properties state
   const [savedPropertyIds, setSavedPropertyIds] = useState<string[]>(() => {
     try {
-      const stored = localStorage.getItem('didu_saved_homes');
+      const stored = localStorage.getItem('chubank_saved_homes');
       return stored ? JSON.parse(stored) : [];
     } catch {
       return [];
@@ -152,7 +152,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('didu_saved_homes', JSON.stringify(savedPropertyIds));
+      localStorage.setItem('chubank_saved_homes', JSON.stringify(savedPropertyIds));
     } catch {
       // ignore
     }
@@ -164,7 +164,7 @@ export default function App() {
   // Leads State
   const [leads, setLeads] = useState<LeadSubmission[]>(() => {
     try {
-      const stored = localStorage.getItem('didu_leads');
+      const stored = localStorage.getItem('chubank_leads');
       return stored ? JSON.parse(stored) : [];
     } catch {
       return [];
@@ -173,7 +173,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('didu_leads', JSON.stringify(leads));
+      localStorage.setItem('chubank_leads', JSON.stringify(leads));
     } catch {
       // ignore
     }
@@ -234,7 +234,7 @@ export default function App() {
     }
 
     if (screen === 'sell-rent' && !user) {
-      setLoginPromptMessage('Please sign in or create an account to list your property on DIDU Homes.');
+      setLoginPromptMessage('Please sign in or create an account to list your property on Chubank Property.');
       setPendingPostRedirect(true);
       setLoginModalOpen(true);
       return;
@@ -332,7 +332,7 @@ export default function App() {
   // Protected Post Property trigger - directly navigates to Sell/Rent or prompts login
   const handleInitiatePostProperty = () => {
     if (!user) {
-      setLoginPromptMessage('Please sign in or create an account to list your property on DIDU Homes.');
+      setLoginPromptMessage('Please sign in or create an account to list your property on Chubank Property.');
       setPendingPostRedirect(true);
       setLoginModalOpen(true);
       return;
@@ -447,7 +447,7 @@ export default function App() {
       isApproved: true,
       isDeleted: false,
       isUserListing: idx === 0 || idx === 2,
-      ownerId: (idx === 0 || idx === 2) ? 'DIDU-OWNER-01' : 'DIDU-PARTNER-02',
+      ownerId: (idx === 0 || idx === 2) ? 'Chubank-OWNER-01' : 'Chubank-PARTNER-02',
       ownerName: (idx === 0 || idx === 2) ? 'Amara Okafor' : p.agent?.name || 'Managing Partner'
     }));
     setProperties(seeded);
@@ -501,7 +501,7 @@ export default function App() {
       propertyTitle: property.title,
       buyerName: user?.name || 'Prospective Buyer',
       phone: user?.phone || '+234 803 555 0148',
-      email: user?.email || 'client@diduhomes.com',
+      email: user?.email || 'client@chubankhomes.com',
       preferredTime: 'Direct WhatsApp Inquire / Contact',
       timestamp: new Date().toLocaleString()
     };
@@ -623,7 +623,7 @@ export default function App() {
       });
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8F9FA] text-[#1A2E26] selection:bg-[#0F382C] selection:text-white">
+    <div className="min-h-screen flex flex-col bg-brand-page text-brand-ink selection:bg-brand-primary selection:text-white">
       
       {/* 1. Header & Navigation */}
       <Navbar
@@ -670,7 +670,7 @@ export default function App() {
               onSelectLocality={handleSelectLocality}
             />
 
-            <WhyRoyalLagos
+            <WhyChubank
               onContactAdvisory={() => navigateTo('contact')}
             />
           </div>
@@ -731,7 +731,7 @@ export default function App() {
             onPropertyCreated={handlePropertyCreated}
             onNavigateDashboard={() => navigateTo('dashboard')}
             onOpenLogin={(msg) => {
-              setLoginPromptMessage(msg || 'Please sign in or create an account to list your property on DIDU Homes.');
+              setLoginPromptMessage(msg || 'Please sign in or create an account to list your property on Chubank Property.');
               setPendingPostRedirect(true);
               setLoginModalOpen(true);
             }}
@@ -826,9 +826,9 @@ export default function App() {
 
       {/* Floating Compare Bar */}
       {compareList.length > 0 && (
-        <div className="fixed bottom-6 right-6 z-40 bg-[#0F382C] text-white p-3 sm:px-5 sm:py-3.5 rounded-2xl shadow-2xl border border-[#C5A869]/40 flex items-center gap-3.5">
+        <div className="fixed bottom-6 right-6 z-40 bg-brand-primary text-white p-3 sm:px-5 sm:py-3.5 rounded-2xl shadow-2xl border border-brand-accent/40 flex items-center gap-3.5">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-[#E4D5B7] text-[#0F382C] text-xs font-bold flex items-center justify-center">
+            <div className="w-6 h-6 rounded-full bg-brand-accent-soft text-brand-primary text-xs font-bold flex items-center justify-center">
               {compareList.length}
             </div>
             <span className="text-xs font-bold uppercase tracking-wider hidden sm:inline">
@@ -840,7 +840,7 @@ export default function App() {
             type="button"
             id="open-compare-modal-btn"
             onClick={() => setCompareModalOpen(true)}
-            className="px-4 py-1.5 bg-[#E4D5B7] hover:bg-[#d8c59f] text-[#0F382C] text-xs font-bold uppercase tracking-wider rounded-xl shadow-xs transition-colors"
+            className="px-4 py-1.5 bg-brand-accent-soft hover:bg-[#d8c59f] text-brand-primary text-xs font-bold uppercase tracking-wider rounded-xl shadow-xs transition-colors"
           >
             Compare Now
           </button>

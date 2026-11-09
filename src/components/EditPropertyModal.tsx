@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Property, PropertyType } from '../types';
-import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
+import { LISTING_LOCATIONS, PROPERTY_TYPES } from '../data/mockData';
 import { formatNaira } from '../utils/format';
 import { X, Building2, Image as ImageIcon, Banknote, Save, Trash2, Plus, Upload, Star, Loader2, Check } from 'lucide-react';
 
@@ -91,7 +91,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
             fbCtx.fillStyle = '#C5A880';
             fbCtx.font = 'bold 28px sans-serif';
             fbCtx.textAlign = 'center';
-            fbCtx.fillText('DIDU Homes   Verified Photo', 400, 270);
+            fbCtx.fillText('Chubank Property   Verified Photo', 400, 270);
             return fbCanvas.toDataURL('image/jpeg', 0.60);
           }
         } catch {}
@@ -283,16 +283,16 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
       <div className="bg-white w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl border border-gray-100 relative my-8">
         
         {/* Header */}
-        <div className="bg-[#0F382C] text-white p-6 flex items-center justify-between border-b border-[#164E3D]">
+        <div className="bg-brand-primary text-white p-6 flex items-center justify-between border-b border-brand-primary-light">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#E4D5B7] text-[#0F382C] flex items-center justify-center shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-brand-accent-soft text-brand-primary flex items-center justify-center shadow-sm">
               <Building2 className="w-5 h-5" />
             </div>
             <div>
               <h3 className="font-serif-luxury font-bold text-lg text-white">
                 Edit Property Listing
               </h3>
-              <p className="text-xs text-[#E4D5B7]">
+              <p className="text-xs text-brand-accent-soft">
                 Update details, pricing, and media for #{property.id}
               </p>
             </div>
@@ -300,7 +300,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="text-white/80 hover:text-white p-2 rounded-full hover:bg-[#164E3D] transition-colors"
+            className="text-white/80 hover:text-white p-2 rounded-full hover:bg-brand-primary-light transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -345,7 +345,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
               />
             </div>
 
@@ -357,7 +357,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                 rows={2}
                 value={tagline}
                 onChange={(e) => setTagline(e.target.value)}
-                className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
               />
             </div>
           </div>
@@ -373,7 +373,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                 required
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value))}
-                className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 font-mono focus:bg-white focus:border-[#0F382C]"
+                className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 font-mono focus:bg-white focus:border-brand-primary"
               />
               <span className="text-[11px] text-gray-500 font-mono mt-1 block">
                 Preview: {formatPriceDisplay(price, property.listingType)}
@@ -389,7 +389,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                 required
                 value={superAreaSqFt}
                 onChange={(e) => setSuperAreaSqFt(Number(e.target.value))}
-                className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
               />
             </div>
           </div>
@@ -420,7 +420,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                 onChange={(e) => setLocality(e.target.value)}
                 className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white"
               >
-                {LAGOS_LOCALITIES.filter(l => l !== 'All Localities').map(l => (
+                {LISTING_LOCATIONS.filter(l => l !== 'All Locations').map(l => (
                   <option key={l} value={l}>{l}</option>
                 ))}
               </select>
@@ -441,7 +441,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="e.g. Plot 18, Ikoyi, Near Hotel Lagos Island, Ikoyi, Lagos"
-              className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+              className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
             />
           </div>
 
@@ -531,7 +531,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                     <option value="Seller-provided details">Seller-provided details</option>
                     <option value="Tehsil Registry / Sub-Registrar Lagos">Tehsil Registry / Sub-Registrar Lagos</option>
                     <option value="Lagos local authority (Municipal Corporation)">Lagos local authority (Municipal Corporation)</option>
-                    <option value="DIDU Homes Legal Advisory Cell">DIDU Homes Legal Advisory Cell</option>
+                    <option value="Chubank Property Legal Advisory Cell">Chubank Property Legal Advisory Cell</option>
                     <option value="Lagos Cantonment Board">Lagos Cantonment Board</option>
                     <option value="Nationalized / Private Bank (Home Loan Approved)">Nationalized / Private Bank (Home Loan Approved)</option>
                   </select>
@@ -557,7 +557,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
                 <label className="block text-xs font-bold text-gray-800 uppercase tracking-wider flex items-center gap-1.5">
-                  <ImageIcon className="w-4 h-4 text-[#0F382C]" />
+                  <ImageIcon className="w-4 h-4 text-brand-primary" />
                   <span>Property Photo Gallery ({images.length}/{MAX_PHOTOS})</span>
                 </label>
                 <p className="text-[11px] text-gray-500 mt-0.5">
@@ -569,7 +569,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                   disabled={isUploading}
-                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-[#0F382C] hover:bg-[#164E3D] text-white text-xs font-bold rounded-lg transition-colors shadow-xs cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-3 py-2 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold rounded-lg transition-colors shadow-xs cursor-pointer disabled:opacity-50"
                 >
                   {isUploading ? (
                     <>
@@ -668,7 +668,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
             ) : (
               <div
                 onClick={() => fileInputRef.current?.click()}
-                className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-[#0F382C] transition-colors cursor-pointer bg-white"
+                className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-brand-primary transition-colors cursor-pointer bg-white"
               >
                 <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
                 <p className="text-xs font-semibold text-gray-700">No photos remaining</p>
@@ -717,7 +717,7 @@ export const EditPropertyModal: React.FC<EditPropertyModalProps> = ({
             <button
               type="submit"
               id="save-property-edit-btn"
-              className="bg-[#0F382C] hover:bg-[#164E3D] text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+              className="bg-brand-primary hover:bg-brand-primary-light text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center gap-2"
             >
               <Save className="w-4 h-4" />
               <span>Save & Update Listing</span>

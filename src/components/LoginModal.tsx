@@ -127,7 +127,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     // Retrieve saved accounts from localStorage first for fast check
     let savedAccounts: any[] = [];
     try {
-      const stored = localStorage.getItem('didu_demo_accounts');
+      const stored = localStorage.getItem('chubank_demo_accounts');
       if (stored) savedAccounts = JSON.parse(stored);
     } catch {
       savedAccounts = [];
@@ -152,14 +152,14 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           matchedAccount = directAccount;
           if (!savedAccounts.some(sa => sa.id === directAccount.id || sa.email === directAccount.email)) {
             savedAccounts.push(directAccount);
-            localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
+            localStorage.setItem('chubank_demo_accounts', JSON.stringify(savedAccounts));
           }
         } else {
           const firestoreAccounts = await fetchFirestoreAccounts();
           if (firestoreAccounts && firestoreAccounts.length > 0) {
             // Merge into local list
             savedAccounts = [...savedAccounts, ...firestoreAccounts.filter(fa => !savedAccounts.some(sa => sa.id === fa.id || sa.email === fa.email))];
-            localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
+            localStorage.setItem('chubank_demo_accounts', JSON.stringify(savedAccounts));
             matchedAccount = savedAccounts.find(
               (acc: any) => (acc.email && acc.email.toLowerCase() === identifier) || acc.phone === identifier
             );
@@ -192,11 +192,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
 
     // Check demo accounts as fallback
-    if (identifier === 'amara@diduhomes.com' || identifier === '+234 803 555 0148') {
+    if (identifier === 'amara@chubankhomes.com' || identifier === '+234 803 555 0148') {
       const demoUser: UserProfile = {
-        id: 'DIDU-OWNER-01',
+        id: 'Chubank-OWNER-01',
         name: 'Amara Okafor',
-        email: 'amara@diduhomes.com',
+        email: 'amara@chubankhomes.com',
         phone: '+234 803 555 0148',
         role: role,
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
@@ -230,7 +230,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     // Retrieve saved accounts from localStorage
     let savedAccounts: any[] = [];
     try {
-      const stored = localStorage.getItem('didu_demo_accounts');
+      const stored = localStorage.getItem('chubank_demo_accounts');
       if (stored) savedAccounts = JSON.parse(stored);
     } catch {
       savedAccounts = [];
@@ -244,7 +244,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
 
     const newUserAccount = {
-      id: `DIDU-${Math.floor(1000 + Math.random() * 9000)}`,
+      id: `Chubank-${Math.floor(1000 + Math.random() * 9000)}`,
       name: signupName.trim(),
       phone: signupPhone.trim(),
       email: emailFormatted,
@@ -264,7 +264,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
     savedAccounts.push(newUserAccount);
     try {
-      localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
+      localStorage.setItem('chubank_demo_accounts', JSON.stringify(savedAccounts));
     } catch {
       // ignore
     }
@@ -298,7 +298,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
     let savedAccounts: any[] = [];
     try {
-      const stored = localStorage.getItem('didu_demo_accounts');
+      const stored = localStorage.getItem('chubank_demo_accounts');
       if (stored) savedAccounts = JSON.parse(stored);
     } catch {
       savedAccounts = [];
@@ -314,7 +314,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         account = firestoreAccounts.find((acc: any) => acc.email && acc.email.toLowerCase() === emailF);
         if (account) {
           savedAccounts.push(account);
-          localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
+          localStorage.setItem('chubank_demo_accounts', JSON.stringify(savedAccounts));
         }
       } catch {}
     }
@@ -340,7 +340,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
       }
       account.password = forgotNewPassword.trim();
       try {
-        localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
+        localStorage.setItem('chubank_demo_accounts', JSON.stringify(savedAccounts));
       } catch {}
       await saveFirestoreAccount(account);
       setSuccessMsg('Password reset successfully! You can now log in.');
@@ -357,30 +357,30 @@ export const LoginModal: React.FC<LoginModalProps> = ({
       <div className="bg-white w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-gray-100 relative my-6">
         
         {/* Header with Emerald background */}
-        <div className="bg-[#0F382C] text-white p-6 text-center relative border-b border-[#164E3D]">
+        <div className="bg-brand-primary text-white p-6 text-center relative border-b border-brand-primary-light">
           <button
             type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-[#164E3D] transition-colors"
+            className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-brand-primary-light transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
 
-          <div className="w-12 h-12 rounded-xl bg-[#E4D5B7] text-[#0F382C] flex items-center justify-center mx-auto mb-2 shadow-sm">
+          <div className="w-12 h-12 rounded-xl bg-brand-accent-soft text-brand-primary flex items-center justify-center mx-auto mb-2 shadow-sm">
             <Landmark className="w-6 h-6" />
           </div>
           <h3 className="font-brand-title font-bold text-xl text-white">
-            DIDU Homes
+            Chubank Property
           </h3>
-          <p className="text-xs text-[#E4D5B7] mt-0.5">
+          <p className="text-xs text-brand-accent-soft mt-0.5">
             Client & Property Owner Portal
           </p>
         </div>
 
         {/* Prompt Notice if redirected from Post Property or restricted action */}
         {promptMessage && authMode !== 'forgot' && (
-          <div className="bg-[#FAF8F5] border-b border-[#E4D5B7]/50 px-6 py-2.5 flex items-center gap-2 text-xs text-[#0F382C] font-medium">
-            <ShieldCheck className="w-4 h-4 text-[#C5A869] shrink-0" />
+          <div className="bg-brand-cream border-b border-brand-accent-soft/50 px-6 py-2.5 flex items-center gap-2 text-xs text-brand-primary font-medium">
+            <ShieldCheck className="w-4 h-4 text-brand-accent shrink-0" />
             <span>{promptMessage}</span>
           </div>
         )}
@@ -388,7 +388,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         {/* Modal Body */}
         <div className="p-6 sm:p-8">
           <div className="mb-5 rounded-lg border border-[#D4B77A]/50 bg-[#F7F3EA] px-3 py-2 text-xs text-[#33483D]">
-            Demo sign-in: <strong>amara@diduhomes.com</strong> / <strong>demo123</strong>
+            Demo sign-in: <strong>amara@chubankhomes.com</strong> / <strong>demo123</strong>
           </div>
           
           {/* Tab Switcher: Log In vs Create Account */}
@@ -400,7 +400,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 onClick={() => setAuthMode('login')}
                 className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
                   authMode === 'login' 
-                    ? 'bg-[#0F382C] text-white shadow-xs' 
+                    ? 'bg-brand-primary text-white shadow-xs' 
                     : 'text-gray-600 hover:text-black'
                 }`}
               >
@@ -412,7 +412,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 onClick={() => setAuthMode('signup')}
                 className={`flex-1 py-2 text-xs font-bold rounded-lg transition-all ${
                   authMode === 'signup' 
-                    ? 'bg-[#0F382C] text-white shadow-xs' 
+                    ? 'bg-brand-primary text-white shadow-xs' 
                     : 'text-gray-600 hover:text-black'
                 }`}
               >
@@ -482,7 +482,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                     placeholder="Enter your mobile number or email"
                     value={loginIdentifier}
                     onChange={(e) => setLoginIdentifier(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                   <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -500,7 +500,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                       setAuthError('');
                       setForgotStep(1);
                     }}
-                    className="text-[11px] text-[#0F382C] font-semibold hover:underline"
+                    className="text-[11px] text-brand-primary font-semibold hover:underline"
                   >
                     Forgot Password?
                   </button>
@@ -512,7 +512,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                     placeholder="Enter your password"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                   <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -526,7 +526,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
               <button
                 type="submit"
                 id="submit-login-btn"
-                className="w-full py-3 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                className="w-full py-3 bg-brand-primary hover:bg-brand-primary-light text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <span>Log In</span>
                 <ArrowRight className="w-4 h-4" />
@@ -550,7 +550,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                     placeholder="e.g. Amara Okafor"
                     value={signupName}
                     onChange={(e) => setSignupName(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                   <User className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -567,7 +567,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                     placeholder="+234 803 555 0148"
                     value={signupPhone}
                     onChange={(e) => setSignupPhone(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                   <Phone className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -582,7 +582,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   <select
                     value={signupSecurityQuestion}
                     onChange={(e) => setSignupSecurityQuestion(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   >
                     {SECURITY_QUESTIONS.map((q, idx) => (
                       <option key={idx} value={q}>{q}</option>
@@ -602,7 +602,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   placeholder="e.g. Lagos waterfront"
                   value={signupSecurityAnswer}
                   onChange={(e) => setSignupSecurityAnswer(e.target.value)}
-                  className="w-full px-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                  className="w-full px-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                 />
               </div>
 
@@ -642,10 +642,10 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                     <input
                       type="email"
                       required
-                      placeholder="hello@diduhomes.com"
+                      placeholder="hello@chubankhomes.com"
                       value={signupEmail}
                       onChange={(e) => setSignupEmail(e.target.value)}
-                      className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                      className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                     />
                     <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   </div>
@@ -665,7 +665,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                         setSignupPassword(e.target.value);
                         if (authError === 'Passwords do not match') setAuthError('');
                       }}
-                      className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                      className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                     />
                     <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                   </div>
@@ -688,7 +688,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                       className={`w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-900 focus:bg-white ${
                         signupConfirmPassword && signupPassword !== signupConfirmPassword
                           ? 'border-red-500 bg-red-50/30'
-                          : 'border-gray-200 focus:border-[#0F382C]'
+                          : 'border-gray-200 focus:border-brand-primary'
                       }`}
                     />
                     <Lock className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -702,7 +702,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
               <button
                 type="submit"
                 id="submit-signup-btn"
-                className="w-full py-3 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-4 shrink-0"
+                className="w-full py-3 bg-brand-primary hover:bg-brand-primary-light text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 mt-4 shrink-0"
               >
                 <span>Create Account</span>
                 <ArrowRight className="w-4 h-4" />
@@ -714,7 +714,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           {authMode === 'forgot' && (
             <form onSubmit={handleForgotSubmit} className="space-y-4">
               <div className="text-center mb-2">
-                <h4 className="text-sm font-bold text-[#0F382C]">Password Recovery</h4>
+                <h4 className="text-sm font-bold text-brand-primary">Password Recovery</h4>
                 <p className="text-xs text-gray-500">Verify your registered email and security answer.</p>
               </div>
 
@@ -725,7 +725,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                     <input
                       type="email"
                       required
-                      placeholder="e.g. amara@diduhomes.com"
+                      placeholder="e.g. amara@chubankhomes.com"
                       value={forgotEmail}
                       onChange={(e) => setForgotEmail(e.target.value)}
                       className="w-full px-3 py-2 text-xs bg-gray-50 border border-gray-200 rounded-lg text-gray-900"
@@ -744,7 +744,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-3 bg-[#0F382C] text-white rounded-lg font-bold text-xs uppercase tracking-wider"
+                    className="w-full py-3 bg-brand-primary text-white rounded-lg font-bold text-xs uppercase tracking-wider"
                   >
                     Verify Security Answer
                   </button>
@@ -764,7 +764,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-3 bg-[#0F382C] text-white rounded-lg font-bold text-xs uppercase tracking-wider"
+                    className="w-full py-3 bg-brand-primary text-white rounded-lg font-bold text-xs uppercase tracking-wider"
                   >
                     Reset Password
                   </button>
@@ -777,7 +777,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   setAuthMode('login');
                   setAuthError('');
                 }}
-                className="text-xs text-gray-500 hover:text-[#0F382C] underline block mx-auto mt-2"
+                className="text-xs text-gray-500 hover:text-brand-primary underline block mx-auto mt-2"
               >
                 Back to Login
               </button>

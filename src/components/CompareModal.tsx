@@ -98,7 +98,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
     if (found) {
       return `${found.distance} (${found.travelTime})`;
     }
-    return 'Ask DIDU Homes';
+    return 'Ask Chubank Property';
   };
 
   return (
@@ -106,30 +106,30 @@ export const CompareModal: React.FC<CompareModalProps> = ({
       <div className="bg-white w-full max-w-6xl rounded-2xl overflow-hidden shadow-2xl border border-gray-100 flex flex-col max-h-[92vh]">
         
         {/* Header */}
-        <div className="bg-[#0F382C] text-white px-6 py-4 flex items-center justify-between border-b border-[#164E3D] shrink-0">
+        <div className="bg-brand-primary text-white px-6 py-4 flex items-center justify-between border-b border-brand-primary-light shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-[#E4D5B7]/10 border border-[#C5A869]/30 flex items-center justify-center text-[#E4D5B7]">
+            <div className="w-9 h-9 rounded-lg bg-brand-accent-soft/10 border border-brand-accent/30 flex items-center justify-center text-brand-accent-soft">
               <Layers className="w-5 h-5" />
             </div>
             <div>
               <h3 className="font-serif-luxury font-bold text-lg sm:text-xl text-white tracking-wide">
                 Detailed Property Comparison Matrix
               </h3>
-              <p className="text-xs text-[#E4D5B7]">
+              <p className="text-xs text-brand-accent-soft">
                 Side-by-side analysis of specifications, amenities, and landmark proximities
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
-            <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-[#164E3D] text-[#E4D5B7] text-xs font-semibold">
+            <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-brand-primary-light text-brand-accent-soft text-xs font-semibold">
               {compareList.length} {compareList.length === 1 ? 'Estate' : 'Estates'} Selected
             </span>
             <button
               type="button"
               id="close-compare-modal-btn"
               onClick={onClose}
-              className="p-1.5 text-white/80 hover:text-white rounded-full hover:bg-[#164E3D] transition-colors"
+              className="p-1.5 text-white/80 hover:text-white rounded-full hover:bg-brand-primary-light transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
@@ -145,7 +145,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 onClick={() => setActiveSection('all')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                   activeSection === 'all'
-                    ? 'bg-[#0F382C] text-white shadow-xs'
+                    ? 'bg-brand-primary text-white shadow-xs'
                     : 'bg-white text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
@@ -156,7 +156,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 onClick={() => setActiveSection('specs')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                   activeSection === 'specs'
-                    ? 'bg-[#0F382C] text-white shadow-xs'
+                    ? 'bg-brand-primary text-white shadow-xs'
                     : 'bg-white text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
@@ -167,7 +167,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 onClick={() => setActiveSection('amenities')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                   activeSection === 'amenities'
-                    ? 'bg-[#0F382C] text-white shadow-xs'
+                    ? 'bg-brand-primary text-white shadow-xs'
                     : 'bg-white text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
@@ -178,7 +178,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 onClick={() => setActiveSection('landmarks')}
                 className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors ${
                   activeSection === 'landmarks'
-                    ? 'bg-[#0F382C] text-white shadow-xs'
+                    ? 'bg-brand-primary text-white shadow-xs'
                     : 'bg-white text-gray-700 hover:bg-gray-200 border border-gray-200'
                 }`}
               >
@@ -196,7 +196,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
         <div className="p-4 sm:p-6 overflow-x-auto flex-1 bg-white">
           {compareList.length === 0 ? (
             <div className="text-center py-16 text-gray-500 max-w-md mx-auto">
-              <div className="w-16 h-16 rounded-full bg-[#0F382C]/10 text-[#0F382C] mx-auto flex items-center justify-center mb-4">
+              <div className="w-16 h-16 rounded-full bg-brand-primary/10 text-brand-primary mx-auto flex items-center justify-center mb-4">
                 <Layers className="w-8 h-8" />
               </div>
               <h4 className="text-lg font-serif-luxury font-bold text-gray-900 mb-2">No Estates in Comparison</h4>
@@ -206,7 +206,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-6 py-2.5 bg-[#0F382C] text-white rounded-lg text-xs font-bold tracking-wider uppercase hover:bg-[#164E3D]"
+                className="px-6 py-2.5 bg-brand-primary text-white rounded-lg text-xs font-bold tracking-wider uppercase hover:bg-brand-primary-light"
               >
                 Browse Properties
               </button>
@@ -232,7 +232,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
 
                 {/* Property Columns */}
                 {compareList.map((p) => (
-                  <div key={p.id} className="relative bg-[#FAF8F5] rounded-xl border border-[#C5A869]/30 p-3 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+                  <div key={p.id} className="relative bg-brand-cream rounded-xl border border-brand-accent/30 p-3 shadow-sm hover:shadow-md transition-shadow flex flex-col">
                     <button
                       type="button"
                       onClick={() => onRemoveFromCompare(p.id)}
@@ -244,16 +244,16 @@ export const CompareModal: React.FC<CompareModalProps> = ({
 
                     <div className="relative h-28 rounded-lg overflow-hidden mb-2.5 bg-gray-200">
                       <img src={p.coverImage} alt={p.title} className="w-full h-full object-cover" />
-                      <div className="absolute bottom-1.5 left-1.5 bg-[#0F382C]/90 text-[#FAF8F5] px-2 py-0.5 rounded text-[10px] font-bold">
+                      <div className="absolute bottom-1.5 left-1.5 bg-brand-primary/90 text-brand-cream px-2 py-0.5 rounded text-[10px] font-bold">
                         {p.propertyType}
                       </div>
                     </div>
 
-                    <h4 className="text-xs sm:text-sm font-bold text-[#0F382C] line-clamp-1 mb-1">
+                    <h4 className="text-xs sm:text-sm font-bold text-brand-primary line-clamp-1 mb-1">
                       {p.title}
                     </h4>
                     <p className="text-[11px] text-gray-500 flex items-center gap-1 mb-2">
-                      <MapPin className="w-3 h-3 text-[#C5A869]" />
+                      <MapPin className="w-3 h-3 text-brand-accent" />
                       <span className="truncate">{p.locality}</span>
                     </p>
 
@@ -267,7 +267,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                           onSelectProperty(p);
                           onClose();
                         }}
-                        className="px-2.5 py-1 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded text-[11px] font-semibold flex items-center gap-1"
+                        className="px-2.5 py-1 bg-brand-primary hover:bg-brand-primary-light text-white rounded text-[11px] font-semibold flex items-center gap-1"
                       >
                         <Eye className="w-3 h-3" />
                         <span>View</span>
@@ -283,8 +283,8 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 {/* 1. FINANCIALS & PRICING */}
                 {(activeSection === 'all' || activeSection === 'specs') && (
                   <>
-                    <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-[#0F382C] uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
-                      <Banknote className="w-3.5 h-3.5 text-[#C5A869]" />
+                    <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-brand-primary uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
+                      <Banknote className="w-3.5 h-3.5 text-brand-accent" />
                       <span>Financials & Registration</span>
                     </div>
 
@@ -351,8 +351,8 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 {/* 2. AREA & ARCHITECTURAL SPECS */}
                 {(activeSection === 'all' || activeSection === 'specs') && (
                   <>
-                    <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-[#0F382C] uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
-                      <Maximize className="w-3.5 h-3.5 text-[#C5A869]" />
+                    <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-brand-primary uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
+                      <Maximize className="w-3.5 h-3.5 text-brand-accent" />
                       <span>Area & Space Specifications</span>
                     </div>
 
@@ -444,8 +444,8 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 {/* 3. LUXURY AMENITIES MATRIX */}
                 {(activeSection === 'all' || activeSection === 'amenities') && (
                   <>
-                    <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-[#0F382C] uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#C5A869]" />
+                    <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-brand-primary uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
+                      <ShieldCheck className="w-3.5 h-3.5 text-brand-accent" />
                       <span>Luxury Amenities Checklist</span>
                     </div>
 
@@ -482,8 +482,8 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                 {/* 4. PROXIMITY TO LAGOS LANDMARKS */}
                 {(activeSection === 'all' || activeSection === 'landmarks') && (
                   <>
-                    <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-[#0F382C] uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
-                      <Navigation className="w-3.5 h-3.5 text-[#C5A869]" />
+                    <div className="py-2.5 bg-gray-50/80 px-2 font-bold text-brand-primary uppercase tracking-wider text-[11px] flex items-center gap-2 mt-4 rounded">
+                      <Navigation className="w-3.5 h-3.5 text-brand-accent" />
                       <span>Proximity to Lagos Landmarks & Transit</span>
                     </div>
 
@@ -497,7 +497,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                         {compareList.map(p => (
                           <div key={p.id} className="px-2">
                             <span className="inline-flex items-center gap-1 text-gray-800 text-xs font-medium">
-                              <Clock className="w-3 h-3 text-[#C5A869]" />
+                              <Clock className="w-3 h-3 text-brand-accent" />
                               {getLandmarkInfo(p, landmark)}
                             </span>
                           </div>
@@ -513,7 +513,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                   compareList.length === 2 ? 'grid-cols-3' :
                   compareList.length === 3 ? 'grid-cols-4' : 'grid-cols-5'
                 }`}>
-                  <span className="font-bold text-[#0F382C] px-2 text-xs uppercase tracking-wider">
+                  <span className="font-bold text-brand-primary px-2 text-xs uppercase tracking-wider">
                     Next Steps
                   </span>
                   {compareList.map(p => (
@@ -524,7 +524,7 @@ export const CompareModal: React.FC<CompareModalProps> = ({
                           onSelectProperty(p);
                           onClose();
                         }}
-                        className="w-full py-2 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-lg text-xs font-bold tracking-wide shadow-sm hover:shadow flex items-center justify-center gap-1.5 transition-all"
+                        className="w-full py-2 bg-brand-primary hover:bg-brand-primary-light text-white rounded-lg text-xs font-bold tracking-wide shadow-sm hover:shadow flex items-center justify-center gap-1.5 transition-all"
                       >
                         <span>Full Dossier</span>
                         <ArrowRight className="w-3.5 h-3.5" />

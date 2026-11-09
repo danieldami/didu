@@ -15,11 +15,11 @@ export const NeighborhoodExplorer: React.FC<NeighborhoodExplorerProps> = ({
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0F382C]/10 text-[#0F382C] text-xs font-bold uppercase tracking-wider mb-3">
-            <MapPin className="w-3.5 h-3.5 text-[#0F382C]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-wider mb-3">
+            <MapPin className="w-3.5 h-3.5 text-brand-primary" />
             <span>Lagos Micro-Market Intelligence</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-[#0F382C]">
+          <h2 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-brand-primary">
             Explore Lagos's Prime Neighborhoods
           </h2>
           <p className="text-sm sm:text-base text-gray-600 mt-3 leading-relaxed">
@@ -32,7 +32,7 @@ export const NeighborhoodExplorer: React.FC<NeighborhoodExplorerProps> = ({
           {NEIGHBORHOODS_DATA.map((hood) => (
             <div
               key={hood.id}
-              className="bg-[#FAF8F5] rounded-xl overflow-hidden border border-gray-200/80 hover:border-[#0F382C]/30 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-brand-cream rounded-xl overflow-hidden border border-gray-200/80 hover:border-brand-primary/30 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
             >
               {/* Image with Tag & Price Overlay */}
               <div className="relative aspect-[16/9] overflow-hidden bg-gray-200">
@@ -42,10 +42,10 @@ export const NeighborhoodExplorer: React.FC<NeighborhoodExplorerProps> = ({
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2B22]/90 via-[#0B2B22]/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-primary-dark/90 via-brand-primary-dark/30 to-transparent" />
                 
                 <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <span className="text-[11px] font-semibold text-[#E4D5B7] uppercase tracking-wider block">
+                  <span className="text-[11px] font-semibold text-brand-accent-soft uppercase tracking-wider block">
                     {hood.totalListings} Active Luxury Listings
                   </span>
                   <h3 className="text-lg font-serif-luxury font-bold text-white drop-shadow-sm">
@@ -57,8 +57,8 @@ export const NeighborhoodExplorer: React.FC<NeighborhoodExplorerProps> = ({
               {/* Body */}
               <div className="p-5 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center gap-1.5 text-xs text-[#0F382C] font-semibold mb-2 bg-[#0F382C]/5 px-2.5 py-1 rounded inline-block">
-                    <TrendingUp className="w-3.5 h-3.5 inline mr-1 text-[#0F382C]" />
+                  <div className="flex items-center gap-1.5 text-xs text-brand-primary font-semibold mb-2 bg-brand-primary/5 px-2.5 py-1 rounded inline-block">
+                    <TrendingUp className="w-3.5 h-3.5 inline mr-1 text-brand-primary" />
                     Avg: {hood.avgPriceSqFt}
                   </div>
 
@@ -84,7 +84,7 @@ export const NeighborhoodExplorer: React.FC<NeighborhoodExplorerProps> = ({
                   type="button"
                   id={`explore-hood-${hood.id}`}
                   onClick={() => onSelectLocality(hood.name.split(' ')[0])}
-                  className="w-full py-2.5 text-xs font-bold text-[#0F382C] hover:text-white bg-white hover:bg-[#0F382C] border border-[#0F382C]/20 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-2xs group"
+                  className="w-full py-2.5 text-xs font-bold text-brand-primary hover:text-white bg-white hover:bg-brand-primary border border-brand-primary/20 rounded-lg transition-all flex items-center justify-center gap-1.5 shadow-2xs group"
                 >
                   <span>Explore {hood.name.split(' ')[0]} Properties</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

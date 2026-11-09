@@ -13,19 +13,19 @@ export interface LeadSubmission {
 
 export const ADMIN_CREDENTIALS = [
   {
-    email: 'amara@diduhomes.com',
+    email: 'amara@chubankhomes.com',
     password: 'demo123',
     name: 'Amara Okafor',
     phone: '+234 803 555 0148',
-    id: 'DIDU-ADMIN-01',
+    id: 'Chubank-ADMIN-01',
     role: 'admin' as const
   },
   {
-    email: 'tunde@diduhomes.com',
+    email: 'tunde@chubankhomes.com',
     password: 'demo123',
     name: 'Tunde Adebayo',
     phone: '+234 809 555 0182',
-    id: 'DIDU-ADMIN-02',
+    id: 'Chubank-ADMIN-02',
     role: 'admin' as const
   }
 ];
@@ -36,8 +36,8 @@ export const isAdmin = (user: UserProfile | null): boolean => {
   const phoneClean = user.phone ? user.phone.replace(/[^0-9]/g, '') : '';
   return (
     user.role === 'admin' ||
-    emailLower === 'amara@diduhomes.com' ||
-    emailLower === 'tunde@diduhomes.com' ||
+    emailLower === 'amara@chubankhomes.com' ||
+    emailLower === 'tunde@chubankhomes.com' ||
     phoneClean.endsWith('8035550148') ||
     phoneClean.endsWith('8095550182')
   );
@@ -98,10 +98,10 @@ export const getMaskedProperty = (property: Property, user: UserProfile | null):
     coordinates: { lat: 27.1767, lng: 78.0081 },
     ownerContact: undefined,
     agent: {
-      name: 'DIDU Homes Concierge',
+      name: 'Chubank Property Concierge',
       role: 'Senior Advisory Desk',
       phone: '+234 803 555 0148',
-      email: 'hello@diduhomes.com',
+      email: 'hello@chubankhomes.com',
       avatar: property.agent?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
       experience: 'Verified Luxury Advisory'
     }

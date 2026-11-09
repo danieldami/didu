@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="460" height="96" viewBox="0 0 460 96" role="img" aria-labelledby="title">
+  <title id="title">Chubank Property</title>
+  <rect width="96" height="96" rx="18" fill="#0F382C"/>
+  <path d="M26 29h44v8H35v22h29v8H35v10h35v8H26z" fill="#E4D5B7"/>
+  <text x="116" y="57" fill="#0F382C" font-family="Georgia,serif" font-size="35" font-weight="600">Chubank</text>
+  <text x="118" y="80" fill="#6c746c" font-family="Arial,sans-serif" font-size="15" letter-spacing="4">PROPERTY</text>
+</svg>

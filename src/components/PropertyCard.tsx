@@ -46,8 +46,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         {/* Top-Left: Price Tag Badge + Optional Exclusive tags + Status */}
         <div className="absolute top-3 left-3 flex flex-col items-start gap-1.5 pointer-events-none z-10">
           {/* Main Price Tag Badge */}
-          <div className="bg-white text-[#0F382C] px-3.5 py-1.5 rounded-lg shadow-lg border border-gray-100 flex items-center gap-1">
-            <span className="text-sm sm:text-base font-sans font-black tracking-normal text-[#0F382C]">
+          <div className="bg-white text-brand-primary px-3.5 py-1.5 rounded-lg shadow-lg border border-gray-100 flex items-center gap-1">
+            <span className="text-sm sm:text-base font-sans font-black tracking-normal text-brand-primary">
               {property.priceDisplay}
             </span>
           </div>
@@ -62,8 +62,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
           {/* Secondary Badge if exclusive */}
           {(property.badge || property.isExclusive) && (
-            <span className="px-2 py-0.5 rounded bg-[#C5A869] text-[#0F382C] text-[10px] font-bold tracking-wider uppercase shadow-xs flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3 text-[#0F382C]" />
+            <span className="px-2 py-0.5 rounded bg-brand-accent text-brand-primary text-[10px] font-bold tracking-wider uppercase shadow-xs flex items-center gap-1">
+              <ShieldCheck className="w-3 h-3 text-brand-primary" />
               {property.badge || 'Exclusive'}
             </span>
           )}
@@ -72,7 +72,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         {/* Bottom Image Info: Property Type & Rate / Sq.Ft cleanly docked */}
         <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white z-10 pointer-events-none">
           <div className="flex items-center gap-1.5">
-            <span className="text-[11px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-black/60 backdrop-blur-xs text-[#E4D5B7] border border-white/10">
+            <span className="text-[11px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-black/60 backdrop-blur-xs text-brand-accent-soft border border-white/10">
               {property.propertyType}
             </span>
             {property.verified ? (
@@ -102,7 +102,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         <div>
           {/* Location Line */}
           <div className="flex items-center gap-1 text-xs text-gray-500 font-medium mb-1.5">
-            <MapPin className="w-3.5 h-3.5 text-[#0F382C] shrink-0" />
+            <MapPin className="w-3.5 h-3.5 text-brand-primary shrink-0" />
             <span className="truncate" title={isAdminUser && property.address ? property.address : undefined}>
               {isAdminUser && property.address
                 ? property.address
@@ -118,7 +118,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
           {/* Property Title */}
           <h3
             id={`prop-title-${property.id}`}
-            className="text-base sm:text-lg font-serif-luxury font-bold text-[#0F382C] hover:text-[#164E3D] cursor-pointer line-clamp-1 transition-colors"
+            className="text-base sm:text-lg font-serif-luxury font-bold text-brand-primary hover:text-brand-primary-light cursor-pointer line-clamp-1 transition-colors"
           >
             <span>
               {property.title || 'Luxury Estate'}
@@ -159,7 +159,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
           {/* Highlights Mini Pills */}
           <div className="flex items-center gap-1.5 flex-wrap mb-2">
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[#FAF8F5] text-[#0F382C] border border-[#0F382C]/10">
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-brand-cream text-brand-primary border border-brand-primary/10">
               {property.possession}
             </span>
             <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-gray-50 text-gray-600 border border-gray-200">
@@ -175,7 +175,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
         {/* Card Footer Actions */}
         <div className="flex items-center gap-2 pt-3 mt-2 border-t border-gray-100">
-          <a href={`?property=${property.id}`} onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) { e.preventDefault(); onSelect(property); } }} className="text-xs font-semibold bg-[#0F382C] hover:bg-[#164E3D] text-white px-3.5 py-2 rounded shadow-xs flex items-center gap-1"><span>View</span><ArrowRight className="w-3.5 h-3.5" /></a>
+          <a href={`?property=${property.id}`} onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0) { e.preventDefault(); onSelect(property); } }} className="text-xs font-semibold bg-brand-primary hover:bg-brand-primary-light text-white px-3.5 py-2 rounded shadow-xs flex items-center gap-1"><span>View</span><ArrowRight className="w-3.5 h-3.5" /></a>
           <a href={`https://wa.me/2349125882627?text=${encodeURIComponent(`Hi, I'm interested in ${property.title} (${property.priceDisplay})`)}`} target="_blank" rel="noopener" className="flex-1 py-2 bg-[#25D366] hover:bg-[#1ebd54] text-white rounded-lg font-bold text-xs flex items-center justify-center gap-1.5 shadow-xs"><MessageSquare className="w-3.5 h-3.5" /><span>Chat on WhatsApp</span></a>
         </div>
       </div>

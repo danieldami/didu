@@ -74,7 +74,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
   // Profile form state
   const [name, setName] = useState(user?.name || 'Valued Client');
   const [phone, setPhone] = useState(user?.phone || '+234 803 555 0148');
-  const [email, setEmail] = useState(user?.email || 'client@diduhomes.com');
+  const [email, setEmail] = useState(user?.email || 'client@chubankhomes.com');
   const [role, setRole] = useState<'buyer' | 'owner' | 'admin'>(user?.role || 'owner');
   const [avatar, setAvatar] = useState(user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80');
   const [preferredLocality, setPreferredLocality] = useState(user?.preferredLocality || 'Ikoyi, Lagos');
@@ -125,7 +125,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
       }
       let savedAccounts: any[] = [];
       try {
-        const stored = localStorage.getItem('didu_demo_accounts');
+        const stored = localStorage.getItem('chubank_demo_accounts');
         if (stored) savedAccounts = JSON.parse(stored);
       } catch {}
 
@@ -137,7 +137,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
         }
         account.password = newPassword.trim();
         try {
-          localStorage.setItem('didu_demo_accounts', JSON.stringify(savedAccounts));
+          localStorage.setItem('chubank_demo_accounts', JSON.stringify(savedAccounts));
         } catch {}
       } else {
         const adminAcc = ADMIN_CREDENTIALS.find(a => a.email.toLowerCase() === user.email.toLowerCase());
@@ -191,12 +191,12 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
   ];
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen py-8 sm:py-12">
+    <div className="bg-brand-cream min-h-screen py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         {/* Top Member Banner */}
-        <div className="bg-gradient-to-r from-[#0F382C] via-[#0F382C] to-[#164E3D] rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-[#164E3D] relative overflow-hidden">
-          <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-radial from-[#C5A869]/15 to-transparent pointer-events-none" />
+        <div className="bg-gradient-to-r from-brand-primary via-brand-primary to-brand-primary-light rounded-2xl p-6 sm:p-8 text-white shadow-xl border border-brand-primary-light relative overflow-hidden">
+          <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-radial from-brand-accent/15 to-transparent pointer-events-none" />
           
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
             {/* Left: User Avatar & Greetings */}
@@ -205,9 +205,9 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 <img
                   src={user?.avatar || avatar}
                   alt={user?.name || 'User'}
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-[#C5A869] shadow-md"
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border-2 border-brand-accent shadow-md"
                 />
-                <div className="absolute -bottom-1 -right-1 bg-[#C5A869] text-[#0F382C] p-1 rounded-full text-[10px] font-bold shadow-xs">
+                <div className="absolute -bottom-1 -right-1 bg-brand-accent text-brand-primary p-1 rounded-full text-[10px] font-bold shadow-xs">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
               </div>
@@ -217,27 +217,27 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                   <h1 className="text-xl sm:text-2xl font-serif-luxury font-bold text-white">
                     {user?.name || 'Client'}
                   </h1>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#E4D5B7] text-[#0F382C] shadow-xs">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-brand-accent-soft text-brand-primary shadow-xs">
                     {isAdmin(user) ? 'Administrator & Co-Founder' : user?.role === 'owner' ? 'Property Owner / Seller' : 'Buyer / Investor'}
                   </span>
                 </div>
                 {isAdmin(user) && (
-                  <p className="text-xs text-[#E4D5B7] font-semibold mt-1">
-                    DIDU Homes - Managed by Amara Okafor & Tunde Adebayo
+                  <p className="text-xs text-brand-accent-soft font-semibold mt-1">
+                    Chubank Property - Managed by Amara Okafor & Tunde Adebayo
                   </p>
                 )}
                 <p className="text-xs text-gray-300 mt-1 flex items-center gap-3">
-                  <span>ID: #{user?.id || 'DIDU-Client'}</span>
+                  <span>ID: #{user?.id || 'Chubank-Client'}</span>
                   <span> </span>
                   <span>Member since {user?.memberSince || '2024'}</span>
                 </p>
                 <div className="flex items-center gap-4 text-xs text-gray-300 mt-2">
                   <span className="flex items-center gap-1">
-                    <Phone className="w-3 h-3 text-[#C5A869]" />
+                    <Phone className="w-3 h-3 text-brand-accent" />
                     {user?.phone}
                   </span>
                   <span className="flex items-center gap-1">
-                    <Mail className="w-3 h-3 text-[#C5A869]" />
+                    <Mail className="w-3 h-3 text-brand-accent" />
                     {user?.email}
                   </span>
                 </div>
@@ -250,9 +250,9 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 type="button"
                 id="dashboard-post-new-btn"
                 onClick={onNavigatePostProperty}
-                className="bg-white hover:bg-[#FAF8F5] text-[#0F382C] px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+                className="bg-white hover:bg-brand-cream text-brand-primary px-5 py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center gap-2"
               >
-                <PlusCircle className="w-4 h-4 text-[#0F382C]" />
+                <PlusCircle className="w-4 h-4 text-brand-primary" />
                 <span>Post New Property</span>
               </button>
               
@@ -260,7 +260,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 type="button"
                 id="dashboard-logout-btn"
                 onClick={onLogout}
-                className="bg-[#0B2B22] hover:bg-black/40 text-gray-200 hover:text-white px-4 py-2.5 rounded-xl text-xs font-semibold border border-white/20 transition-all"
+                className="bg-brand-primary-dark hover:bg-black/40 text-gray-200 hover:text-white px-4 py-2.5 rounded-xl text-xs font-semibold border border-white/20 transition-all"
               >
                 Logout
               </button>
@@ -269,15 +269,15 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
 
           {/* Quick Metrics Bar */}
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 mt-6 pt-6 border-t border-white/10">
-            <div className="bg-[#0B2B22]/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
+            <div className="bg-brand-primary-dark/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
               <span className="text-[11px] uppercase tracking-wider text-gray-300 block">Total Listed</span>
               <span className="text-xl font-bold text-white font-serif-luxury mt-0.5 block">{userProperties.length}</span>
             </div>
-            <div className="bg-[#0B2B22]/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
+            <div className="bg-brand-primary-dark/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
               <span className="text-[11px] uppercase tracking-wider text-gray-300 block">Active Live</span>
               <span className="text-xl font-bold text-emerald-400 font-serif-luxury mt-0.5 block">{activeCount}</span>
             </div>
-            <div className="bg-[#0B2B22]/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
+            <div className="bg-brand-primary-dark/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
               <span className="text-[11px] uppercase tracking-wider text-gray-300 block">
                 {isAdmin(user) ? 'Pending Approval' : 'Under Review'}
               </span>
@@ -287,11 +287,11 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 {isAdmin(user) ? pendingProperties.length : userPendingCount}
               </span>
             </div>
-            <div className="bg-[#0B2B22]/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
+            <div className="bg-brand-primary-dark/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
               <span className="text-[11px] uppercase tracking-wider text-gray-300 block">Sold / Rented</span>
-              <span className="text-xl font-bold text-[#E4D5B7] font-serif-luxury mt-0.5 block">{soldCount}</span>
+              <span className="text-xl font-bold text-brand-accent-soft font-serif-luxury mt-0.5 block">{soldCount}</span>
             </div>
-            <div className="bg-[#0B2B22]/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
+            <div className="bg-brand-primary-dark/60 backdrop-blur-xs p-3.5 rounded-xl border border-white/5">
               <span className="text-[11px] uppercase tracking-wider text-gray-300 block">Saved Estates</span>
               <span className="text-xl font-bold text-rose-300 font-serif-luxury mt-0.5 block">{savedProperties.length}</span>
             </div>
@@ -301,33 +301,33 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
           {(user?.profession || user?.preferredBudget || user?.primaryInterest || user?.address || user?.dob) ? (
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-4 pt-4 border-t border-white/10 text-xs">
               {user.primaryInterest ? (
-                <div className="p-2.5 bg-[#0B2B22]/40 rounded-xl border border-white/5">
+                <div className="p-2.5 bg-brand-primary-dark/40 rounded-xl border border-white/5">
                   <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Lead Interest</span>
-                  <span className="font-bold text-[#E4D5B7] mt-0.5 block">{user.primaryInterest}</span>
+                  <span className="font-bold text-brand-accent-soft mt-0.5 block">{user.primaryInterest}</span>
                 </div>
               ) : null}
               {user.preferredBudget ? (
-                <div className="p-2.5 bg-[#0B2B22]/40 rounded-xl border border-white/5">
+                <div className="p-2.5 bg-brand-primary-dark/40 rounded-xl border border-white/5">
                   <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Target Budget</span>
-                  <span className="font-bold text-[#E4D5B7] mt-0.5 block">{user.preferredBudget}</span>
+                  <span className="font-bold text-brand-accent-soft mt-0.5 block">{user.preferredBudget}</span>
                 </div>
               ) : null}
               {user.profession ? (
-                <div className="p-2.5 bg-[#0B2B22]/40 rounded-xl border border-white/5">
+                <div className="p-2.5 bg-brand-primary-dark/40 rounded-xl border border-white/5">
                   <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Profession</span>
-                  <span className="font-bold text-[#E4D5B7] mt-0.5 block">{user.profession}</span>
+                  <span className="font-bold text-brand-accent-soft mt-0.5 block">{user.profession}</span>
                 </div>
               ) : null}
               {user.address ? (
-                <div className="p-2.5 bg-[#0B2B22]/40 rounded-xl border border-white/5">
+                <div className="p-2.5 bg-brand-primary-dark/40 rounded-xl border border-white/5">
                   <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Home Town</span>
-                  <span className="font-bold text-[#E4D5B7] mt-0.5 block">{user.address}</span>
+                  <span className="font-bold text-brand-accent-soft mt-0.5 block">{user.address}</span>
                 </div>
               ) : null}
               {user.dob ? (
-                <div className="p-2.5 bg-[#0B2B22]/40 rounded-xl border border-white/5">
+                <div className="p-2.5 bg-brand-primary-dark/40 rounded-xl border border-white/5">
                   <span className="text-[10px] text-gray-400 uppercase tracking-wider block">Date of Birth</span>
-                  <span className="font-bold text-[#E4D5B7] mt-0.5 block">{user.dob}</span>
+                  <span className="font-bold text-brand-accent-soft mt-0.5 block">{user.dob}</span>
                 </div>
               ) : null}
             </div>
@@ -370,14 +370,14 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
             onClick={() => setActiveTab('listings')}
             className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
               activeTab === 'listings'
-                ? 'bg-[#0F382C] text-white shadow-md'
+                ? 'bg-brand-primary text-white shadow-md'
                 : 'text-gray-600 hover:text-black hover:bg-gray-100'
             }`}
           >
             <Building2 className="w-4 h-4" />
             <span>My Listed Properties</span>
             <span className={`px-2 py-0.5 text-[10px] rounded-full ${
-              activeTab === 'listings' ? 'bg-[#E4D5B7] text-[#0F382C]' : 'bg-gray-200 text-gray-700'
+              activeTab === 'listings' ? 'bg-brand-accent-soft text-brand-primary' : 'bg-gray-200 text-gray-700'
             }`}>
               {userProperties.length}
             </span>
@@ -389,7 +389,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
             onClick={() => setActiveTab('profile')}
             className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
               activeTab === 'profile'
-                ? 'bg-[#0F382C] text-white shadow-md'
+                ? 'bg-brand-primary text-white shadow-md'
                 : 'text-gray-600 hover:text-black hover:bg-gray-100'
             }`}
           >
@@ -403,14 +403,14 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
             onClick={() => setActiveTab('saved')}
             className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
               activeTab === 'saved'
-                ? 'bg-[#0F382C] text-white shadow-md'
+                ? 'bg-brand-primary text-white shadow-md'
                 : 'text-gray-600 hover:text-black hover:bg-gray-100'
             }`}
           >
             <Heart className="w-4 h-4" />
             <span>Saved Estates</span>
             <span className={`px-2 py-0.5 text-[10px] rounded-full ${
-              activeTab === 'saved' ? 'bg-[#E4D5B7] text-[#0F382C]' : 'bg-gray-200 text-gray-700'
+              activeTab === 'saved' ? 'bg-brand-accent-soft text-brand-primary' : 'bg-gray-200 text-gray-700'
             }`}>
               {savedProperties.length}
             </span>
@@ -423,14 +423,14 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
               onClick={() => setActiveTab('leads')}
               className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'leads'
-                  ? 'bg-[#0F382C] text-white shadow-md'
+                  ? 'bg-brand-primary text-white shadow-md'
                   : 'text-gray-600 hover:text-black hover:bg-gray-100'
               }`}
             >
               <Calendar className="w-4 h-4" />
               <span>Incoming Leads</span>
               <span className={`px-2 py-0.5 text-[10px] rounded-full ${
-                activeTab === 'leads' ? 'bg-[#E4D5B7] text-[#0F382C]' : 'bg-gray-200 text-gray-700'
+                activeTab === 'leads' ? 'bg-brand-accent-soft text-brand-primary' : 'bg-gray-200 text-gray-700'
               }`}>
                 {leads?.length || 0}
               </span>
@@ -444,14 +444,14 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
               onClick={() => setActiveTab('approvals')}
               className={`px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'approvals'
-                  ? 'bg-[#0F382C] text-white shadow-md'
+                  ? 'bg-brand-primary text-white shadow-md'
                   : 'text-gray-600 hover:text-black hover:bg-gray-100'
               }`}
             >
               <ShieldCheck className="w-4 h-4" />
               <span>Property Approvals</span>
               <span className={`px-2 py-0.5 text-[10px] rounded-full ${
-                activeTab === 'approvals' ? 'bg-[#E4D5B7] text-[#0F382C]' : 'bg-gray-200 text-gray-700'
+                activeTab === 'approvals' ? 'bg-brand-accent-soft text-brand-primary' : 'bg-gray-200 text-gray-700'
               }`}>
                 {pendingProperties.length}
               </span>
@@ -464,11 +464,11 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="text-xl font-serif-luxury font-bold text-[#0F382C]">
+                <h2 className="text-xl font-serif-luxury font-bold text-brand-primary">
                   My Listed Properties ({userProperties.length})
                 </h2>
                 <p className="text-xs text-gray-600 mt-0.5">
-                  Manage live status, edit pricing/photos, or remove listings from the DIDU Homes network.
+                  Manage live status, edit pricing/photos, or remove listings from the Chubank Property network.
                 </p>
               </div>
 
@@ -476,7 +476,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 type="button"
                 id="add-listing-cta-btn"
                 onClick={onNavigatePostProperty}
-                className="inline-flex items-center gap-2 bg-[#0F382C] hover:bg-[#164E3D] text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
+                className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-primary-light text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
               >
                 <PlusCircle className="w-4 h-4" />
                 <span>Add Another Property</span>
@@ -538,10 +538,10 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
 
             {userProperties.length === 0 ? (
               <div className="bg-white rounded-2xl border border-gray-200 p-12 text-center space-y-4 shadow-sm">
-                <div className="w-16 h-16 rounded-full bg-gray-100 text-[#0F382C] flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 rounded-full bg-gray-100 text-brand-primary flex items-center justify-center mx-auto">
                   <Building2 className="w-8 h-8 opacity-60" />
                 </div>
-                <h3 className="text-lg font-serif-luxury font-bold text-[#0F382C]">
+                <h3 className="text-lg font-serif-luxury font-bold text-brand-primary">
                   You Haven't Listed Any Properties Yet
                 </h3>
                 <p className="text-xs text-gray-500 max-w-md mx-auto">
@@ -551,7 +551,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                   <button
                     type="button"
                     onClick={onNavigatePostProperty}
-                    className="bg-[#0F382C] text-white px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-[#164E3D] transition-all"
+                    className="bg-brand-primary text-white px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:bg-brand-primary-light transition-all"
                   >
                     Create Your First Listing
                   </button>
@@ -621,14 +621,14 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                             </span>
                           )}
 
-                          <span className="px-2.5 py-0.5 rounded bg-[#0F382C]/90 text-[#FAF8F5] text-xs font-serif-luxury font-bold shadow-xs">
+                          <span className="px-2.5 py-0.5 rounded bg-brand-primary/90 text-brand-cream text-xs font-serif-luxury font-bold shadow-xs">
                             {prop.priceDisplay}
                           </span>
                         </div>
 
                         {/* Top-right property type */}
                         <div className="absolute top-3 right-3 z-10">
-                          <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-black/60 backdrop-blur-xs text-[#E4D5B7] border border-white/20">
+                          <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-black/60 backdrop-blur-xs text-brand-accent-soft border border-white/20">
                             {prop.propertyType}
                           </span>
                         </div>
@@ -636,7 +636,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                         {/* Bottom overlay: Location */}
                         <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between text-white text-xs z-10 pointer-events-none">
                           <div className="flex items-center gap-1 bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded">
-                            <MapPin className="w-3 h-3 text-[#E4D5B7]" />
+                            <MapPin className="w-3 h-3 text-brand-accent-soft" />
                             <span className="truncate max-w-[200px]">{prop.locality}</span>
                           </div>
                           <span className="bg-black/60 backdrop-blur-xs px-2 py-0.5 rounded text-[11px] font-mono">
@@ -650,7 +650,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                         <div>
                           <h3 
                             onClick={() => onViewProperty(prop)}
-                            className="text-base font-serif-luxury font-bold text-[#0F382C] line-clamp-1 hover:underline cursor-pointer"
+                            className="text-base font-serif-luxury font-bold text-brand-primary line-clamp-1 hover:underline cursor-pointer"
                           >
                             {prop.title}
                           </h3>
@@ -680,8 +680,8 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                           {isAdmin(user) && (
                             <div className="mt-3 p-2.5 bg-gray-50 rounded-xl border border-gray-200 text-[11px] text-gray-700 space-y-1">
                               <div className="flex items-center justify-between">
-                                <span className="font-bold text-[#0F382C] flex items-center gap-1">
-                                  <User className="w-3.5 h-3.5 text-[#C5A869]" />
+                                <span className="font-bold text-brand-primary flex items-center gap-1">
+                                  <User className="w-3.5 h-3.5 text-brand-accent" />
                                   <span>Posted by: {prop.postedBy?.name || prop.ownerName || 'Property Owner'}</span>
                                 </span>
                                 <span className="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase">
@@ -779,7 +779,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                               type="button"
                               id={`edit-property-btn-${prop.id}`}
                               onClick={() => onEditProperty(prop)}
-                              className="py-2 px-3 rounded-lg text-xs font-bold bg-[#0F382C] hover:bg-[#164E3D] text-white flex items-center justify-center gap-1.5 shadow-xs transition-all"
+                              className="py-2 px-3 rounded-lg text-xs font-bold bg-brand-primary hover:bg-brand-primary-light text-white flex items-center justify-center gap-1.5 shadow-xs transition-all"
                             >
                               <Edit3 className="w-3.5 h-3.5" />
                               <span>Edit Property</span>
@@ -810,7 +810,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
         {activeTab === 'profile' && (
           <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 sm:p-10 max-w-3xl">
             <div className="mb-6">
-              <h2 className="text-xl font-serif-luxury font-bold text-[#0F382C]">
+              <h2 className="text-xl font-serif-luxury font-bold text-brand-primary">
                 Personal Profile & Contact Settings
               </h2>
               <p className="text-xs text-gray-500 mt-1">
@@ -836,7 +836,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                   <img
                     src={avatar}
                     alt="Current Avatar"
-                    className="w-16 h-16 rounded-2xl object-cover border-2 border-[#C5A869] shadow-sm"
+                    className="w-16 h-16 rounded-2xl object-cover border-2 border-brand-accent shadow-sm"
                   />
                   <div className="space-y-1.5 flex-1">
                     <input
@@ -854,7 +854,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                           type="button"
                           onClick={() => setAvatar(preset)}
                           className={`w-7 h-7 rounded-lg overflow-hidden border ${
-                            avatar === preset ? 'border-[#0F382C] ring-2 ring-[#0F382C]/30' : 'border-gray-200 opacity-70'
+                            avatar === preset ? 'border-brand-primary ring-2 ring-brand-primary/30' : 'border-gray-200 opacity-70'
                           }`}
                         >
                           <img src={preset} alt="preset" className="w-full h-full object-cover" />
@@ -875,7 +875,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                  className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                 />
               </div>
 
@@ -890,7 +890,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                 </div>
 
@@ -903,7 +903,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                 </div>
               </div>
@@ -919,7 +919,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     onClick={() => setRole('buyer')}
                     className={`py-3 px-4 rounded-xl border text-xs font-bold transition-all text-left ${
                       role === 'buyer'
-                        ? 'bg-[#0F382C] text-white border-[#0F382C] shadow-sm'
+                        ? 'bg-brand-primary text-white border-brand-primary shadow-sm'
                         : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
                     }`}
                   >
@@ -932,7 +932,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     onClick={() => setRole('owner')}
                     className={`py-3 px-4 rounded-xl border text-xs font-bold transition-all text-left ${
                       role === 'owner'
-                        ? 'bg-[#0F382C] text-white border-[#0F382C] shadow-sm'
+                        ? 'bg-brand-primary text-white border-brand-primary shadow-sm'
                         : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
                     }`}
                   >
@@ -952,7 +952,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                   value={preferredLocality}
                   onChange={(e) => setPreferredLocality(e.target.value)}
                   placeholder="e.g. Ikoyi, Victoria Island, Civil Lines"
-                  className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                  className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                 />
               </div>
 
@@ -964,7 +964,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 <select
                   value={primaryInterest}
                   onChange={(e) => setPrimaryInterest(e.target.value)}
-                  className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                  className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                 >
                   <option value="Buying">Buying / Investing</option>
                   <option value="Selling/Listing">Selling / Listing Property</option>
@@ -983,7 +983,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     value={preferredBudget}
                     onChange={(e) => setPreferredBudget(e.target.value)}
                     placeholder="e.g. ₦ 2.5bn+ luxury home"
-                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                 </div>
 
@@ -996,7 +996,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     value={profession}
                     onChange={(e) => setProfession(e.target.value)}
                     placeholder="e.g. Senior Medical Consultant"
-                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                 </div>
               </div>
@@ -1012,7 +1012,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder="e.g. Lekki Phase 1, Lagos"
-                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                 </div>
 
@@ -1024,14 +1024,14 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                     type="date"
                     value={dob}
                     onChange={(e) => setDob(e.target.value)}
-                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                 </div>
               </div>
 
               {/* Password Change Section */}
               <div className="pt-6 border-t border-gray-200 space-y-4">
-                <h3 className="text-sm font-bold text-[#0F382C] uppercase tracking-wider">
+                <h3 className="text-sm font-bold text-brand-primary uppercase tracking-wider">
                   Change Account Password
                 </h3>
                 {passwordError && (
@@ -1082,7 +1082,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 <button
                   type="submit"
                   id="save-profile-btn"
-                  className="bg-[#0F382C] hover:bg-[#164E3D] text-white px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+                  className="bg-brand-primary hover:bg-brand-primary-light text-white px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md hover:shadow-lg transition-all flex items-center gap-2"
                 >
                   <Save className="w-4 h-4" />
                   <span>Save Profile Changes</span>
@@ -1098,7 +1098,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-serif-luxury font-bold text-[#0F382C]">
+                <h2 className="text-xl font-serif-luxury font-bold text-brand-primary">
                   My Saved Estates ({savedProperties.length})
                 </h2>
                 <p className="text-xs text-gray-600 mt-0.5">
@@ -1109,7 +1109,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
               <button
                 type="button"
                 onClick={onNavigateProperties}
-                className="text-xs font-bold text-[#0F382C] hover:underline flex items-center gap-1"
+                className="text-xs font-bold text-brand-primary hover:underline flex items-center gap-1"
               >
                 <span>Browse All Estates</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -1124,7 +1124,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 <button
                   type="button"
                   onClick={onNavigateProperties}
-                  className="bg-[#0F382C] text-white px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider"
+                  className="bg-brand-primary text-white px-5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider"
                 >
                   Explore Properties
                 </button>
@@ -1135,14 +1135,14 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                   <div key={prop.id} className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm flex flex-col justify-between">
                     <div className="relative aspect-[16/10] overflow-hidden">
                       <img src={prop.coverImage} alt={prop.title} className="w-full h-full object-cover" />
-                      <div className="absolute top-2 left-2 bg-[#0F382C] text-white px-2 py-0.5 rounded text-xs font-serif-luxury font-bold">
+                      <div className="absolute top-2 left-2 bg-brand-primary text-white px-2 py-0.5 rounded text-xs font-serif-luxury font-bold">
                         {prop.priceDisplay}
                       </div>
                     </div>
                     <div className="p-4 space-y-2">
-                      <h4 className="text-sm font-serif-luxury font-bold text-[#0F382C] line-clamp-1">{prop.title}</h4>
+                      <h4 className="text-sm font-serif-luxury font-bold text-brand-primary line-clamp-1">{prop.title}</h4>
                       <p className="text-xs text-gray-500 flex items-center gap-1">
-                        <MapPin className="w-3 h-3 text-[#0F382C]" />
+                        <MapPin className="w-3 h-3 text-brand-primary" />
                         <span>{prop.locality ? (prop.locality.toLowerCase().includes('lagos') ? prop.locality : `${prop.locality}, Lagos`) : (prop.location || 'Lagos')}</span>
                       </p>
                       <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
@@ -1150,7 +1150,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                         <button
                           type="button"
                           onClick={() => onViewProperty(prop)}
-                          className="text-xs font-bold text-[#0F382C] hover:underline"
+                          className="text-xs font-bold text-brand-primary hover:underline"
                         >
                           View Details  
                         </button>
@@ -1167,7 +1167,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
         {activeTab === 'leads' && isAdmin(user) && (
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl font-serif-luxury font-bold text-[#0F382C]">
+              <h2 className="text-xl font-serif-luxury font-bold text-brand-primary">
                 Incoming Leads & Tour Inquiries ({leads?.length || 0})
               </h2>
               <p className="text-xs text-gray-600 mt-0.5">
@@ -1186,7 +1186,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse text-xs">
                     <thead>
-                      <tr className="bg-[#0F382C] text-white uppercase text-[10px] tracking-wider">
+                      <tr className="bg-brand-primary text-white uppercase text-[10px] tracking-wider">
                         <th className="p-4">Lead ID & Date</th>
                         <th className="p-4">Buyer Name & Contact</th>
                         <th className="p-4">Property Reference</th>
@@ -1198,7 +1198,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                       {leads.map((lead) => (
                         <tr key={lead.id} className="hover:bg-gray-50/80 transition-colors">
                           <td className="p-4 font-mono">
-                            <span className="font-bold text-[#0F382C] block">#{lead.id}</span>
+                            <span className="font-bold text-brand-primary block">#{lead.id}</span>
                             <span className="text-[10px] text-gray-400">{lead.timestamp}</span>
                           </td>
                           <td className="p-4">
@@ -1207,7 +1207,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                             <span className="text-gray-500 block">{lead.email}</span>
                           </td>
                           <td className="p-4">
-                            <span className="font-semibold text-[#0F382C] block">{lead.propertyTitle}</span>
+                            <span className="font-semibold text-brand-primary block">{lead.propertyTitle}</span>
                             <span className="text-[10px] font-mono text-gray-400">ID: {lead.propertyId}</span>
                           </td>
                           <td className="p-4 font-medium text-gray-700">
@@ -1216,7 +1216,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                           <td className="p-4 text-right">
                             <div className="flex items-center justify-end gap-2">
                               <a
-                                href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${lead.buyerName}, regarding your inquiry for DIDU Homes...`)}`}
+                                href={`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Hi ${lead.buyerName}, regarding your inquiry for Chubank Property...`)}`}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-bold text-[10px]"
@@ -1249,7 +1249,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
         {activeTab === 'approvals' && isAdmin(user) && (
           <div className="space-y-6">
             <div>
-              <h2 className="text-xl font-serif-luxury font-bold text-[#0F382C]">
+              <h2 className="text-xl font-serif-luxury font-bold text-brand-primary">
                 Pending Property Submissions ({pendingProperties.length})
               </h2>
               <p className="text-xs text-gray-600 mt-0.5">
@@ -1291,7 +1291,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                       <div>
                         <h3 
                           onClick={() => onViewProperty(prop)}
-                          className="text-base font-serif-luxury font-bold text-[#0F382C] line-clamp-1 hover:underline cursor-pointer"
+                          className="text-base font-serif-luxury font-bold text-brand-primary line-clamp-1 hover:underline cursor-pointer"
                         >
                           {prop.title}
                         </h3>
@@ -1300,7 +1300,7 @@ export const UserDashboardScreen: React.FC<UserDashboardScreenProps> = ({
                         </p>
                         <div className="mt-3 p-3 bg-amber-50/90 rounded-xl border border-amber-200 text-xs text-gray-800 space-y-1.5">
                           <div className="flex items-center justify-between pb-1 border-b border-amber-200/60">
-                            <span className="font-bold text-[#0F382C] flex items-center gap-1.5">
+                            <span className="font-bold text-brand-primary flex items-center gap-1.5">
                               <User className="w-3.5 h-3.5 text-amber-800" />
                               <span>User Account: {prop.postedBy?.name || prop.ownerName || 'Property Owner'}</span>
                             </span>

@@ -23,7 +23,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error('Uncaught Error in DIDU Homes App:', error, errorInfo);
+    console.error('Uncaught Error in Chubank Property App:', error, errorInfo);
     
     // Auto-reload on chunk load failures (e.g. after a new deployment)
     const isChunkError = error.message?.includes('Loading chunk') || 
@@ -101,7 +101,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
               marginBottom: '10px',
               letterSpacing: '-0.02em'
             }}>
-              DIDU Homes
+              Chubank Property
             </h1>
             
             <p style={{

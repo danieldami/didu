@@ -28,7 +28,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
     e.preventDefault();
     if (!buyerName || !phone || !email || !preferredTime) return;
 
-    const whatsappMessage = `Hi, I would like to arrange ${preferredTime.trim()} for ${property?.title || 'a DIDU Homes property'}. My name is ${buyerName.trim()} and my phone number is ${phone.trim()}.`;
+    const whatsappMessage = `Hi, I would like to arrange ${preferredTime.trim()} for ${property?.title || 'a Chubank Property property'}. My name is ${buyerName.trim()} and my phone number is ${phone.trim()}.`;
     window.open(`https://wa.me/2349125882627?text=${encodeURIComponent(whatsappMessage)}`, '_blank', 'noopener,noreferrer');
 
     const newLead: LeadSubmission = {
@@ -59,18 +59,18 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
       <div className="bg-white w-full max-w-md rounded-2xl overflow-hidden shadow-2xl border border-gray-100 relative">
         
         {/* Header */}
-        <div className="bg-[#0F382C] text-white p-6 relative border-b border-[#164E3D]">
+        <div className="bg-brand-primary text-white p-6 relative border-b border-brand-primary-light">
           <button
             type="button"
             onClick={onClose}
-            className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-[#164E3D] transition-colors"
+            className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-full hover:bg-brand-primary-light transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
 
-          <div className="flex items-center gap-2 text-[#E4D5B7] text-xs uppercase tracking-wider font-semibold mb-1">
+          <div className="flex items-center gap-2 text-brand-accent-soft text-xs uppercase tracking-wider font-semibold mb-1">
             <Calendar className="w-4 h-4" />
-            <span>DIDU Homes Concierge</span>
+            <span>Chubank Property Concierge</span>
           </div>
           <h3 className="font-brand-title font-bold text-lg text-white">
             {property ? `Inquire / Book Tour: ${property.title}` : 'Private Inquiry & Tour Booking'}
@@ -89,7 +89,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
               <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto animate-bounce">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h4 className="text-lg font-serif-luxury font-bold text-[#0F382C]">
+              <h4 className="text-lg font-serif-luxury font-bold text-brand-primary">
                 Inquiry Saved Successfully
               </h4>
               <p className="text-xs text-gray-600">
@@ -109,7 +109,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
                     placeholder="e.g. Vikram Singhania"
                     value={buyerName}
                     onChange={(e) => setBuyerName(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                   <User className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -126,7 +126,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
                     placeholder="+234 803 555 0148"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                   <Phone className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -143,7 +143,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
                     placeholder="vikram@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                   <Mail className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -159,7 +159,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
                     required
                     value={preferredTime}
                     onChange={(e) => setPreferredTime(e.target.value)}
-                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C]"
+                    className="w-full pl-9 pr-3 py-2.5 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary"
                   />
                   <Clock className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -173,7 +173,7 @@ export const LeadInquiryModal: React.FC<LeadInquiryModalProps> = ({
               <button
                 type="submit"
                 id="submit-lead-inquiry-btn"
-                className="w-full py-3 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
+                className="w-full py-3 bg-brand-primary hover:bg-brand-primary-light text-white rounded-lg font-bold text-xs uppercase tracking-wider shadow-md hover:shadow-lg transition-all"
               >
                 Continue on WhatsApp
               </button>

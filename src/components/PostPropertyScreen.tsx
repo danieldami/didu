@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Property, PropertyType, UserProfile } from '../types';
-import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
+import { LISTING_LOCATIONS, PROPERTY_TYPES } from '../data/mockData';
 import { isAdmin } from '../utils/security';
 import { formatNaira } from '../utils/format';
 import { 
@@ -183,7 +183,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
             fbCtx.fillStyle = '#C5A880';
             fbCtx.font = 'bold 28px sans-serif';
             fbCtx.textAlign = 'center';
-            fbCtx.fillText('DIDU Homes   Verified Photo', 400, 270);
+            fbCtx.fillText('Chubank Property   Verified Photo', 400, 270);
             return fbCanvas.toDataURL('image/jpeg', 0.60);
           }
         } catch {}
@@ -412,7 +412,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
     const numSuperArea = areaUnit === 'Sq.Yard' ? Math.round(rawArea * 9) : rawArea;
 
     const generatedId = `prop-user-${Date.now()}`;
-    const refCode = `DIDU-${Math.floor(100000 + Math.random() * 900000)}`;
+    const refCode = `Chubank-${Math.floor(100000 + Math.random() * 900000)}`;
     setCreatedPropertyRef(refCode);
 
     const isLegallyVerified = false;
@@ -502,7 +502,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
         name: 'Amara Okafor',
         role: 'Managing Partner & Co-Founder',
         phone: '+234 803 555 0148',
-        email: 'hello@diduhomes.com',
+        email: 'hello@chubankhomes.com',
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
         experience: 'Luxury Residential & HNI Advisory'
       },
@@ -534,24 +534,24 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
   // If user is not authenticated, display luxury barrier screen
   if (!user) {
     return (
-      <div className="bg-[#FAF8F5] min-h-screen py-12 sm:py-20 flex items-center justify-center">
+      <div className="bg-brand-cream min-h-screen py-12 sm:py-20 flex items-center justify-center">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 w-full text-center">
           
           <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-xl border border-gray-200/90 relative overflow-hidden">
             {/* Top decorative accent */}
-            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#0F382C] via-[#C5A869] to-[#0F382C]" />
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-primary via-brand-accent to-brand-primary" />
 
             {/* Shield / Lock Icon */}
-            <div className="w-20 h-20 bg-[#0F382C]/10 text-[#0F382C] rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner border border-[#0F382C]/20">
-              <Lock className="w-10 h-10 text-[#0F382C]" />
+            <div className="w-20 h-20 bg-brand-primary/10 text-brand-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-inner border border-brand-primary/20">
+              <Lock className="w-10 h-10 text-brand-primary" />
             </div>
 
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0F382C]/10 text-[#0F382C] text-xs font-bold uppercase tracking-wider mb-4 border border-[#0F382C]/15">
-              <ShieldCheck className="w-4 h-4 text-[#C5A869]" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-wider mb-4 border border-brand-primary/15">
+              <ShieldCheck className="w-4 h-4 text-brand-accent" />
               <span>Exclusive Owner & Developer Portal</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0F382C] mb-3">
+            <h1 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-brand-primary mb-3">
               Sign In Required to List Property
             </h1>
 
@@ -564,11 +564,11 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               <button
                 type="button"
                 id="barrier-login-btn"
-                onClick={() => onOpenLogin?.('Please sign in or create an account to list your property on DIDU Homes.')}
-                className="w-full sm:w-auto flex-1 bg-[#0F382C] hover:bg-[#164E3D] text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                onClick={() => onOpenLogin?.('Please sign in or create an account to list your property on Chubank Property.')}
+                className="w-full sm:w-auto flex-1 bg-brand-primary hover:bg-brand-primary-light text-white px-6 py-3.5 rounded-xl text-xs font-bold tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Sign In / Create Account</span>
-                <ArrowRight className="w-4 h-4 text-[#E4D5B7]" />
+                <ArrowRight className="w-4 h-4 text-brand-accent-soft" />
               </button>
 
               <button
@@ -624,16 +624,16 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
   }
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen py-10 sm:py-16">
+    <div className="bg-brand-cream min-h-screen py-10 sm:py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0F382C]/10 text-[#0F382C] text-xs font-bold uppercase tracking-wider mb-2">
-            <Building className="w-3.5 h-3.5 text-[#0F382C]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-wider mb-2">
+            <Building className="w-3.5 h-3.5 text-brand-primary" />
             <span>Owner & Developer Portal</span>
           </div>
-          <h1 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-[#0F382C]">
+          <h1 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-brand-primary">
             List Your Luxury Property in Lagos
           </h1>
           <p className="text-sm text-gray-600 mt-2">
@@ -657,7 +657,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                 }}
                 className={`flex items-center gap-2 cursor-pointer transition-all ${
                   step === s.num 
-                    ? 'text-[#0F382C] font-bold' 
+                    ? 'text-brand-primary font-bold' 
                     : step > s.num 
                     ? 'text-emerald-700 font-semibold' 
                     : 'text-gray-400 font-medium'
@@ -665,7 +665,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               >
                 <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
                   step === s.num 
-                    ? 'bg-[#0F382C] text-white ring-4 ring-[#0F382C]/10' 
+                    ? 'bg-brand-primary text-white ring-4 ring-brand-primary/10' 
                     : step > s.num 
                     ? 'bg-emerald-100 text-emerald-800' 
                     : 'bg-gray-100 text-gray-400'
@@ -686,11 +686,11 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto animate-bounce">
                 <CheckCircle className="w-10 h-10" />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-[#0F382C]">
+              <h2 className="text-2xl sm:text-3xl font-serif-luxury font-bold text-brand-primary">
                 {isUserAdmin ? 'Property Published Live!' : 'Property Submitted for Verification!'}
               </h2>
               <p className="text-sm text-gray-600 max-w-lg mx-auto">
-                Thank you, <strong>{ownerName || user?.name || 'Property Owner'}</strong>. Your luxury listing in <strong>{locality}</strong> has been {isUserAdmin ? 'published directly to the live website' : 'submitted for admin verification'} with reference ID <strong>#{createdPropertyRef || 'DIDU-892140'}</strong>.
+                Thank you, <strong>{ownerName || user?.name || 'Property Owner'}</strong>. Your luxury listing in <strong>{locality}</strong> has been {isUserAdmin ? 'published directly to the live website' : 'submitted for admin verification'} with reference ID <strong>#{createdPropertyRef || 'Chubank-892140'}</strong>.
               </p>
               
               <div className="bg-emerald-50 rounded-xl p-4 max-w-md mx-auto border border-emerald-200 text-xs text-emerald-900 space-y-1">
@@ -713,16 +713,16 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                   type="button"
                   id="post-another-property-btn"
                   onClick={resetForm}
-                  className="w-full sm:w-auto bg-[#0F382C] text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-[#164E3D] flex items-center justify-center gap-2 shadow-md transition-all"
+                  className="w-full sm:w-auto bg-brand-primary text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider hover:bg-brand-primary-light flex items-center justify-center gap-2 shadow-md transition-all"
                 >
-                  <PlusCircle className="w-4 h-4 text-[#E4D5B7]" />
+                  <PlusCircle className="w-4 h-4 text-brand-accent-soft" />
                   <span>Post Another Property</span>
                 </button>
                 {onNavigateDashboard && (
                   <button
                     type="button"
                     onClick={onNavigateDashboard}
-                    className="w-full sm:w-auto bg-white border border-[#0F382C]/30 text-[#0F382C] hover:bg-gray-50 px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm"
+                    className="w-full sm:w-auto bg-white border border-brand-primary/30 text-brand-primary hover:bg-gray-50 px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm"
                   >
                     <LayoutDashboard className="w-4 h-4" />
                     <span>Go to My Dashboard</span>
@@ -743,7 +743,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               {/* STEP 1: Basic Details */}
               {step === 1 && (
                 <div className="space-y-6">
-                  <h3 className="text-lg font-serif-luxury font-bold text-[#0F382C]">
+                  <h3 className="text-lg font-serif-luxury font-bold text-brand-primary">
                     Step 1: Property Type & Lagos Location
                   </h3>
 
@@ -756,7 +756,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         onClick={() => setListingIntent('Sale')}
                         className={`py-3 rounded-xl border text-xs font-bold transition-all ${
                           listingIntent === 'Sale' 
-                            ? 'bg-[#0F382C] text-white border-[#0F382C] shadow-sm' 
+                            ? 'bg-brand-primary text-white border-brand-primary shadow-sm' 
                             : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
                         }`}
                       >
@@ -767,7 +767,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         onClick={() => setListingIntent('Rent')}
                         className={`py-3 rounded-xl border text-xs font-bold transition-all ${
                           listingIntent === 'Rent' 
-                            ? 'bg-[#0F382C] text-white border-[#0F382C] shadow-sm' 
+                            ? 'bg-brand-primary text-white border-brand-primary shadow-sm' 
                             : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
                         }`}
                       >
@@ -824,7 +824,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                             setCustomPropertyType(e.target.value);
                             setPropertyType(e.target.value);
                           }}
-                          className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-800 focus:bg-white focus:border-[#0F382C]"
+                          className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-800 focus:bg-white focus:border-brand-primary"
                         />
                       </div>
                     )}
@@ -845,9 +845,9 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                           setLocality(val);
                         }
                       }}
-                      className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-800 focus:bg-white focus:border-[#0F382C]"
+                      className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-800 focus:bg-white focus:border-brand-primary"
                     >
-                      {LAGOS_LOCALITIES.filter(l => l !== 'All Localities').map((l) => (
+                      {LISTING_LOCATIONS.filter(l => l !== 'All Locations').map((l) => (
                         <option key={l} value={l}>{l}</option>
                       ))}
                       <option value="Other">Other (Specify Custom Locality)</option>
@@ -863,7 +863,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                             setCustomLocality(e.target.value);
                             setLocality(e.target.value);
                           }}
-                          className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-800 focus:bg-white focus:border-[#0F382C]"
+                          className="w-full p-3 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-800 focus:bg-white focus:border-brand-primary"
                         />
                       </div>
                     )}
@@ -880,7 +880,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         setProjectTitle(e.target.value);
                         if (stepErrors.projectTitle) setStepErrors(prev => ({ ...prev, projectTitle: '' }));
                       }}
-                      className={`w-full p-3 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-800 focus:bg-white focus:border-[#0F382C] ${
+                      className={`w-full p-3 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-800 focus:bg-white focus:border-brand-primary ${
                         stepErrors.projectTitle ? 'border-red-400 ring-1 ring-red-400 bg-red-50/20' : 'border-gray-200'
                       }`}
                     />
@@ -903,7 +903,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         setAddress(e.target.value);
                         if (stepErrors.address) setStepErrors(prev => ({ ...prev, address: '' }));
                       }}
-                      className={`w-full p-3 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-800 focus:bg-white focus:border-[#0F382C] ${
+                      className={`w-full p-3 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-800 focus:bg-white focus:border-brand-primary ${
                         stepErrors.address ? 'border-red-400 ring-1 ring-red-400 bg-red-50/20' : 'border-gray-200'
                       }`}
                     />
@@ -927,7 +927,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                           setStep(2);
                         }
                       }}
-                      className="bg-[#0F382C] text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-[#164E3D] transition-all"
+                      className="bg-brand-primary text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-brand-primary-light transition-all"
                     >
                       <span>Continue to Specifications</span>
                       <ArrowRight className="w-4 h-4" />
@@ -939,7 +939,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               {/* STEP 2: Specs & Price */}
               {step === 2 && (
                 <div className="space-y-6">
-                  <h3 className="text-lg font-serif-luxury font-bold text-[#0F382C]">
+                  <h3 className="text-lg font-serif-luxury font-bold text-brand-primary">
                     Step 2: Area, Configuration & Pricing
                   </h3>
 
@@ -953,7 +953,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                             type="button"
                             onClick={() => setAreaUnit('Sq.Ft')}
                             className={`px-2 py-0.5 rounded transition-all ${
-                              areaUnit === 'Sq.Ft' ? 'bg-[#0F382C] text-white' : 'text-gray-600 hover:text-black'
+                              areaUnit === 'Sq.Ft' ? 'bg-brand-primary text-white' : 'text-gray-600 hover:text-black'
                             }`}
                           >
                             Sq.Ft
@@ -962,7 +962,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                             type="button"
                             onClick={() => setAreaUnit('Sq.Yard')}
                             className={`px-2 py-0.5 rounded transition-all ${
-                              areaUnit === 'Sq.Yard' ? 'bg-[#0F382C] text-white' : 'text-gray-600 hover:text-black'
+                              areaUnit === 'Sq.Yard' ? 'bg-brand-primary text-white' : 'text-gray-600 hover:text-black'
                             }`}
                           >
                             Sq.Yard
@@ -978,7 +978,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                             if (stepErrors.superArea) setStepErrors(prev => ({ ...prev, superArea: '' }));
                           }}
                           placeholder="e.g. 3500"
-                          className={`w-full p-3 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-800 focus:bg-white focus:border-[#0F382C] ${
+                          className={`w-full p-3 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-800 focus:bg-white focus:border-brand-primary ${
                             stepErrors.superArea ? 'border-red-400 ring-1 ring-red-400 bg-red-50/20' : 'border-gray-200'
                           }`}
                         />
@@ -1070,7 +1070,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                           if (stepErrors.askingPrice) setStepErrors(prev => ({ ...prev, askingPrice: '' }));
                         }}
                         placeholder="e.g. 28500000"
-                        className={`w-full p-3 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-800 font-mono focus:bg-white focus:border-[#0F382C] ${
+                        className={`w-full p-3 text-xs sm:text-sm bg-gray-50 border rounded-lg text-gray-800 font-mono focus:bg-white focus:border-brand-primary ${
                           stepErrors.askingPrice ? 'border-red-400 ring-1 ring-red-400 bg-red-50/20' : 'border-gray-200'
                         }`}
                       />
@@ -1099,7 +1099,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="text-xs font-bold text-gray-600 px-4 py-2 hover:text-[#0F382C] flex items-center gap-1.5"
+                      className="text-xs font-bold text-gray-600 px-4 py-2 hover:text-brand-primary flex items-center gap-1.5"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Back</span>
@@ -1112,7 +1112,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                           setStep(3);
                         }
                       }}
-                      className="bg-[#0F382C] text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-[#164E3D] transition-all"
+                      className="bg-brand-primary text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-brand-primary-light transition-all"
                     >
                       <span>Continue to Amenities & Media</span>
                       <ArrowRight className="w-4 h-4" />
@@ -1124,7 +1124,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               {/* STEP 3: Amenities & Photos / Videos Upload */}
               {step === 3 && (
                 <div className="space-y-6">
-                  <h3 className="text-lg font-serif-luxury font-bold text-[#0F382C]">
+                  <h3 className="text-lg font-serif-luxury font-bold text-brand-primary">
                     Step 3: Select Amenities & Media Upload
                   </h3>
 
@@ -1227,7 +1227,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                                 className={`relative rounded-xl overflow-hidden border-2 bg-gray-900 group aspect-[4/3] cursor-pointer transition-all ${
                                   isChosenCover
                                     ? 'border-emerald-500 ring-4 ring-emerald-500/20 shadow-lg'
-                                    : 'border-gray-200 hover:border-[#0F382C]'
+                                    : 'border-gray-200 hover:border-brand-primary'
                                 }`}
                               >
                                 {item.type === 'video' ? (
@@ -1258,7 +1258,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                                         e.stopPropagation();
                                         setSelectedCoverIndex(idx);
                                       }}
-                                      className="bg-black/70 hover:bg-[#0F382C] backdrop-blur-xs text-white text-[10px] font-semibold px-2 py-0.5 rounded border border-white/20 transition-colors"
+                                      className="bg-black/70 hover:bg-brand-primary backdrop-blur-xs text-white text-[10px] font-semibold px-2 py-0.5 rounded border border-white/20 transition-colors"
                                     >
                                       Set as Display Cover
                                     </button>
@@ -1312,18 +1312,18 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                                   type="button"
                                   disabled={isProcessingPhotos}
                                   onClick={() => fileInputRef.current?.click()}
-                                  className="flex-1 sm:flex-initial px-4 py-2 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
+                                  className="flex-1 sm:flex-initial px-4 py-2 bg-brand-primary hover:bg-brand-primary-light text-white rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
                                 >
-                                  <Upload className="w-3.5 h-3.5 text-[#E4D5B7]" />
+                                  <Upload className="w-3.5 h-3.5 text-brand-accent-soft" />
                                   <span>Add More Photos ({MAX_PHOTOS - uploadedMediaList.length} left)</span>
                                 </button>
                                 <button
                                   type="button"
                                   disabled={isProcessingPhotos}
                                   onClick={() => cameraInputRef.current?.click()}
-                                  className="flex-1 sm:flex-initial px-4 py-2 bg-white hover:bg-gray-100 text-[#0F382C] border border-[#0F382C]/30 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
+                                  className="flex-1 sm:flex-initial px-4 py-2 bg-white hover:bg-gray-100 text-brand-primary border border-brand-primary/30 rounded-lg text-xs font-bold flex items-center justify-center gap-1.5 transition-colors disabled:opacity-50"
                                 >
-                                  <Camera className="w-3.5 h-3.5 text-[#0F382C]" />
+                                  <Camera className="w-3.5 h-3.5 text-brand-primary" />
                                   <span>Camera</span>
                                 </button>
                               </>
@@ -1340,13 +1340,13 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                         className={`border-2 border-dashed rounded-2xl p-8 sm:p-12 text-center transition-all ${
                           isDragging
                             ? 'border-emerald-600 bg-emerald-50/70 scale-[1.01]'
-                            : 'border-gray-300 hover:border-[#0F382C] bg-gray-50/60 hover:bg-white'
+                            : 'border-gray-300 hover:border-brand-primary bg-gray-50/60 hover:bg-white'
                         }`}
                       >
-                        <div className="w-16 h-16 rounded-2xl bg-emerald-100/70 text-[#0F382C] flex items-center justify-center mx-auto mb-4 shadow-xs">
-                          <Upload className="w-8 h-8 text-[#0F382C]" />
+                        <div className="w-16 h-16 rounded-2xl bg-emerald-100/70 text-brand-primary flex items-center justify-center mx-auto mb-4 shadow-xs">
+                          <Upload className="w-8 h-8 text-brand-primary" />
                         </div>
-                        <h4 className="text-base font-serif-luxury font-bold text-[#0F382C]">
+                        <h4 className="text-base font-serif-luxury font-bold text-brand-primary">
                           Drag & drop property photos here (Up to 10 photos)
                         </h4>
                         <p className="text-xs text-gray-500 mt-1 mb-6 max-w-sm mx-auto">
@@ -1358,9 +1358,9 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                             type="button"
                             disabled={isProcessingPhotos}
                             onClick={() => fileInputRef.current?.click()}
-                            className="w-full sm:w-auto px-5 py-2.5 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                            className="w-full sm:w-auto px-5 py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                           >
-                            <Upload className="w-4 h-4 text-[#E4D5B7]" />
+                            <Upload className="w-4 h-4 text-brand-accent-soft" />
                             <span>Select Photos (Max 10, Up to 25 MB)</span>
                           </button>
 
@@ -1368,9 +1368,9 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                             type="button"
                             disabled={isProcessingPhotos}
                             onClick={() => cameraInputRef.current?.click()}
-                            className="w-full sm:w-auto px-5 py-2.5 bg-white hover:bg-gray-100 text-[#0F382C] border border-[#0F382C]/30 rounded-xl text-xs font-bold uppercase tracking-wider shadow-2xs flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                            className="w-full sm:w-auto px-5 py-2.5 bg-white hover:bg-gray-100 text-brand-primary border border-brand-primary/30 rounded-xl text-xs font-bold uppercase tracking-wider shadow-2xs flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                           >
-                            <Camera className="w-4 h-4 text-[#0F382C]" />
+                            <Camera className="w-4 h-4 text-brand-primary" />
                             <span>Live Camera Capture</span>
                           </button>
                         </div>
@@ -1382,7 +1382,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                     <button
                       type="button"
                       onClick={() => setStep(2)}
-                      className="text-xs font-bold text-gray-600 px-4 py-2 hover:text-[#0F382C] flex items-center gap-1.5"
+                      className="text-xs font-bold text-gray-600 px-4 py-2 hover:text-brand-primary flex items-center gap-1.5"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Back</span>
@@ -1391,7 +1391,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       type="button"
                       id="step3-continue-btn"
                       onClick={() => setStep(4)}
-                      className="bg-[#0F382C] text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-[#164E3D]"
+                      className="bg-brand-primary text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 hover:bg-brand-primary-light"
                     >
                       <span>Continue to Verification</span>
                       <ArrowRight className="w-4 h-4" />
@@ -1404,7 +1404,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
               {step === 4 && (
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-lg font-serif-luxury font-bold text-[#0F382C]">
+                    <h3 className="text-lg font-serif-luxury font-bold text-brand-primary">
                       Step 4: Legal Verification & Owner Contact
                     </h3>
                     <p className="text-xs text-gray-500 mt-0.5">
@@ -1492,7 +1492,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                               setVerifiedByAuthority(e.target.value);
                             }}
                             placeholder="Enter the authority named on the seller's documents"
-                            className="w-full p-2.5 text-xs bg-white border border-gray-300 rounded-lg text-gray-800 font-medium focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
+                            className="w-full p-2.5 text-xs bg-white border border-gray-300 rounded-lg text-gray-800 font-medium focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
                           />
                         </div>
 
@@ -1587,7 +1587,7 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       type="button"
                       onClick={() => setStep(3)}
                       disabled={isSubmitting}
-                      className="text-xs font-bold text-gray-600 px-4 py-2 hover:text-[#0F382C] flex items-center gap-1.5 disabled:opacity-50"
+                      className="text-xs font-bold text-gray-600 px-4 py-2 hover:text-brand-primary flex items-center gap-1.5 disabled:opacity-50"
                     >
                       <ArrowLeft className="w-4 h-4" />
                       <span>Back</span>
@@ -1598,17 +1598,17 @@ export const PostPropertyScreen: React.FC<PostPropertyScreenProps> = ({
                       id="submit-property-listing-btn"
                       disabled={isSubmitting}
                       onClick={handleSubmit}
-                      className="bg-[#0F382C] hover:bg-[#164E3D] text-white px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center gap-2 disabled:opacity-75 cursor-pointer disabled:cursor-not-allowed"
+                      className="bg-brand-primary hover:bg-brand-primary-light text-white px-8 py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all flex items-center gap-2 disabled:opacity-75 cursor-pointer disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
-                          <Loader2 className="w-4 h-4 text-[#E4D5B7] animate-spin" />
-                          <span>Publishing to DIDU Homes...</span>
+                          <Loader2 className="w-4 h-4 text-brand-accent-soft animate-spin" />
+                          <span>Publishing to Chubank Property...</span>
                         </>
                       ) : (
                         <>
                           <span>Publish Property Listing</span>
-                          <ShieldCheck className="w-4 h-4 text-[#E4D5B7]" />
+                          <ShieldCheck className="w-4 h-4 text-brand-accent-soft" />
                         </>
                       )}
                     </button>

@@ -2,12 +2,14 @@
 
 @layer base {
   :root {
-    --color-primary: #0F382C;
-    --color-primary-dark: #0B2B22;
-    --color-primary-light: #164E3D;
-    --color-gold: #C5A869;
-    --color-gold-light: #E4D5B7;
-    --color-cream: #FAF8F5;
+    --color-brand-primary: #0F382C;
+    --color-brand-primary-dark: #0B2B22;
+    --color-brand-primary-light: #164E3D;
+    --color-brand-accent: #C5A869;
+    --color-brand-accent-soft: #E4D5B7;
+    --color-brand-cream: #FAF8F5;
+    --color-brand-page: #F8F9FA;
+    --color-brand-ink: #1A2E26;
   }
 
   body {
@@ -23,18 +25,29 @@
   }
 }
 
+@theme {
+  --color-brand-primary: #0F382C;
+  --color-brand-primary-dark: #0B2B22;
+  --color-brand-primary-light: #164E3D;
+  --color-brand-accent: #C5A869;
+  --color-brand-accent-soft: #E4D5B7;
+  --color-brand-cream: #FAF8F5;
+  --color-brand-page: #F8F9FA;
+  --color-brand-ink: #1A2E26;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F3;
+  background: var(--color-brand-page);
 }
 ::-webkit-scrollbar-thumb {
-  background: #0F382C40;
+  background: color-mix(in srgb, var(--color-brand-primary) 25%, transparent);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0F382C80;
+  background: color-mix(in srgb, var(--color-brand-primary) 50%, transparent);
 }

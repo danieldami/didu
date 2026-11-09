@@ -17,20 +17,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <footer className="bg-[#0B2B22] text-white border-t border-[#164E3D] py-12">
+    <footer className="bg-brand-primary-dark text-white border-t border-brand-primary-light py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Row */}
-        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 pb-8 border-b border-[#164E3D]/70 text-center md:text-left">
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 pb-8 border-b border-brand-primary-light/70 text-center md:text-left">
           
           {/* Brand Identity & Location */}
           <div className="space-y-3 max-w-sm">
             <div className="flex items-center justify-center md:justify-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#E4D5B7] flex items-center justify-center text-[#0F382C] shadow-sm">
+              <div className="w-8 h-8 rounded-lg bg-brand-accent-soft flex items-center justify-center text-brand-primary shadow-sm">
                 <Landmark className="w-4 h-4" />
               </div>
               <span className="text-xl font-brand-title font-bold text-white tracking-wide">
-                DIDU Homes
+                Chubank Property
               </span>
             </div>
             <p className="text-xs text-gray-300 leading-relaxed">
@@ -61,23 +61,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Core Contact Info with clean dual lines */}
           <div className="text-xs text-gray-300 space-y-1.5 flex flex-col items-center md:items-end">
             <div className="flex items-center gap-2">
-              <Phone className="w-3.5 h-3.5 text-[#C5A869]" />
+              <Phone className="w-3.5 h-3.5 text-brand-accent" />
               <a href="https://wa.me/2349125882627" target="_blank" rel="noopener" className="hover:text-white transition-colors">
                 Amara Okafor: +234 912 588 2627
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="w-3.5 h-3.5 text-[#C5A869]" />
+              <Phone className="w-3.5 h-3.5 text-brand-accent" />
               <a href="https://wa.me/2349125882627" target="_blank" rel="noopener" className="hover:text-white transition-colors">
                 Tunde Adebayo: +234 912 588 2627
               </a>
             </div>
             <div className="flex items-center gap-2 pt-1">
-              <Mail className="w-3.5 h-3.5 text-[#C5A869]" />
-              <a href="mailto:hello@diduhomes.com" className="hover:text-white transition-colors">hello@diduhomes.com</a>
+              <Mail className="w-3.5 h-3.5 text-brand-accent" />
+              <a href="mailto:hello@chubankhomes.com" className="hover:text-white transition-colors">hello@chubankhomes.com</a>
             </div>
             <div className="flex items-center gap-2 pt-1">
-              <MapPin className="w-3.5 h-3.5 text-[#C5A869]" />
+              <MapPin className="w-3.5 h-3.5 text-brand-accent" />
               <span>4 Uwajeh Lane, Ikoyi, Lagos</span>
             </div>
           </div>
@@ -87,7 +87,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-400 gap-3 text-center sm:text-left">
           <span>
-            © 2026 DIDU Homes. Managed by Amara Okafor & Tunde Adebayo. All rights reserved.
+            © 2026 Chubank Property. Managed by Amara Okafor & Tunde Adebayo. All rights reserved.
           </span>
         </div>
 

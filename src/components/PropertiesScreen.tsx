@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Property, FilterState, PropertyType, ListingType } from '../types';
 import { PropertyCard } from './PropertyCard';
 import { PropertySkeletonGrid } from './PropertyCardSkeleton';
-import { LAGOS_LOCALITIES, PROPERTY_TYPES } from '../data/mockData';
+import { LISTING_LOCATIONS, PROPERTY_TYPES } from '../data/mockData';
 import { 
   Search, 
   SlidersHorizontal, 
@@ -103,7 +103,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
       if (filterState.listingType === 'Plots' && item.propertyType !== 'Gated Township Plot') return false;
 
       // 3. Locality
-      if (filterState.locality && filterState.locality !== 'All Localities') {
+      if (filterState.locality && filterState.locality !== 'All Locations') {
         const filterLoc = (filterState.locality || '').toLowerCase();
         if (!(item.locality || '').toLowerCase().includes(filterLoc) &&
             !(item.location || '').toLowerCase().includes(filterLoc)) {
@@ -153,18 +153,18 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
   }, [properties, filterState]);
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen py-8 sm:py-12">
+    <div className="bg-brand-cream min-h-screen py-8 sm:py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}
         <div className="mb-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-[#0F382C]">
+              <h1 className="text-2xl sm:text-4xl font-serif-luxury font-bold text-brand-primary">
                 Exclusive Lagos Property Portfolio
               </h1>
               <p className="text-sm text-gray-600 mt-1">
-                Showing <strong className="text-[#0F382C]">{filteredProperties.length}</strong> selected homes across Lagos.
+                Showing <strong className="text-brand-primary">{filteredProperties.length}</strong> selected homes across Lagos.
               </p>
             </div>
 
@@ -175,9 +175,9 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                   type="button"
                   id="open-compare-bar-btn"
                   onClick={onOpenCompareModal}
-                  className="bg-[#0F382C] text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-sm hover:bg-[#164E3D] flex items-center gap-2"
+                  className="bg-brand-primary text-white px-4 py-2 rounded-lg text-xs font-semibold shadow-sm hover:bg-brand-primary-light flex items-center gap-2"
                 >
-                  <Building className="w-4 h-4 text-[#E4D5B7]" />
+                  <Building className="w-4 h-4 text-brand-accent-soft" />
                   <span>Compare ({compareList.length}/3)</span>
                 </button>
               )}
@@ -188,7 +188,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                   type="button"
                   id="view-grid-btn"
                   onClick={() => setViewMode('grid')}
-                  className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-[#0F382C] text-white' : 'text-gray-500 hover:text-[#0F382C]'}`}
+                  className={`p-1.5 rounded ${viewMode === 'grid' ? 'bg-brand-primary text-white' : 'text-gray-500 hover:text-brand-primary'}`}
                   title="Grid View"
                 >
                   <LayoutGrid className="w-4 h-4" />
@@ -197,7 +197,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                   type="button"
                   id="view-list-btn"
                   onClick={() => setViewMode('list')}
-                  className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-[#0F382C] text-white' : 'text-gray-500 hover:text-[#0F382C]'}`}
+                  className={`p-1.5 rounded ${viewMode === 'list' ? 'bg-brand-primary text-white' : 'text-gray-500 hover:text-brand-primary'}`}
                   title="List View"
                 >
                   <List className="w-4 h-4" />
@@ -206,7 +206,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                   type="button"
                   id="view-map-btn"
                   onClick={() => setViewMode('map')}
-                  className={`p-1.5 rounded ${viewMode === 'map' ? 'bg-[#0F382C] text-white' : 'text-gray-500 hover:text-[#0F382C]'}`}
+                  className={`p-1.5 rounded ${viewMode === 'map' ? 'bg-brand-primary text-white' : 'text-gray-500 hover:text-brand-primary'}`}
                   title="Interactive Map"
                 >
                   <Map className="w-4 h-4" />
@@ -218,7 +218,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                 type="button"
                 id="mobile-filter-open-btn"
                 onClick={() => setMobileFilterOpen(true)}
-                className="lg:hidden bg-white border border-gray-200 text-[#0F382C] px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-2xs"
+                className="lg:hidden bg-white border border-gray-200 text-brand-primary px-3.5 py-2 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-2xs"
               >
                 <SlidersHorizontal className="w-3.5 h-3.5" />
                 <span>Filters</span>
@@ -237,7 +237,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                 placeholder="Search by title or location (e.g. Ikoyi, Banana Island)..."
                 value={filterState.searchQuery}
                 onChange={(e) => onUpdateFilters({ searchQuery: e.target.value })}
-                className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-[#0F382C] focus:ring-1 focus:ring-[#0F382C]"
+                className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm bg-gray-50 border border-gray-200 rounded-lg text-gray-900 focus:bg-white focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
               />
               <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
             </div>
@@ -251,7 +251,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                   onClick={() => onUpdateFilters({ listingType: tab })}
                   className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
                     filterState.listingType === tab
-                      ? 'bg-[#0F382C] text-white shadow-2xs'
+                      ? 'bg-brand-primary text-white shadow-2xs'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -267,7 +267,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                 id="properties-sort-select"
                 value={filterState.sortBy}
                 onChange={(e) => onUpdateFilters({ sortBy: e.target.value as any })}
-                className="text-xs font-semibold bg-gray-50 border border-gray-200 rounded-lg px-2.5 py-2 text-gray-800 focus:ring-1 focus:ring-[#0F382C]"
+                className="text-xs font-semibold bg-gray-50 border border-gray-200 rounded-lg px-2.5 py-2 text-gray-800 focus:ring-1 focus:ring-brand-primary"
               >
                 <option value="featured">Featured First</option>
                 <option value="price-asc">Price: Low to High</option>
@@ -289,14 +289,14 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
               
               <div className="flex items-center justify-between pb-3 border-b border-gray-100">
                 <div className="flex items-center gap-2">
-                  <SlidersHorizontal className="w-4 h-4 text-[#0F382C]" />
-                  <h3 className="font-serif-luxury font-bold text-base text-[#0F382C]">Filters</h3>
+                  <SlidersHorizontal className="w-4 h-4 text-brand-primary" />
+                  <h3 className="font-serif-luxury font-bold text-base text-brand-primary">Filters</h3>
                 </div>
                 <button
                   type="button"
                   id="reset-filters-sidebar-btn"
                   onClick={onResetFilters}
-                  className="text-xs text-gray-500 hover:text-[#0F382C] font-semibold flex items-center gap-1"
+                  className="text-xs text-gray-500 hover:text-brand-primary font-semibold flex items-center gap-1"
                 >
                   <RotateCcw className="w-3 h-3" />
                   <span>Reset</span>
@@ -311,10 +311,10 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                 <select
                   value={filterState.locality}
                   onChange={(e) => onUpdateFilters({ locality: e.target.value })}
-                  className="w-full p-2.5 text-xs bg-gray-50 border border-gray-200 rounded-lg font-medium text-gray-800 focus:bg-white focus:border-[#0F382C]"
+                  className="w-full p-2.5 text-xs bg-gray-50 border border-gray-200 rounded-lg font-medium text-gray-800 focus:bg-white focus:border-brand-primary"
                 >
-                  {LAGOS_LOCALITIES.map((loc) => (
-                    <option key={loc} value={loc === 'All Localities' ? '' : loc}>
+                  {LISTING_LOCATIONS.map((loc) => (
+                    <option key={loc} value={loc === 'All Locations' ? '' : loc}>
                       {loc}
                     </option>
                   ))}
@@ -335,11 +335,11 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                         type="button"
                         onClick={() => onUpdateFilters({ propertyType: type as PropertyType })}
                         className={`w-full text-left px-2.5 py-1.5 rounded text-xs font-medium flex items-center justify-between transition-colors ${
-                          isChecked ? 'bg-[#0F382C] text-white font-semibold' : 'text-gray-700 hover:bg-gray-100'
+                          isChecked ? 'bg-brand-primary text-white font-semibold' : 'text-gray-700 hover:bg-gray-100'
                         }`}
                       >
                         <span>{type}</span>
-                        {isChecked && <Check className="w-3.5 h-3.5 text-[#E4D5B7]" />}
+                        {isChecked && <Check className="w-3.5 h-3.5 text-brand-accent-soft" />}
                       </button>
                     );
                   })}
@@ -359,7 +359,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                       onClick={() => onUpdateFilters({ bhk: b })}
                       className={`py-1.5 text-xs font-bold rounded border transition-all ${
                         filterState.bhk === b
-                          ? 'bg-[#0F382C] text-white border-[#0F382C]'
+                          ? 'bg-brand-primary text-white border-brand-primary'
                           : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50'
                       }`}
                     >
@@ -413,7 +413,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
             {/* View Mode: Map View */}
             {viewMode === 'map' && (
               <div className="bg-white rounded-xl border border-gray-200 overflow-hidden p-4 mb-6 shadow-sm">
-                <div className="relative aspect-[16/9] bg-emerald-950 rounded-lg overflow-hidden flex items-center justify-center border border-[#164E3D]">
+                <div className="relative aspect-[16/9] bg-emerald-950 rounded-lg overflow-hidden flex items-center justify-center border border-brand-primary-light">
                   
                   {/* Decorative Map Vector Representation with plotted Lagos Pins */}
                   <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#C5A869_1.5px,transparent_1.5px)] [background-size:24px_24px]" />
@@ -444,7 +444,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                         key={p.id}
                         type="button"
                         onClick={() => onSelectProperty(p)}
-                        className="bg-white hover:bg-[#E4D5B7] text-[#0F382C] px-3 py-1.5 rounded-full text-xs font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-1.5 border border-[#0F382C]"
+                        className="bg-white hover:bg-brand-accent-soft text-brand-primary px-3 py-1.5 rounded-full text-xs font-bold shadow-lg transition-transform hover:scale-105 flex items-center gap-1.5 border border-brand-primary"
                       >
                         <MapPin className="w-3.5 h-3.5 text-red-600" />
                         <span>{p.title.split(' ')[0]} ({p.priceDisplay})</span>
@@ -502,7 +502,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                 <div className="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
                   <Search className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-serif-luxury font-bold text-[#0F382C]">
+                <h3 className="text-xl font-serif-luxury font-bold text-brand-primary">
                   No matching luxury properties found
                 </h3>
                 <p className="text-sm text-gray-500 mt-2 max-w-md mx-auto">
@@ -511,7 +511,7 @@ export const PropertiesScreen: React.FC<PropertiesScreenProps> = ({
                 <button
                   type="button"
                   onClick={onResetFilters}
-                  className="mt-5 px-5 py-2.5 bg-[#0F382C] text-white text-xs font-semibold rounded-lg shadow-sm hover:bg-[#164E3D]"
+                  className="mt-5 px-5 py-2.5 bg-brand-primary text-white text-xs font-semibold rounded-lg shadow-sm hover:bg-brand-primary-light"
                 >
                   Reset All Filters
                 </button>

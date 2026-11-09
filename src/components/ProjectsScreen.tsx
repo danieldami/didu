@@ -40,7 +40,7 @@ export const ProjectsScreen: React.FC<ProjectsScreenProps> = ({
     const proj = projects.find(p => p.name === projectName);
     if (proj) {
       const brochureContent = `=====================================================
-DIDU ESTATE   EXCLUSIVE PROJECT E-BROCHURE
+Chubank ESTATE   EXCLUSIVE PROJECT E-BROCHURE
 =====================================================
 
 Project Name:       ${proj.name}
@@ -67,10 +67,10 @@ AMENITIES & SPECIFICATIONS:
 -----------------------------------------------------
 FOR CONFIDENTIAL INQUIRIES & PRIVATE SITE INSPECTIONS
 -----------------------------------------------------
-DIDU Homes Advisory Desk
-Email:                  hello@diduhomes.com
+Chubank Property Advisory Desk
+Email:                  hello@chubankhomes.com
 Office:                 4 Uwajeh Lane, Ikoyi, Lagos
-Website:                DIDU Homes showcase
+Website:                Chubank Property showcase
 =====================================================`;
 
       const blob = new Blob([brochureContent], { type: 'text/plain;charset=utf-8' });
@@ -88,7 +88,7 @@ Website:                DIDU Homes showcase
 
   const handleOpenCreate = () => {
     setFormName('');
-    setFormDeveloper('DIDU Homes Developers');
+    setFormDeveloper('Chubank Property Developers');
     setFormLocality('Ikoyi, Lagos');
     setFormPriceStarting('₦ 2.10bn onwards');
     setFormUnits('32 Luxury Units');
@@ -119,7 +119,7 @@ Website:                DIDU Homes showcase
     const projObj: Project = {
       id: editingProject ? editingProject.id : `proj-${Date.now()}`,
       name: formName.trim() || 'New Luxury Project',
-      developer: formDeveloper.trim() || 'DIDU Homes Developers',
+      developer: formDeveloper.trim() || 'Chubank Property Developers',
       locality: formLocality.trim() || 'Ikoyi, Lagos',
       priceStarting: formPriceStarting.trim() || '₦ 2.00bn onwards',
       units: formUnits.trim() || '50 Units',
@@ -144,20 +144,20 @@ Website:                DIDU Homes showcase
   };
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen py-10 sm:py-16">
+    <div className="bg-brand-cream min-h-screen py-10 sm:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-14 relative">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0F382C]/10 text-[#0F382C] text-xs font-bold uppercase tracking-wider mb-3">
-            <Building2 className="w-3.5 h-3.5 text-[#0F382C]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-primary/10 text-brand-primary text-xs font-bold uppercase tracking-wider mb-3">
+            <Building2 className="w-3.5 h-3.5 text-brand-primary" />
             <span>Mega Gated Townships & Developments</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-serif-luxury font-bold text-[#0F382C]">
+          <h1 className="text-3xl sm:text-5xl font-serif-luxury font-bold text-brand-primary">
             New Luxury Projects in Lagos
           </h1>
           <p className="text-sm sm:text-base text-gray-600 mt-3 leading-relaxed">
-            Explore illustrative project concepts created to demonstrate the DIDU Homes property experience.
+            Explore illustrative project concepts created to demonstrate the Chubank Property property experience.
           </p>
 
           {/* Add New Project Button for Admin */}
@@ -167,9 +167,9 @@ Website:                DIDU Homes showcase
                 type="button"
                 id="add-new-project-btn"
                 onClick={handleOpenCreate}
-                className="inline-flex items-center gap-2 bg-[#0F382C] hover:bg-[#164E3D] text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-all"
+                className="inline-flex items-center gap-2 bg-brand-primary hover:bg-brand-primary-light text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shadow-md transition-all"
               >
-                <PlusCircle className="w-4 h-4 text-[#E4D5B7]" />
+                <PlusCircle className="w-4 h-4 text-brand-accent-soft" />
                 <span>Add New Project (Admin)</span>
               </button>
             </div>
@@ -197,18 +197,18 @@ Website:                DIDU Homes showcase
                   <span className={`px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider shadow-md ${
                     project.status === 'Ready to Move'
                       ? 'bg-emerald-600 text-white'
-                      : 'bg-[#0F382C] text-[#E4D5B7]'
+                      : 'bg-brand-primary text-brand-accent-soft'
                   }`}>
                     {project.status}
                   </span>
-                  <span className="px-3 py-1 rounded-md bg-white/90 text-[#0F382C] text-xs font-bold flex items-center gap-1 shadow-md">
+                  <span className="px-3 py-1 rounded-md bg-white/90 text-brand-primary text-xs font-bold flex items-center gap-1 shadow-md">
                     <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                     Showcase sample
                   </span>
                 </div>
 
                 <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <span className="text-xs uppercase tracking-widest text-[#E4D5B7] font-semibold block">
+                  <span className="text-xs uppercase tracking-widest text-brand-accent-soft font-semibold block">
                     {project.totalArea}
                   </span>
                   <span className="text-2xl font-serif-luxury font-bold text-white">
@@ -225,9 +225,9 @@ Website:                DIDU Homes showcase
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-gray-100 gap-2">
                     <div>
                       <span className="text-xs font-semibold text-gray-500 block">
-                        Developer: <strong className="text-[#0F382C]">{project.developer}</strong>
+                        Developer: <strong className="text-brand-primary">{project.developer}</strong>
                       </span>
-                      <h2 className="text-xl sm:text-2xl font-serif-luxury font-bold text-[#0F382C] mt-0.5">
+                      <h2 className="text-xl sm:text-2xl font-serif-luxury font-bold text-brand-primary mt-0.5">
                         {project.name}
                       </h2>
                     </div>
@@ -246,7 +246,7 @@ Website:                DIDU Homes showcase
                           <button
                             type="button"
                             onClick={() => handleOpenEdit(project)}
-                            className="p-1.5 bg-gray-100 hover:bg-gray-200 text-[#0F382C] rounded-lg"
+                            className="p-1.5 bg-gray-100 hover:bg-gray-200 text-brand-primary rounded-lg"
                             title="Edit Project"
                           >
                             <Edit3 className="w-4 h-4" />
@@ -271,7 +271,7 @@ Website:                DIDU Homes showcase
                   {/* Location & Title Status */}
                   <div className="flex items-center gap-4 text-xs text-gray-500 my-3">
                     <div className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-[#0F382C]" />
+                      <MapPin className="w-3.5 h-3.5 text-brand-primary" />
                       <span>{project.locality}</span>
                     </div>
                     <span> </span>
@@ -318,7 +318,7 @@ Website:                DIDU Homes showcase
                     type="button"
                     id={`brochure-btn-${project.id}`}
                     onClick={() => handleDownloadBrochure(project.name)}
-                    className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-[#0F382C] border border-[#0F382C]/30 hover:bg-[#0F382C]/5 rounded-lg flex items-center justify-center gap-1.5 transition-colors"
+                    className="w-full sm:w-auto px-4 py-2.5 text-xs font-semibold text-brand-primary border border-brand-primary/30 hover:bg-brand-primary/5 rounded-lg flex items-center justify-center gap-1.5 transition-colors"
                   >
                     <Download className="w-3.5 h-3.5" />
                     <span>{downloadSuccess === project.name ? '  PDF Brochure Downloaded' : 'Download E-Brochure (PDF)'}</span>
@@ -328,7 +328,7 @@ Website:                DIDU Homes showcase
                     type="button"
                     id={`inquire-proj-btn-${project.id}`}
                     onClick={() => window.open(`https://wa.me/2349125882627?text=${encodeURIComponent(`Hi, I would like pricing and a site visit for ${project.name}.`)}`, '_blank', 'noopener,noreferrer')}
-                    className="w-full sm:w-auto px-6 py-2.5 bg-[#0F382C] hover:bg-[#164E3D] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2"
+                    className="w-full sm:w-auto px-6 py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all flex items-center justify-center gap-2"
                   >
                     <span>Request Pricing & Site Visit</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -354,7 +354,7 @@ Website:                DIDU Homes showcase
               <X className="w-5 h-5" />
             </button>
 
-            <h3 className="text-xl font-serif-luxury font-bold text-[#0F382C] mb-4">
+            <h3 className="text-xl font-serif-luxury font-bold text-brand-primary mb-4">
               {editingProject ? 'Edit Luxury Project' : 'Add New Luxury Project'}
             </h3>
 
@@ -449,7 +449,7 @@ Website:                DIDU Homes showcase
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-[#0F382C] text-white font-bold rounded-lg shadow-md"
+                  className="px-6 py-2 bg-brand-primary text-white font-bold rounded-lg shadow-md"
                 >
                   Save Project
                 </button>

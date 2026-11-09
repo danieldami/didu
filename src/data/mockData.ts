@@ -1,9 +1,7 @@
 import { Property, Project, Neighborhood } from '../types';
 
-export const LAGOS_LOCALITIES = ['All Localities', 'Ikoyi', 'Old Ikoyi', 'Banana Island', 'Victoria Island', 'Eko Atlantic', 'Lekki Phase 1', 'Oniru', 'Parkview Estate', 'Victoria Garden City', 'Chevron Drive'];
-export const PROPERTY_TYPES = ['All', 'Luxury Apartment', 'Penthouse', 'Detached House', 'Terrace House', 'Land', 'Commercial'];
 
-const agent = { name: 'Amara Okafor', role: 'Property Consultant', phone: '+234 803 555 0148', email: 'hello@diduhomes.com', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', experience: 'Luxury Property Advisory' };
+const agent = { name: 'Amara Okafor', role: 'Property Consultant', phone: '+234 803 555 0148', email: 'hello@chubankhomes.com', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80', experience: 'Luxury Property Advisory' };
 const home = (id: string, title: string, locality: string, type: string, price: number, beds: number, image: string, tagline: string): Property => ({
   id, title, tagline, propertyType: type, listingType: 'Sale', price, priceDisplay: price >= 1_000_000_000 ? `₦${(price / 1_000_000_000).toLocaleString('en-NG', { maximumFractionDigits: 2 })}bn` : `₦${(price / 1_000_000).toLocaleString('en-NG')}m`, pricePerSqFt: Math.round(price / (3200 + beds * 250)),
   location: `${locality}, Lagos`, locality, address: `${locality}, Lagos`, bedrooms: beds, bathrooms: beds, balconies: 2,
@@ -23,6 +21,9 @@ const baseProperties: Property[] = [
   home('lag-eko-05', 'Atlantic View Collection', 'Eko Atlantic', 'Penthouse', 1650000000, 3, 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1400&q=85', 'Elevated city living with a dramatic Atlantic outlook.'),
   home('lag-parkview-06', 'Parkview Signature Home', 'Parkview Estate', 'Terrace House', 960000000, 4, 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85', 'Understated architecture in one of Ikoyi’s sought-after enclaves.')
 ];
+
+export const LISTING_LOCATIONS = ['All Locations', ...new Set(baseProperties.map(property => property.locality))];
+export const PROPERTY_TYPES = ['All', ...new Set(baseProperties.map(property => property.propertyType))];
 
 const listingDetails: { area: number; baths: number; rate: number; furnishing: Property['furnishing']; gated: boolean; badge: string; tags: string[] }[] = [
   { area: 4200, baths: 5, rate: 440476, furnishing: 'Fully Furnished', gated: true, badge: 'Exclusive', tags: ['Ready to Move', 'Fully Furnished', 'Serviced'] },
@@ -47,9 +48,9 @@ export const NEIGHBORHOODS_DATA: Neighborhood[] = [
 ];
 
 export const PROJECTS_DATA: Project[] = [
-  { id: 'proj-1', name: 'The Meridian, Ikoyi', developer: 'DIDU Homes Showcase', locality: 'Old Ikoyi, Lagos', priceStarting: '₦1.85bn', units: 'Limited collection of 4-bedroom residences', status: 'Under Construction', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85'], description: 'An illustrative premium residential concept for the Ikoyi market.', highlights: ['Private residents lounge', 'Landscaped courtyard', 'Concierge reception'], totalArea: 'Illustrative concept', unitConfigurations: ['4-bedroom residence', 'Penthouse'] },
-  { id: 'proj-2', name: 'Lagoon House, Banana Island', developer: 'DIDU Homes Showcase', locality: 'Banana Island, Lagos', priceStarting: '₦2.45bn', units: 'Waterfront residences', status: 'Newly Launched', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85'], description: 'A sample waterfront development concept created for this website demonstration.', highlights: ['Lagoon outlook', 'Private outdoor spaces', 'Residents  fitness suite'], totalArea: 'Illustrative concept', unitConfigurations: ['3-bedroom apartment', '4-bedroom penthouse'] },
-  { id: 'proj-3', name: 'Garden Court, VGC', developer: 'DIDU Homes Showcase', locality: 'Victoria Garden City, Lagos', priceStarting: '₦1.25bn', units: 'Private family homes', status: 'Ready to Move', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85'], description: 'A sample gated-estate home concept for a family-focused Lagos property search.', highlights: ['Gated estate setting', 'Family-friendly layout', 'Covered parking'], totalArea: 'Illustrative concept', unitConfigurations: ['4-bedroom home', '5-bedroom home'] }
+  { id: 'proj-1', name: 'The Meridian, Ikoyi', developer: 'Chubank Property Showcase', locality: 'Old Ikoyi, Lagos', priceStarting: '₦1.85bn', units: 'Limited collection of 4-bedroom residences', status: 'Under Construction', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85'], description: 'An illustrative premium residential concept for the Ikoyi market.', highlights: ['Private residents lounge', 'Landscaped courtyard', 'Concierge reception'], totalArea: 'Illustrative concept', unitConfigurations: ['4-bedroom residence', 'Penthouse'] },
+  { id: 'proj-2', name: 'Lagoon House, Banana Island', developer: 'Chubank Property Showcase', locality: 'Banana Island, Lagos', priceStarting: '₦2.45bn', units: 'Waterfront residences', status: 'Newly Launched', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1400&q=85'], description: 'A sample waterfront development concept created for this website demonstration.', highlights: ['Lagoon outlook', 'Private outdoor spaces', 'Residents  fitness suite'], totalArea: 'Illustrative concept', unitConfigurations: ['3-bedroom apartment', '4-bedroom penthouse'] },
+  { id: 'proj-3', name: 'Garden Court, VGC', developer: 'Chubank Property Showcase', locality: 'Victoria Garden City, Lagos', priceStarting: '₦1.25bn', units: 'Private family homes', status: 'Ready to Move', possessionDate: 'Showcase concept', reraNumber: 'Illustrative demo', coverImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85', images: ['https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85'], description: 'A sample gated-estate home concept for a family-focused Lagos property search.', highlights: ['Gated estate setting', 'Family-friendly layout', 'Covered parking'], totalArea: 'Illustrative concept', unitConfigurations: ['4-bedroom home', '5-bedroom home'] }
 ];
 
 export const TESTIMONIALS_DATA = [];
@@ -57,6 +58,6 @@ export const STATS_DATA = [
   { value: 'Lagos', label: 'Local property expertise' },
   { value: 'Curated', label: 'A considered property selection' },
   { value: 'Personal', label: 'One-to-one client service' },
-  { value: 'DIDU', label: 'Your property partner' }
+  { value: 'Chubank', label: 'Your property partner' }
 ];
 export const LAGOS_BUYING_GUIDE = [];

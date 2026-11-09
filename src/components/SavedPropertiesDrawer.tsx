@@ -24,9 +24,9 @@ export const SavedPropertiesDrawer: React.FC<SavedPropertiesDrawerProps> = ({
       <div className="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between">
         
         {/* Header */}
-        <div className="p-5 bg-[#0F382C] text-white flex items-center justify-between border-b border-[#164E3D]">
+        <div className="p-5 bg-brand-primary text-white flex items-center justify-between border-b border-brand-primary-light">
           <div className="flex items-center gap-2">
-            <Heart className="w-5 h-5 text-[#E4D5B7] fill-[#E4D5B7]" />
+            <Heart className="w-5 h-5 text-brand-accent-soft fill-brand-accent-soft" />
             <h3 className="font-serif-luxury font-bold text-lg text-white">
               Saved Favorites ({savedProperties.length})
             </h3>
@@ -34,7 +34,7 @@ export const SavedPropertiesDrawer: React.FC<SavedPropertiesDrawerProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1 text-white/80 hover:text-white rounded-full hover:bg-[#164E3D]"
+            className="p-1 text-white/80 hover:text-white rounded-full hover:bg-brand-primary-light"
           >
             <X className="w-5 h-5" />
           </button>
@@ -61,7 +61,7 @@ export const SavedPropertiesDrawer: React.FC<SavedPropertiesDrawerProps> = ({
                       onSelectProperty(p);
                       onClose();
                     }}
-                    className="text-xs font-bold text-[#0F382C] hover:underline truncate cursor-pointer"
+                    className="text-xs font-bold text-brand-primary hover:underline truncate cursor-pointer"
                   >
                     {p.title}
                   </h4>
@@ -86,7 +86,7 @@ export const SavedPropertiesDrawer: React.FC<SavedPropertiesDrawerProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="w-full py-2.5 bg-[#0F382C] hover:bg-[#164E3D] text-white rounded-lg text-xs font-bold uppercase tracking-wider"
+            className="w-full py-2.5 bg-brand-primary hover:bg-brand-primary-light text-white rounded-lg text-xs font-bold uppercase tracking-wider"
           >
             Continue Browsing
           </button>
