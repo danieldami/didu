@@ -6,7 +6,7 @@ Listings and projects are JSON files in this folder. Add or edit them in GitHub 
 
 1. Copy `listings/_template.json` and save it as `listings/your-listing-name.json`. Use lowercase words separated by hyphens for the filename; this becomes the listing URL slug.
 2. Fill in the approved property information. The JSON does not contain a `slug` field; the filename provides it.
-3. Create `public/listings/your-listing-name/` and copy the approved photos there. Set `coverImage` and `images` to photo filenames only. The sample `placeholder.svg` can be replaced by a real image.
+3. Photos are optional. If you have photos, create `public/listings/your-listing-name/`, copy them there, and set `coverImage` and `images` to the filenames. If you do not have photos, omit those two fields; the site will show a shared placeholder automatically.
 4. Set `status` to `available`, `under-offer`, `sold`, or `let`, and set `listingType` to `sale` or `rent`.
 5. Run `npm run validate`, then commit and push the JSON and photos.
 

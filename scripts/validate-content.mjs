@@ -10,7 +10,7 @@ const allowedStatuses = new Set(['available', 'under-offer', 'sold', 'let']);
 const allowedListingTypes = new Set(['sale', 'rent']);
 const requiredFields = [
   'title', 'status', 'listingType', 'propertyType', 'price', 'location', 'state',
-  'titleDocuments', 'documentsVerified', 'featured', 'coverImage', 'images',
+  'titleDocuments', 'documentsVerified', 'featured',
   'description', 'highlights', 'amenities', 'datePosted',
 ];
 const errors = [];
@@ -32,7 +32,8 @@ async function getContentFiles(directory) {
 }
 
 async function checkImages(file, slug, listing) {
-  const imageNames = new Set([listing.coverImage, ...(Array.isArray(listing.images) ? listing.images : [])]);
+  const imageNames = new Set([listing.coverImage, ...(Array.isArray(listing.images) ? listing.images : [])]
+    .filter(filename => typeof filename === 'string' && filename.trim()));
   for (const filename of imageNames) {
     if (typeof filename !== 'string' || !filename.trim()) continue;
     if (path.basename(filename) !== filename || filename.includes('\\')) {
@@ -84,11 +85,11 @@ for (const file of await getContentFiles(listingsDir)) {
   if (typeof listing.status !== 'string' || !allowedStatuses.has(listing.status)) reportError(file, 'status', 'must be available, under-offer, sold, or let.');
   if (typeof listing.listingType !== 'string' || !allowedListingTypes.has(listing.listingType)) reportError(file, 'listingType', 'must be sale or rent.');
   if (typeof listing.price !== 'number' || !Number.isFinite(listing.price) || listing.price < 0) reportError(file, 'price', 'must be a non-negative number in naira.');
-  if (!Array.isArray(listing.images) || listing.images.length === 0) reportError(file, 'images', 'must be a non-empty array of filenames.');
+  if (listing.images !== undefined && !Array.isArray(listing.images)) reportError(file, 'images', 'must be an array of filenames when provided.');
   if (!Array.isArray(listing.titleDocuments)) reportError(file, 'titleDocuments', 'must be an array of document names.');
   if (typeof listing.documentsVerified !== 'boolean') reportError(file, 'documentsVerified', 'must be true or false.');
   if (typeof listing.featured !== 'boolean') reportError(file, 'featured', 'must be true or false.');
-  if (typeof listing.coverImage !== 'string' || !listing.coverImage.trim()) reportError(file, 'coverImage', 'must be a filename.');
+  if (listing.coverImage !== undefined && typeof listing.coverImage !== 'string') reportError(file, 'coverImage', 'must be a filename when provided.');
   if (typeof listing.description !== 'string' || !listing.description.trim()) reportError(file, 'description', 'must be a non-empty string.');
   if (!Array.isArray(listing.highlights)) reportError(file, 'highlights', 'must be an array.');
   if (!Array.isArray(listing.amenities)) reportError(file, 'amenities', 'must be an array.');

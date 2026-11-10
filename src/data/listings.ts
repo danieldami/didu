@@ -1,8 +1,8 @@
 import type { Project, Property } from '../types';
 
 type RawProperty = Omit<Property, 'slug' | 'coverImage' | 'images'> & {
-  coverImage: string;
-  images: string[];
+  coverImage?: string;
+  images?: string[];
 };
 
 type RawProject = Omit<Project, 'slug' | 'coverImage' | 'images'> & {
@@ -22,17 +22,26 @@ const projectFiles = import.meta.glob<RawProject>('../../content/projects/*.json
 
 const getSlug = (filePath: string): string => filePath.split('/').pop()?.replace(/\.json$/, '') ?? '';
 const propertyImage = (slug: string, filename: string): string => `/listings/${slug}/${filename}`;
+const propertyPlaceholder = '/listings/_placeholder/sample-placeholder.svg';
 const projectImage = (slug: string, filename: string): string => `/projects/${slug}/${filename}`;
 
 export const getListings = (): Property[] => Object.entries(propertyFiles)
   .filter(([filePath]) => !getSlug(filePath).startsWith('_'))
   .map(([filePath, listing]) => {
     const slug = getSlug(filePath);
+    const imageFilenames = Array.isArray(listing.images)
+      ? listing.images.filter(filename => typeof filename === 'string' && filename.trim())
+      : [];
+    const coverImage = typeof listing.coverImage === 'string' && listing.coverImage.trim()
+      ? propertyImage(slug, listing.coverImage)
+      : propertyPlaceholder;
     return {
       ...listing,
       slug,
-      coverImage: propertyImage(slug, listing.coverImage),
-      images: listing.images.map(filename => propertyImage(slug, filename)),
+      coverImage,
+      images: imageFilenames.length > 0
+        ? imageFilenames.map(filename => propertyImage(slug, filename))
+        : [coverImage],
     };
   });
 
